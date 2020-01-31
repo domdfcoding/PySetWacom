@@ -1,0 +1,6 @@
+domdf_python_tools>=0.1.17
+appdirs>=1.4.3
+sh>=1.12.14
+Pypubsub>=4.0.3
+pid>=2.2.5
+domdf_wxpython_tools>=0.2.0
