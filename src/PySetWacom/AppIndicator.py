@@ -178,7 +178,7 @@ class AppIndicatorItem:
 		:rtype: bool
 		"""
 		
-		return self._gtkitem.is_active()
+		return self._gtkitem.get_active()
 
 	def IsEnabled(self):
 		"""
