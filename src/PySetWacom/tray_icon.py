@@ -43,7 +43,7 @@ class TrayIcon(AppIndicator):
 				AppIndicator3.IndicatorCategory.SYSTEM_SERVICES
 				)
 
-		self.profiles = get_profiles_list()[2:]
+		self.profiles = get_profiles_list()
 		
 		self.build_menu()
 
@@ -56,6 +56,9 @@ class TrayIcon(AppIndicator):
 		# Create pubsub receiver to listen for GUI creating new Profile
 		pub.subscribe(self.new_profile_created, "new_profile_created")
 		
+		# Create pubsub receiver to listen for GUI requesting exit
+		pub.subscribe(self.quit, "quit")
+
 		# GUI App
 		self.app = app(0)
 		self.app.MainLoop()
@@ -64,7 +67,9 @@ class TrayIcon(AppIndicator):
 	
 	def new_profile_created(self, selected_profile):
 		# Rebuild Menu
-		self.profiles = get_profiles_list()[2:]
+		self.profiles = get_profiles_list()
+		print("##########")
+		print(self.profiles)
 		self.build_profiles_menu()
 		self.menu_item_profile.SetSubMenu(self._profiles_submenu)
 	
@@ -72,6 +77,7 @@ class TrayIcon(AppIndicator):
 		print(f"GUI Changed Profile To {selected_profile}")
 		for profile in self.profile_menu_items:
 			if profile.GetLabel() == selected_profile:
+				print("Selecting profile: "+ selected_profile)
 				profile.Check(True)
 	
 	def menu_item_activated(self, item):
@@ -85,9 +91,9 @@ class TrayIcon(AppIndicator):
 		:rtype:
 		"""
 		
-		print(f"Item = {item}")
+		# print(f"Item = {item}")
 		label = item.GetLabel()
-		print(f"Label = {label}")
+		# print(f"Label = {label}")
 		
 		if label == "Quit":
 			self.quit()
@@ -96,7 +102,8 @@ class TrayIcon(AppIndicator):
 			self.show()
 		
 		elif label in self.profiles:
-			self.select_profile(label)
+			if item.IsChecked():
+				self.select_profile(label)
 		
 	def build_profiles_menu(self):
 		self._profiles_submenu = AppIndicatorMenu()

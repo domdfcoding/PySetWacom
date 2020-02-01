@@ -38,6 +38,7 @@ from domdf_wxpython_tools.validators import ValidatorBase
 
 # this package
 from PySetWacom.profile import get_profiles_list, Profile, profiles_dir
+from PySetWacom.device import detect_devices
 
 
 # begin wxGlade: dependencies
@@ -47,12 +48,128 @@ from PySetWacom.profile import get_profiles_list, Profile, profiles_dir
 # end wxGlade
 
 
+
+class ManageDevicesDialog(wx.Dialog):
+	def __init__(
+			self, parent, current_devices, id=wx.ID_ANY,
+			pos=wx.DefaultPosition, size=wx.DefaultSize,
+			style=wx.DEFAULT_DIALOG_STYLE, name=wx.DialogNameStr):
+	
+		args = (parent, id)
+		kwds = dict(pos=pos, size=size, style=style, name=name)
+		self.current_devices = current_devices
+		
+		# begin wxGlade: ManageDevicesDialog.__init__
+		kwds["style"] = kwds.get("style", 0) | wx.DEFAULT_DIALOG_STYLE
+		wx.Dialog.__init__(self, *args, **kwds)
+		self.SetSize((450, 350))
+		self.picker_list_box = wx.ListBox(self, wx.ID_ANY, choices=[])
+		self.button_panel = wx.Panel(self, wx.ID_ANY)
+		self.add_btn = wx.Button(self.button_panel, wx.ID_ANY, u"Add 🡲")
+		self.remove_btn = wx.Button(self.button_panel, wx.ID_ANY, u"🡰 Remove")
+		self.selection_list_box = wx.ListBox(self, wx.ID_ANY, choices=[])
+
+		self.__set_properties()
+		self.__do_layout()
+
+		self.Bind(wx.EVT_LISTBOX_DCLICK, self.add, self.picker_list_box)
+		self.Bind(wx.EVT_BUTTON, self.add, self.add_btn)
+		self.Bind(wx.EVT_BUTTON, self.remove, self.remove_btn)
+		self.Bind(wx.EVT_LISTBOX_DCLICK, self.remove, self.selection_list_box)
+		# end wxGlade
+		
+		self.all_devices = []
+		all_devices = detect_devices()
+		for device in all_devices:
+			if device not in self.current_devices:
+				self.all_devices.append(device)
+				self.picker_list_box.Append(device.name)
+		
+		for device in self.current_devices:
+			self.selection_list_box.Append(device.name)
+		
+		self.Bind(wx.EVT_BUTTON, self.OnApply, id=wx.ID_APPLY)
+
+	def __set_properties(self):
+		# begin wxGlade: ManageDevicesDialog.__set_properties
+		self.SetTitle("Manage Devices")
+		self.SetSize((450, 350))
+		self.picker_list_box.SetMinSize((170, 256))
+		self.selection_list_box.SetMinSize((170, 256))
+		# end wxGlade
+		
+	def __do_layout(self):
+		# begin wxGlade: ManageDevicesDialog.__do_layout
+		outer_sizer = wx.BoxSizer(wx.VERTICAL)
+		list_grid_sizer = wx.BoxSizer(wx.HORIZONTAL)
+		button_sizer = wx.BoxSizer(wx.VERTICAL)
+		list_grid_sizer.Add(self.picker_list_box, 5, wx.ALL | wx.EXPAND, 0)
+		button_sizer.Add(self.add_btn, 0, wx.ALIGN_CENTER | wx.BOTTOM, 10)
+		button_sizer.Add(self.remove_btn, 0, wx.ALIGN_CENTER, 0)
+		self.button_panel.SetSizer(button_sizer)
+		list_grid_sizer.Add(self.button_panel, 1, wx.ALIGN_CENTER_VERTICAL | wx.ALL, 5)
+		list_grid_sizer.Add(self.selection_list_box, 5, wx.ALL | wx.EXPAND, 0)
+		outer_sizer.Add(list_grid_sizer, 0, wx.ALL, 10)
+		self.SetSizer(outer_sizer)
+		self.Layout()
+		# end wxGlade
+		
+		self.btns = self.CreateStdDialogButtonSizer(wx.APPLY | wx.CANCEL)
+		outer_sizer.Add(self.btns, 0, wx.BOTTOM | wx.EXPAND, 5)
+	
+	def OnApply(self, event):
+		# Work out which devices from self.all_devices should be in self.current_devices
+		# Remove devices that aren't now in selection_list_box
+		selection_contents = set()
+		for i in range(self.selection_list_box.GetCount()):
+			selection_contents.add(self.selection_list_box.GetString(i))
+		
+		self.current_devices = [device for device in self.current_devices if device.name in selection_contents]
+		
+		# New devices
+		new_devices = [device for device in self.all_devices if device.name in selection_contents]
+		
+		for device in new_devices:
+			if device not in self.current_devices:
+				self.current_devices.append(device)
+		
+		self.EndModal(wx.ID_APPLY)
+	
+	def add(self, event):  # wxGlade: ManageDevicesDialog.<event_handler>
+		selection = self.picker_list_box.GetSelection()
+		if selection == -1:
+			return
+		
+		selection_string = self.picker_list_box.GetString(selection)
+		if selection_string == '':
+			return
+		
+		self.selection_list_box.Append(selection_string)
+		self.picker_list_box.Delete(selection)
+		
+		event.Skip()
+	
+	def remove(self, event):  # wxGlade: ManageDevicesDialog.<event_handler>
+		selection = self.selection_list_box.GetSelection()
+		if selection == -1:
+			return
+		
+		selection_string = self.selection_list_box.GetString(selection)
+		if selection_string == '':
+			return
+		
+		self.picker_list_box.Append(selection_string)
+		self.selection_list_box.Delete(self.selection_list_box.GetSelection())
+		
+		event.Skip()
+	
+# end of class ManageDevicesDialog
 class GUI(wx.Frame):
 	def __init__(self, *args, **kwds):
 		# begin wxGlade: GUI.__init__
 		kwds["style"] = kwds.get("style", 0) | wx.DEFAULT_FRAME_STYLE
 		wx.Frame.__init__(self, *args, **kwds)
-		self.SetSize((500, 400))
+		self.SetSize((500, 420))
 		
 		# Menu Bar
 		self.GUI_menubar = wx.MenuBar()
@@ -68,9 +185,10 @@ class GUI(wx.Frame):
 		self.GUI_menubar.Append(wxglade_tmp_menu, "PySetWacom")
 		self.SetMenuBar(self.GUI_menubar)
 		# Menu Bar end
-		self.profile_choice = wx.Choice(self, wx.ID_ANY, choices=["", "New Profile"])
+		self.profile_choice = wx.Choice(self, wx.ID_ANY, choices=[])
 		self.devices_list = wx.ListBox(self, wx.ID_ANY, choices=[])
 		self.buttons_list = wx.ListBox(self, wx.ID_ANY, choices=[])
+		self.manage_devices_btn = wx.Button(self, wx.ID_ANY, "Manage Devices")
 
 		self.__set_properties()
 		self.__do_layout()
@@ -78,6 +196,7 @@ class GUI(wx.Frame):
 		self.Bind(wx.EVT_CHOICE, self.on_profile_changed, self.profile_choice)
 		self.Bind(wx.EVT_LISTBOX, self.on_device_changed, self.devices_list)
 		self.Bind(wx.EVT_LISTBOX_DCLICK, self.on_button_edit, self.buttons_list)
+		self.Bind(wx.EVT_BUTTON, self.on_manage_devices, self.manage_devices_btn)
 		# end wxGlade
 		
 		self.Bind(wx.EVT_CLOSE, self.OnClose)
@@ -99,16 +218,23 @@ class GUI(wx.Frame):
 	def __set_properties(self):
 		# begin wxGlade: GUI.__set_properties
 		self.SetTitle("PySetWacom")
-		self.profile_choice.SetSelection(0)
-		self.devices_list.SetMinSize((200, 400))
-		self.buttons_list.SetMinSize((400, 400))
+		self.profile_choice.SetMinSize((-1, 32))
+		self.devices_list.SetMinSize((200, 300))
+		self.buttons_list.SetMinSize((400, 300))
 		# end wxGlade
+	
+		# Get Icon
+		from PySetWacom.tray_icon import Gtk
+		icon_theme = Gtk.IconTheme.get_default()
+		icon_info = icon_theme.lookup_icon("input-tablet", 48, 0)
+		
+		self.SetIcon(wx.Icon(icon_info.get_filename()))
 
 	def __do_layout(self):
 		# begin wxGlade: GUI.__do_layout
 		sizer_1 = wx.BoxSizer(wx.VERTICAL)
 		grid_sizer_1 = wx.BoxSizer(wx.VERTICAL)
-		grid_sizer_2 = wx.FlexGridSizer(2, 2, 2, 5)
+		grid_sizer_2 = wx.FlexGridSizer(3, 2, 2, 5)
 		profile_label = wx.StaticText(self, wx.ID_ANY, "Profile")
 		grid_sizer_1.Add(profile_label, 0, wx.EXPAND, 0)
 		grid_sizer_1.Add(self.profile_choice, 0, wx.ALL | wx.EXPAND, 0)
@@ -118,6 +244,8 @@ class GUI(wx.Frame):
 		grid_sizer_2.Add(buttons_label, 0, wx.EXPAND, 0)
 		grid_sizer_2.Add(self.devices_list, 1, wx.EXPAND, 0)
 		grid_sizer_2.Add(self.buttons_list, 1, wx.EXPAND, 0)
+		grid_sizer_2.Add(self.manage_devices_btn, 0, wx.EXPAND, 0)
+		grid_sizer_2.Add((0, 0), 0, 0, 0)
 		grid_sizer_1.Add(grid_sizer_2, 1, wx.EXPAND, 0)
 		sizer_1.Add(grid_sizer_1, 1, wx.ALL | wx.EXPAND, 5)
 		self.SetSizer(sizer_1)
@@ -131,6 +259,9 @@ class GUI(wx.Frame):
 			self.Show()
 	
 	def tray_changed_profile(self, selected_profile):
+		if self.selected_profile.name == selected_profile:
+			return
+		
 		print(f"Tray Changed Profile To {selected_profile}")
 		self.profile_choice.SetStringSelection(selected_profile)
 		self.on_profile_changed()
@@ -141,41 +272,27 @@ class GUI(wx.Frame):
 		self.Hide()
 	
 	def on_profile_changed(self, event=None):  # wxGlade: GUI.<event_handler>
-		print(495)
-		
 		index = self.profile_choice.GetSelection()
 		
 		profile_name = self.profile_choice.GetString(index)
 		
-		# if self.selected_profile and (profile_name == self.selected_profile.name):
-		# 	print(self.selected_profile.name)
-		# 	print(profile_name)
-		# 	return
-		
+		self.load_profile(profile_name)
+		pub.sendMessage("gui_changed_profile", selected_profile=self.selected_profile.name)
+	
+	def load_profile(self, profile_name):
 		# Clear Devices and Buttons
 		self.buttons_list.Clear()
 		self.devices_list.Clear()
 		
-		if index == 0:
-			pass
-		elif index == 1:
-			self.create_new_profile()
-		else:
-			self.load_profile(profile_name)
-			pub.sendMessage("gui_changed_profile", selected_profile=self.selected_profile.name)
-	
-	def load_profile(self, profile_name):
 		self.selected_profile = Profile.load(profile_name)
 		
 		for index, device in enumerate(self.selected_profile.devices):
-			print(device)
 			self.devices_list.Append(device.name)
 	
 	def refresh_profiles_list(self):
 		self.profile_choice.Clear()
 		
 		self.profiles = get_profiles_list()
-		# print(self.profiles)
 		
 		for profile in self.profiles:
 			self.profile_choice.Append(profile)
@@ -189,7 +306,6 @@ class GUI(wx.Frame):
 	
 	def update_mapping_list(self):
 		self.buttons_list.Clear()
-		print([str(button) for button in self.selected_device.buttons])
 		self.buttons_list.AppendItems([str(button) for button in self.selected_device.buttons])
 		self.buttons_list.Refresh()
 	
@@ -221,13 +337,10 @@ class GUI(wx.Frame):
 				self.selected_profile.save()
 				self.refresh_profiles_list()
 			
-			if self.selected_profile is None:
-				self.profile_choice.SetSelection(0)
-			else:
-				idx = self.profiles.index(self.selected_profile.name)
-				self.profile_choice.SetSelection(idx)
-				self.load_profile(self.selected_profile.name)
-				pub.sendMessage("new_profile_created", selected_profile=self.selected_profile.name)
+			idx = self.profiles.index(self.selected_profile.name)
+			self.profile_choice.SetSelection(idx)
+			self.load_profile(self.selected_profile.name)
+			pub.sendMessage("new_profile_created", selected_profile=self.selected_profile.name)
 	
 	def on_menu_new_profile(self, event):  # wxGlade: GUI.<event_handler>
 		self.create_new_profile()
@@ -238,13 +351,49 @@ class GUI(wx.Frame):
 		event.Skip()
 	
 	def on_menu_delete_profile(self, event):  # wxGlade: GUI.<event_handler>
-		print("Event handler 'on_menu_delete_profile' not implemented!")
+		with wx.MultiChoiceDialog(self, "Select Profiles to delete", "Delete Profile", choices=self.profiles) as dlg:
+			if dlg.ShowModal() == wx.ID_OK:
+				selected_profiles = [self.profiles[i] for i in dlg.GetSelections()]
+				if selected_profiles:
+					for profile in selected_profiles:
+						(profiles_dir / f"{profile}.profile").unlink()
+					
+					self.refresh_profiles_list()
+
+					pub.sendMessage("new_profile_created", selected_profile=None)
+
+					if self.selected_profile.name in selected_profiles:
+						self.selected_profile = None
+						self.buttons_list.Clear()
+						self.devices_list.Clear()
+					
+						self.profile_choice.SetSelection(-1)
+					else:
+						self.profile_choice.SetSelection(self.profiles.index(self.selected_profile.name))
+						pub.sendMessage("gui_changed_profile", selected_profile=self.selected_profile.name)
+					
 		event.Skip()
 	
 	def on_quit(self, event):  # wxGlade: GUI.<event_handler>
-		print("Event handler 'on_quit' not implemented!")
+		pub.sendMessage("quit")
 		event.Skip()
 
+	def on_manage_devices(self, event):  # wxGlade: GUI.<event_handler>
+		if self.selected_profile:
+			with ManageDevicesDialog(self, self.selected_profile.devices) as dlg:
+				if dlg.ShowModal() == wx.ID_APPLY:
+					self.selected_profile.devices = dlg.current_devices
+					
+					self.selected_profile.save()
+					self.selected_profile.apply()
+					
+					# Refresh list of devices and mappings
+					self.buttons_list.Clear()
+					self.devices_list.Clear()
+					
+					for index, device in enumerate(self.selected_profile.devices):
+						self.devices_list.Append(device.name)
+					
 # end of class GUI
 
 
@@ -602,15 +751,15 @@ class EditMappingDialog(wx.Dialog):
 		event.Skip()
 
 	def on_add_home(self, event):  # wxGlade: EditMappingDialog.<event_handler>
-		print("Event handler 'on_add_home' not implemented!")
+		self.add_special_key("home")
 		event.Skip()
 
 	def on_add_end(self, event):  # wxGlade: EditMappingDialog.<event_handler>
-		print("Event handler 'on_add_end' not implemented!")
+		self.add_special_key("end")
 		event.Skip()
 
 	def on_add_super(self, event):  # wxGlade: EditMappingDialog.<event_handler>
-		print("Event handler 'on_add_super' not implemented!")
+		self.add_special_key("super")
 		event.Skip()
 
 	def on_grab_combo(self, event):  # wxGlade: EditMappingDialog.<event_handler>
@@ -673,7 +822,7 @@ class EditMappingDialog(wx.Dialog):
 		event.Skip()
 		
 	def on_add_tab(self, event):  # wxGlade: EditMappingDialog.<event_handler>
-		print("Event handler 'on_add_tab' not implemented!")
+		self.add_special_key("tab")
 		event.Skip()
 		
 	def on_clear_combo(self, event):  # wxGlade: EditMappingDialog.<event_handler>
@@ -692,6 +841,8 @@ class app(wx.App):
 	
 	def Show(self, show=True):
 		self.GUI.Show(show)
+		if show:
+			self.GUI.Raise()
 	
 
 # end of class app

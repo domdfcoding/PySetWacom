@@ -154,7 +154,7 @@ def get_profiles_list():
 	
 	profile_files = list(profile_file.stem for profile_file in profiles_dir.glob("**/*.profile"))
 	profile_files.sort()
-	return ["", "New Profile"] + profile_files
+	return profile_files
 
 
 profiles_dir = pathlib.Path(user_data_dir("PySetWacom"))
