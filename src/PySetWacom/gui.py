@@ -226,7 +226,7 @@ class GUI(wx.Frame):
 		# Get Icon
 		from PySetWacom.tray_icon import Gtk
 		icon_theme = Gtk.IconTheme.get_default()
-		icon_info = icon_theme.lookup_icon("input-tablet", 48, 0)
+		icon_info = icon_theme.lookup_icon("input-tablet", 128, 0)
 		
 		self.SetIcon(wx.Icon(icon_info.get_filename()))
 
