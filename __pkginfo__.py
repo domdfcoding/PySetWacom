@@ -20,7 +20,7 @@ import sys
 
 sys.path.append("src")
 
-VERSION = "0.1.1"
+VERSION = "0.1.2"
 
 modname = "PySetWacom"
 py_modules = None
