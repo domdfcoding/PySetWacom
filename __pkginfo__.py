@@ -18,7 +18,7 @@
 import os.path
 import sys
 
-VERSION = "0.1.2"
+VERSION = "0.1.3"
 
 modname = "PySetWacom"
 py_modules = None
