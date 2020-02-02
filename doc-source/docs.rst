@@ -1,70 +1,70 @@
 **************************
-:mod:`PyMassSpec`
+:mod:`PySetWacom`
 **************************
 
 .. contents:: Table of Contents
 
-.. automodule:: PyMassSpec
+.. automodule:: PySetWacom
     :members:
     :private-members:
     :special-members:
 
 ==================================
-:mod:`PyMassSpec.button`
+:mod:`PySetWacom.button`
 ==================================
 
 
-.. automodule:: PyMassSpec.button
+.. automodule:: PySetWacom.button
     :members:
     :private-members:
     :special-members:
 
 ==================================
-:mod:`PyMassSpec.device`
+:mod:`PySetWacom.device`
 ==================================
 
 
-.. automodule:: PyMassSpec.device
-    :members:
-    :private-members:
-    :special-members:
-
-===================================
-:mod:`PyMassSpec.gui`
-===================================
-
-
-.. automodule:: PyMassSpec.gui
-    :members:
-    :private-members:
-    :special-members:
-
-==================================
-:mod:`PyMassSpec.profile`
-==================================
-
-
-.. automodule:: PyMassSpec.profile
+.. automodule:: PySetWacom.device
     :members:
     :private-members:
     :special-members:
 
 ===================================
-:mod:`PyMassSpec.tray_icon`
+:mod:`PySetWacom.gui`
 ===================================
 
 
-.. automodule:: PyMassSpec.tray_icon
+.. automodule:: PySetWacom.gui
     :members:
     :private-members:
     :special-members:
 
 ==================================
-:mod:`PyMassSpec.xmodmap`
+:mod:`PySetWacom.profile`
 ==================================
 
 
-.. automodule:: PyMassSpec.xmodmap
+.. automodule:: PySetWacom.profile
+    :members:
+    :private-members:
+    :special-members:
+
+===================================
+:mod:`PySetWacom.tray_icon`
+===================================
+
+
+.. automodule:: PySetWacom.tray_icon
+    :members:
+    :private-members:
+    :special-members:
+
+==================================
+:mod:`PySetWacom.xmodmap`
+==================================
+
+
+.. automodule:: PySetWacom.xmodmap
     :members:
     :private-members:
     :special-members:
