@@ -27,6 +27,7 @@ entry_points       = {
 		'PySetWacom=PySetWacom:main',
 		'pysetwacom=PySetWacom:main',
 	]}
+# Credit: https://stackoverflow.com/a/12514470/3092681
 
 license = 'GPLv3'
 
