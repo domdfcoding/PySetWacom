@@ -5,13 +5,11 @@ from __pkginfo__ import (
 	author, author_email, install_requires,
 	license, long_description, classifiers,
 	entry_points, modname, py_modules,
-	short_desc, VERSION, web,
+	short_desc, VERSION, web, data_files
 	)
 
 from setuptools import setup, find_packages
 
-
-print(find_packages(exclude=("tests",)))
 
 setup(
 		author=author,
@@ -26,5 +24,6 @@ setup(
 		packages=find_packages(exclude=("tests",)),
 		py_modules=py_modules,
 		url=web,
-		version=VERSION
+		version=VERSION,
+		data_files=data_files,
 		)

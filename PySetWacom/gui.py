@@ -530,7 +530,7 @@ class EditMappingDialog(wx.Dialog):
 		# begin wxGlade: EditMappingDialog.__init__
 		kwds["style"] = kwds.get("style", 0) | wx.DEFAULT_DIALOG_STYLE
 		wx.Dialog.__init__(self, *args, **kwds)
-		self.button_name = wx.StaticText(self, wx.ID_ANY, "Button Name")
+		self.mapping_label = wx.StaticText(self, wx.ID_ANY, "Mapping")
 		self.combo_value = wx.TextCtrl(self, wx.ID_ANY, "", style=wx.TE_MULTILINE)
 		self.button_notebook = wx.Notebook(self, wx.ID_ANY)
 		self.keyboard_tab = wx.Panel(self.button_notebook, wx.ID_ANY)
@@ -605,7 +605,6 @@ class EditMappingDialog(wx.Dialog):
 	def __set_properties(self):
 		# begin wxGlade: EditMappingDialog.__set_properties
 		self.SetTitle("Edit Mapping")
-		self.button_name.SetFont(wx.Font(14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, 0, "Ubuntu"))
 		self.control_button.SetMinSize((90, -1))
 		self.alt_button.SetMinSize((90, -1))
 		self.delete_button.SetMinSize((90, -1))
@@ -645,7 +644,7 @@ class EditMappingDialog(wx.Dialog):
 		btn_sizer = wx.GridSizer(1, 2, 0, 0)
 		grid_sizer_4 = wx.GridBagSizer(2, 2)
 		grid_sizer_3 = wx.GridBagSizer(2, 2)
-		main_sizer.Add(self.button_name, 0, 0, 0)
+		main_sizer.Add(self.mapping_label, 0, wx.BOTTOM | wx.LEFT, 2)
 		main_sizer.Add(self.combo_value, 2, wx.ALL | wx.EXPAND, 2)
 		grid_sizer_3.Add(self.control_button, (0, 0), (1, 1), 0, 0)
 		grid_sizer_3.Add(self.alt_button, (0, 1), (1, 1), 0, 0)

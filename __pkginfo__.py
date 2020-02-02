@@ -25,6 +25,7 @@ py_modules = None
 entry_points       = {
 	'console_scripts': [
 		'PySetWacom=PySetWacom:main',
+		'pysetwacom=PySetWacom:main',
 	]}
 
 license = 'GPLv3'
@@ -50,8 +51,6 @@ author_email = "dominic@davis-foster.co.uk"
 github_username = "domdfcoding"
 web = github_url = f"https://github.com/{github_username}/{modname}"
 
-install_requires = []
-
 
 def get_srcdir():
 	filename = os.path.normcase(os.path.dirname(os.path.abspath(__file__)))
@@ -62,5 +61,26 @@ def read(*rnames):
 	return open(os.path.join(get_srcdir(), *rnames)).read()
 
 
+install_requires = [read("requirements.txt")]
+
+
 # Get info from files; set: long_description
 long_description = (read("README.rst") + '\n')
+
+# Create .desktop file
+with open("PySetWacom.desktop", "w") as desktop:
+	desktop.write(f"""[Desktop Entry]
+Version={VERSION}
+Name={modname}
+Comment=A GUI utility for configuring buttons on graphics tablets and styli
+Exec=PySetWacom
+Icon=input-tablet
+Terminal=false
+Type=Application
+Categories=Utility;Application;
+NoDisplay=true
+""")
+
+data_files = [
+		('share/applications', ['PySetWacom.desktop']),
+		]
