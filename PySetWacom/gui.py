@@ -255,7 +255,7 @@ class GUI(wx.Frame):
 	def receive_signal(self, signum, stack):
 		print('My PID is:', os.getpid())
 		print('Received:', signum)
-		if signum == 10:
+		if signum == signal.SIGUSR1:
 			self.Show()
 	
 	def tray_changed_profile(self, selected_profile):

@@ -18,13 +18,14 @@
 import os.path
 import sys
 
-sys.path.append("src")
-
 VERSION = "0.1.2"
 
 modname = "PySetWacom"
 py_modules = None
-entry_points = "src/pysetwacom.py"
+entry_points       = {
+	'console_scripts': [
+		'PySetWacom=PySetWacom:main',
+	]}
 
 license = 'GPLv3'
 

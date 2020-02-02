@@ -47,13 +47,15 @@ def main():
 	print('My PID is:', os.getpid())
 	
 	try:
-		with PidFile(piddir=str(pid_dir)) as p:
-			print('The other PID is:', p.pid)
+		with PidFile(pidname="PySetWacom", piddir=str(pid_dir)) as p:
 			
 			# Create Tray Icon, which in turn creates GUI
 			TrayIcon()
 	except (BlockingIOError, PidFileAlreadyLockedError):
-		os.kill(os.getpid(), signal.SIGUSR1)
+		other_pid = int((pid_dir / "PySetWacom.pid").read_text())
+		print("PySetWacom already running")
+		print('The other PID is:', other_pid)
+		os.kill(other_pid, signal.SIGUSR1)
 
 
 if __name__ == "__main__":

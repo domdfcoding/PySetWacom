@@ -24,9 +24,5 @@
 #
 
 
-import sys
-
-sys.path.append("..")
-
-from src.PySetWacom.main import main
+from PySetWacom.__main__ import main
 main()
