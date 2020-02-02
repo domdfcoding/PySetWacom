@@ -15,7 +15,6 @@ PySetWacom
     :target: https://pypi.org/project/PySetWacom/
     :alt: PyPI - Python Version
 
-|
 
 A GUI utility for configuring buttons on graphics tablets and styli, using the xsetwacom utility.
 
@@ -57,12 +56,10 @@ AppIndicator
 Once started, you should see an AppIndicator icon appear that looks like this:
 
 .. image:: images/AppIndicator.png
-	:width: 400
 
 You can click this icon to show the `Editor` window, switch profiles, or quit `PySetWacom`.
 
 .. image:: images/AppIndicatorMenu.png
-	:width: 400
 
 Editor
 -------
