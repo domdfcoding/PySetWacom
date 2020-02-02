@@ -1,9 +1,21 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+# Copy images from root into doc-source/images
+import os
+import shutil
+
+for image in os.listdir("../images"):
+	s = os.path.join("../images", image)
+	d = os.path.join("./images", image)
+	if os.path.isdir(s):
+		shutil.copytree(s, d)
+	else:
+		shutil.copy2(s, d)
+
+
 #### No need to change anything in this file ####
 
-import os
 import re
 import sys
 

@@ -56,12 +56,12 @@ AppIndicator
 
 Once started, you should see an AppIndicator icon appear that looks like this:
 
-.. image:: doc-source/images/AppIndicator.png
+.. image:: images/AppIndicator.png
 	:width: 400
 
 You can click this icon to show the `Editor` window, switch profiles, or quit `PySetWacom`.
 
-.. image:: doc-source/images/AppIndicatorMenu.png
+.. image:: images/AppIndicatorMenu.png
 	:width: 400
 
 Editor
@@ -69,17 +69,17 @@ Editor
 
 In the `Editor` window, you can change profiles and edit the mappings for the different buttons on your tablet.
 
-.. image:: doc-source/images/Editor.png
+.. image:: images/Editor.png
 	:width: 400
 
 Double clicking on a button opens the `Edit Mapping` dialog, where you can type in the mapping or capture it from your keyboard.
 
 
-.. image:: doc-source/images/Edit_Mapping.png
+.. image:: images/Edit_Mapping.png
 	:width: 400
 
 If there are devices in the list that you don't want to configure, or if there is a new device you want to add, you can click the `Manage Devices` button in the `Editor` window.
 
-.. image:: doc-source/images/Manage_Devices.png
+.. image:: images/Manage_Devices.png
 	:width: 400
 
