@@ -2,8 +2,8 @@
 PySetWacom
 **********************
 
-.. image:: https://travis-ci.org/domdfcoding/PySetWacom.svg?branch=master
-    :target: https://travis-ci.org/domdfcoding/PySetWacom
+.. image:: https://travis-ci.com/domdfcoding/PySetWacom.svg?branch=master
+    :target: https://travis-ci.com/domdfcoding/PySetWacom
     :alt: Build Status
 .. image:: https://readthedocs.org/projects/PySetWacom/badge/?version=latest
     :target: https://PySetWacom.readthedocs.io/en/latest/?badge=latest
