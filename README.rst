@@ -3,17 +3,17 @@ PySetWacom
 **********************
 
 .. image:: https://travis-ci.com/domdfcoding/PySetWacom.svg?branch=master
-    :target: https://travis-ci.com/domdfcoding/PySetWacom
-    :alt: Build Status
-.. image:: https://readthedocs.org/projects/PySetWacom/badge/?version=latest
-    :target: https://PySetWacom.readthedocs.io/en/latest/?badge=latest
-    :alt: Documentation Status
+	:target: https://travis-ci.com/domdfcoding/PySetWacom
+	:alt: Build Status
+.. image:: https://readthedocs.org/projects/pysetwacom/badge/?version=latest
+	:target: https://pysetwacom.readthedocs.io/en/latest/?badge=latest
+	:alt: Documentation Status
 .. image:: https://img.shields.io/pypi/v/pysetwacom.svg
-    :target: https://pypi.org/project/pysetwacom/
-    :alt: PyPI
+	:target: https://pypi.org/project/pysetwacom/
+	:alt: PyPI
 .. image:: https://img.shields.io/pypi/pyversions/PySetWacom.svg
-    :target: https://pypi.org/project/PySetWacom/
-    :alt: PyPI - Python Version
+	:target: https://pypi.org/project/PySetWacom/
+	:alt: PyPI - Python Version
 
 
 A GUI utility for configuring buttons on graphics tablets and styli, using the xsetwacom utility.
@@ -39,6 +39,10 @@ wxPython (4.0.7 or greater) must also be installed. See https://wxpython.org/pag
 PyGObject must also be installed. See https://pygobject.readthedocs.io/en/latest/ for more information and installation instructions.
 
 
+Depending on your tablet model you may need to install DIGImend_. See https://digimend.github.io/ for further information, a list of supported devices, and installation instructions.
+
+.. _DIGImend: https://digimend.github.io/
+
 Brief Tutorial
 ================
 
@@ -48,7 +52,7 @@ Brief Tutorial
 
 	$ PySetWacom
 
-or from your application menu.
+or by selecting its icon from your application menu.
 
 AppIndicator
 ---------------
