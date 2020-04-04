@@ -17,7 +17,7 @@
 
 import pathlib
 
-VERSION = "0.1.3"
+VERSION = "0.1.4"
 
 modname = "PySetWacom"
 py_modules = None
