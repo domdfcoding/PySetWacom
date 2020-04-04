@@ -15,18 +15,18 @@
 
 # This script based on https://github.com/rocky/python-uncompyle6/blob/master/__pkginfo__.py
 
-import os.path
-import sys
+import pathlib
 
 VERSION = "0.1.3"
 
 modname = "PySetWacom"
 py_modules = None
-entry_points       = {
-	'console_scripts': [
-		'PySetWacom=PySetWacom:main',
-		'pysetwacom=PySetWacom:main',
-	]}
+entry_points = {
+		'console_scripts': [
+				'PySetWacom=PySetWacom:main',
+				'pysetwacom=PySetWacom:main',
+				]
+		}
 # Credit: https://stackoverflow.com/a/12514470/3092681
 
 license = 'GPLv3'
@@ -52,21 +52,15 @@ author_email = "dominic@davis-foster.co.uk"
 github_username = "domdfcoding"
 web = github_url = f"https://github.com/{github_username}/{modname}"
 
-
-def get_srcdir():
-	filename = os.path.normcase(os.path.dirname(os.path.abspath(__file__)))
-	return os.path.realpath(filename)
-
-
-def read(*rnames):
-	return open(os.path.join(get_srcdir(), *rnames)).read()
-
-
-install_requires = [read("requirements.txt")]
-
-
 # Get info from files; set: long_description
-long_description = (read("README.rst") + '\n')
+if pathlib.Path.cwd().name == "doc-source":
+	print(pathlib.Path.cwd().parent / "README.rst")
+	install_requires = (pathlib.Path.cwd().parent / "requirements.txt").read_text().split("\n")
+	long_description = (pathlib.Path.cwd().parent / "README.rst").read_text() + '\n'
+else:
+	print(pathlib.Path("README.rst"))
+	install_requires = pathlib.Path("requirements.txt").read_text().split("\n")
+	long_description = pathlib.Path("README.rst").read_text() + '\n'
 
 data_files = [
 		('share/applications', ['PySetWacom.desktop']),

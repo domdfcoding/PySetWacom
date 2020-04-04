@@ -26,7 +26,6 @@ NoDisplay=true
 """)
 
 
-
 setup(
 		author=author,
 		author_email=author_email,
