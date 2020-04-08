@@ -1,0 +1,2 @@
+include __pkginfo__.py
+include requirements.txt
