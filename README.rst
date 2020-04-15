@@ -84,3 +84,12 @@ If there are devices in the list that you don't want to configure, or if there i
 .. image:: images/Manage_Devices.png
 	:width: 400
 
+
+Further Reading
+================
+
+https://github.com/linuxwacom/xf86-input-wacom/wiki/Tablet-Configuration-1:-xsetwacom-and-xorg.conf
+https://github.com/linuxwacom/xf86-input-wacom/wiki/xsetwacom
+https://www.x.org/releases/current/doc/man/man4/mousedrv.4.xhtml
+https://wiki.archlinux.org/index.php/Wacom_tablet
+
