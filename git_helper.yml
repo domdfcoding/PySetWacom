@@ -18,6 +18,7 @@ additional_ignore:
   - sample_icon.svg
   - notify-demo.py
   - "*.desktop"
+  - "**/*.desktop"
 
 console_scripts:
   - "PySetWacom = PySetWacom.__main__:main"
