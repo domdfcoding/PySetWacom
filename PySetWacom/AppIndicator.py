@@ -588,7 +588,7 @@ class AppIndicatorMenu:
 
 	def GetInvokingWindow(self):
 		""" GetInvokingWindow() -> Window """
-		# TODo
+		# TODO
 		return Window
 
 	def GetLabel(self, id):
@@ -836,4 +836,3 @@ Returns the title of the menu."""
 
 	Window = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
 	"""GetWindow() -> Window"""
-
