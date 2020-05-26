@@ -78,23 +78,20 @@ intersphinx_mapping = {
 		"attrs": ('https://www.attrs.org/en/stable/', None),
 		}
 
-html_theme = 'alabaster'
+html_theme = 'sphinx_rtd_theme'
 html_theme_options = {
-		'page_width': '1200px',
-		'logo_name': 'true',
-		'github_user': 'domdfcoding',
-		'github_repo': 'PySetWacom',
-		'description': 'Update multiple configuration files, build scripts etc. from a single location',
-		'github_banner': 'true',
-		'github_type': 'star',
-		'badge_branch': 'master',
-		'fixed_sidebar': 'false',
+		'logo_only': False,
 		}
 html_theme_path = ["../.."]
 # html_logo = "logo/pyms.png"
 html_show_sourcelink = False  # True will show link to source
 
 html_context = {
+		'display_github': True,
+		'github_user': 'domdfcoding',
+		'github_repo': 'PySetWacom',
+		'github_version': 'master',
+		'conf_py_path': '/',
 		}
 
 htmlhelp_basename = slug
