@@ -6,20 +6,6 @@ from __pkginfo__ import *
 
 from setuptools import setup, find_packages
 
-# Create .desktop file
-with open("PySetWacom.desktop", "w") as desktop:
-	desktop.write(f"""[Desktop Entry]
-Version={__version__}
-Name={modname}
-Comment=A GUI utility for configuring buttons on graphics tablets and styli
-Exec=PySetWacom
-Icon=input-tablet
-Terminal=false
-Type=Application
-Categories=Utility;Application;
-""")
-
-
 setup(
 		author=author,
 		author_email=author_email,

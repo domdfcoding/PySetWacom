@@ -2,3 +2,4 @@ include __pkginfo__.py
 include LICENSE
 include requirements.txt
 recursive-exclude **/__pycache__ *
+include create_dotdesktop.py

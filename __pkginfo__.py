@@ -40,7 +40,6 @@ __all__ = [
 		"classifiers",
 		"keywords",
 		"import_name",
-		"data_files",
 		]
 
 __copyright__ = """
@@ -99,6 +98,8 @@ classifiers = [
 
 keywords = ""
 
-data_files = [
-		('share/applications', ['PySetWacom.desktop']),
-		]
+data_files = [('share/applications', ['PySetWacom.desktop'])]
+__all__.append("data_files")
+
+from create_dotdesktop import create_dotdesktop
+create_dotdesktop(__version__)
