@@ -64,5 +64,5 @@ sphinx_conf_preamble:
   - "\t\tshutil.copy2(s, d)"
 
 travis_extra_install_pre:
-  - "sudo apt-get update"
-  - "sudo apt-get install cairo"
+  - "sudo apt update"
+  - "sudo apt install libcairo2-dev pkg-config python3-dev"
