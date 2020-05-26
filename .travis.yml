@@ -9,8 +9,8 @@ python:
   - '3.8'
 
 install:
-  - apt-get update
-  - apt-get install cairo
+  - sudo apt-get update
+  - sudo apt-get install cairo
 
   - pip install pip  --upgrade
   - pip install tox tox-travis
