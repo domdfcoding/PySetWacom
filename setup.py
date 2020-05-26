@@ -1,20 +1,15 @@
 #!/usr/bin/env python
+# This file is managed by `git_helper`. Don't edit it directly
 """Setup script"""
 
-from __pkginfo__ import (
-	author, author_email, install_requires,
-	license, long_description, classifiers,
-	entry_points, modname, py_modules,
-	short_desc, VERSION, web, data_files
-	)
+from __pkginfo__ import *
 
 from setuptools import setup, find_packages
-
 
 # Create .desktop file
 with open("PySetWacom.desktop", "w") as desktop:
 	desktop.write(f"""[Desktop Entry]
-Version={VERSION}
+Version={__version__}
 Name={modname}
 Comment=A GUI utility for configuring buttons on graphics tablets and styli
 Exec=PySetWacom
@@ -31,14 +26,18 @@ setup(
 		classifiers=classifiers,
 		description=short_desc,
 		entry_points=entry_points,
+		extras_require=extras_require,
+		include_package_data=True,
 		install_requires=install_requires,
-		license=license,
+		license=__license__,
 		long_description=long_description,
-		name=modname,
-		packages=find_packages(exclude=("tests",)),
+		name=pypi_name,
+		packages=find_packages(exclude=("tests", "doc-source")),
+		project_urls=project_urls,
 		py_modules=py_modules,
+		python_requires=">=3.6",
 		url=web,
-		version=VERSION,
+		version=__version__,
+		keywords=keywords,
 		data_files=data_files,
 		)
-
