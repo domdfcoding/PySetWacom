@@ -10,7 +10,7 @@ python:
 
 install:
   - sudo apt update
-  - sudo apt install libcairo2-dev pkg-config python3-dev libgirepository1.0-dev
+  - sudo apt install libcairo2-dev pkg-config python3-dev libgirepository1.0-dev xserver-xorg-input-wacom libwacom2 libwacom-common
 
   - pip install pip  --upgrade
   - pip install tox tox-travis
