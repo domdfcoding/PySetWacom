@@ -1,7 +1,7 @@
 # This file is managed by `git_helper`. Don't edit it directly
 
 language: python
-dist: xenial
+dist: bionic
 cache: pip
 python:
   - '3.6'
