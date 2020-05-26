@@ -2,19 +2,72 @@
 PySetWacom
 **********************
 
-.. image:: https://travis-ci.com/domdfcoding/PySetWacom.svg?branch=master
-	:target: https://travis-ci.com/domdfcoding/PySetWacom
-	:alt: Build Status
-.. image:: https://readthedocs.org/projects/pysetwacom/badge/?version=latest
+.. start shields 
+
+.. list-table::
+	:stub-columns: 1
+	:widths: 10 90
+
+	* - Docs
+	  - |docs|
+	* - Tests
+	  - |travis| |requires| |codefactor|
+	* - PyPI
+	  - |pypi-version| |supported-versions| |supported-implementations| |wheel|
+	* - Other
+	  - |license| |language| |commits-since| |commits-latest| |maintained| 
+	
+.. |docs| image:: https://readthedocs.org/projects/pysetwacom/badge/?version=latest
 	:target: https://pysetwacom.readthedocs.io/en/latest/?badge=latest
 	:alt: Documentation Status
-.. image:: https://img.shields.io/pypi/v/pysetwacom.svg
-	:target: https://pypi.org/project/pysetwacom/
-	:alt: PyPI
-.. image:: https://img.shields.io/pypi/pyversions/PySetWacom.svg
-	:target: https://pypi.org/project/PySetWacom/
-	:alt: PyPI - Python Version
 
+.. |travis| image:: https://img.shields.io/travis/com/domdfcoding/PySetWacom/master?logo=travis
+	:target: https://travis-ci.com/domdfcoding/PySetWacom
+	:alt: Travis Build Status
+	
+.. |requires| image:: https://requires.io/github/domdfcoding/PySetWacom/requirements.svg?branch=master
+	:target: https://requires.io/github/domdfcoding/PySetWacom/requirements/?branch=master
+	:alt: Requirements Status
+
+.. |codefactor| image:: https://img.shields.io/codefactor/grade/github/domdfcoding/PySetWacom
+	:target: https://www.codefactor.io/repository/github/domdfcoding/PySetWacom
+	:alt: CodeFactor Grade
+
+.. |pypi-version| image:: https://img.shields.io/pypi/v/PySetWacom.svg
+	:target: https://pypi.org/project/PySetWacom/
+	:alt: PyPI - Package Version
+
+.. |supported-versions| image:: https://img.shields.io/pypi/pyversions/PySetWacom.svg
+	:target: https://pypi.org/project/PySetWacom/
+	:alt: PyPI - Supported Python Versions
+
+.. |supported-implementations| image:: https://img.shields.io/pypi/implementation/PySetWacom
+	:target: https://pypi.org/project/PySetWacom/
+	:alt: PyPI - Supported Implementations
+
+.. |wheel| image:: https://img.shields.io/pypi/wheel/PySetWacom
+	:target: https://pypi.org/project/PySetWacom/
+	:alt: PyPI - Wheel
+
+.. |license| image:: https://img.shields.io/github/license/domdfcoding/PySetWacom
+	:alt: License
+	:target: https://github.com/domdfcoding/PySetWacom/blob/master/LICENSE
+
+.. |language| image:: https://img.shields.io/github/languages/top/domdfcoding/PySetWacom
+	:alt: GitHub top language
+
+.. |commits-since| image:: https://img.shields.io/github/commits-since/domdfcoding/PySetWacom/v0.1.6
+	:target: https://github.com/domdfcoding/PySetWacom/pulse
+	:alt: GitHub commits since tagged version
+
+.. |commits-latest| image:: https://img.shields.io/github/last-commit/domdfcoding/PySetWacom
+	:target: https://github.com/domdfcoding/PySetWacom/commit/master
+	:alt: GitHub last commit
+
+.. |maintained| image:: https://img.shields.io/maintenance/yes/2020
+	:alt: Maintenance
+
+.. end shields
 
 A GUI utility for configuring buttons on graphics tablets and styli, using the xsetwacom utility.
 
