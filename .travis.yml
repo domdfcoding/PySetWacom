@@ -1,18 +1,53 @@
+# This file is managed by `git_helper`. Don't edit it directly
+
 language: python
 dist: xenial
+cache: pip
 python:
-- '3.6'
-- '3.7'
-- '3.8'
+  - '3.6'
+  - '3.7'
+  - '3.8'
+
+install:
+
+  - pip install pip  --upgrade
+  - pip install tox tox-travis
+
+
 script:
- - echo "skipping tests"
-deploy:
-  provider: pypi
-  user: DomDF
-  on:
-    tags: true
-    python: '3.6'
-  distributions: sdist bdist_wheel
-  skip_existing: true
-  password:
-    secure: QS1iLcW0Ww3Z9HoWd7cmFVHvwXRS21GwzZbB4FwGAj1E55eEBIWyBQBZswlssuyWG8akPuEuZxThvPcW4biu/VTE4MA0bHbNu1Y2RWUNmwmnH7EJD12A5EP70Qd0DUeSnHki6I8LI+g8MsSMi+u+aZKFzV8QG8OwMA22td/ZmDYyYNnbyTZXkJfY97Lou24eBGZtMJYGBB61mzKPFAOJsh6iFLi82jMGUyESjVals0iHA3+esotGUc805i5fyQHl32MHVBpoYQOAW+YVqxsJheXCpSLp/Md+xLN9kGYKKOc6evCGnaJOrJt7U3LsgYpPp6Xffi4ox5kzDLm5tNJvbYrxWIwDCxo98UCBqBhzsrKUuuPeMsxiz+cKiaAV0gv6MaCFkQwsI84WL9X+Ow6rnpa7U4cSgJoX+RTg/MvNaLrQa7bKQ66QaOzdwaKS0+4jyPO/KZOF7bS35hZGFRVoh6LFyOtNY66pD93xQbc6aACeziUKZbEJO1beaQhtEtyumX32n2tsHmvnlhvXFD4GSPIANwjFm7Bdquv3SRFwC/JemtoTsPOfW52WfmPBMvdWx3+GjJvsfeq2McsYTBg+64je8oF6i4u63KiFN/1K1EYreA/s2oDrM22Z+0P4P9lzrTXNnnd+dHI6oTFo3b/sQCnhlojL6R00Apw2i0kfjCY=
+  - tox
+
+
+stages:
+  - test
+  - deploy_pypi
+
+  - deploy_releases
+
+jobs:
+  include:
+    - stage: deploy_pypi
+      python: "3.6"
+      script: skip
+      deploy:
+        on:
+          tags: true
+          repo: domdfcoding/PySetWacom
+        provider: pypi
+        user: "DomDF"
+        password:
+          secure: QS1iLcW0Ww3Z9HoWd7cmFVHvwXRS21GwzZbB4FwGAj1E55eEBIWyBQBZswlssuyWG8akPuEuZxThvPcW4biu/VTE4MA0bHbNu1Y2RWUNmwmnH7EJD12A5EP70Qd0DUeSnHki6I8LI+g8MsSMi+u+aZKFzV8QG8OwMA22td/ZmDYyYNnbyTZXkJfY97Lou24eBGZtMJYGBB61mzKPFAOJsh6iFLi82jMGUyESjVals0iHA3+esotGUc805i5fyQHl32MHVBpoYQOAW+YVqxsJheXCpSLp/Md+xLN9kGYKKOc6evCGnaJOrJt7U3LsgYpPp6Xffi4ox5kzDLm5tNJvbYrxWIwDCxo98UCBqBhzsrKUuuPeMsxiz+cKiaAV0gv6MaCFkQwsI84WL9X+Ow6rnpa7U4cSgJoX+RTg/MvNaLrQa7bKQ66QaOzdwaKS0+4jyPO/KZOF7bS35hZGFRVoh6LFyOtNY66pD93xQbc6aACeziUKZbEJO1beaQhtEtyumX32n2tsHmvnlhvXFD4GSPIANwjFm7Bdquv3SRFwC/JemtoTsPOfW52WfmPBMvdWx3+GjJvsfeq2McsYTBg+64je8oF6i4u63KiFN/1K1EYreA/s2oDrM22Z+0P4P9lzrTXNnnd+dHI6oTFo3b/sQCnhlojL6R00Apw2i0kfjCY=
+        distributions: "sdist bdist_wheel"
+        skip_existing: true
+
+
+    - stage: deploy_releases
+      python: "3.6"
+      install:
+        - pip install PyGithub requests
+      script: skip
+      deploy:
+        on:
+          repo: domdfcoding/PySetWacom
+        provider: script
+        script: python .ci/copy_pypi_2_github.py || travis_terminate 1
