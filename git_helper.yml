@@ -62,3 +62,7 @@ sphinx_conf_preamble:
   - "\t\tshutil.copytree(s, d)"
   - "\telse:"
   - "\t\tshutil.copy2(s, d)"
+
+travis_extra_install_pre:
+  - "apt-get update"
+  - "apt-get install cairo"
