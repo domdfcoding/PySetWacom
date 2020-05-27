@@ -49,7 +49,6 @@ extensions = [
 		"sphinxcontrib.extras_require",
 		"sphinx.ext.todo",
 		"sphinxemoji.sphinxemoji",
-		"sphinx_autodoc_typehints",
 		]
 
 sphinxemoji_style = 'twemoji'

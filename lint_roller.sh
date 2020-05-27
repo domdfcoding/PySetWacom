@@ -17,13 +17,9 @@ if [ -z "$(git status --porcelain --untracked-files=no)" ] || [ "$1" == "-f" ]; 
 
   autopep8 --in-place --select "$errors" -a --recursive PySetWacom/
   autopep8 --in-place --select "$belligerent" -a -a -a -a -a --recursive PySetWacom/
-  >&2 flake8 --select "$errors$belligerent" PySetWacom/
-
 
   autopep8 --in-place --select "$errors" -a --recursive tests/
   autopep8 --in-place --select "$belligerent" -a -a -a -a -a --recursive tests/
-  >&2 flake8 --select "$warnings" tests/
-
 
   echo "Running flake8"
 
