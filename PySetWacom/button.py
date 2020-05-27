@@ -30,7 +30,7 @@ class Button:
 	"""
 	Models a button on a tablet or stylus
 	"""
-	
+
 	def __init__(self, id, mapping):
 		"""
 		:param id: The id of the button
@@ -41,7 +41,7 @@ class Button:
 
 		self.id = id
 		self.mapping = mapping
-		
+
 	@classmethod
 	def from_string(cls, raw_string):
 		"""
@@ -53,16 +53,16 @@ class Button:
 		:return:
 		:rtype: Button
 		"""
-		
+
 		if raw_string.strip() == '':
 			return
-		
+
 		elements = (raw_string.strip('"').split('" "'))
 		id = elements[0]
 		mapping = elements[1]
-		
+
 		return cls(id, mapping)
-	
+
 	@classmethod
 	def from_dict(cls, data_dict):
 		"""
@@ -74,22 +74,22 @@ class Button:
 		:return:
 		:rtype: Button
 		"""
-		
+
 		return cls(**data_dict)
-	
+
 	def __dict__(self):
 		return {
 				"id": self.id,
 				"mapping": self.mapping,
 				}
-	
+
 	def __iter__(self):
 		for key, value in self.__dict__().items():
 			yield key, value
-	
+
 	def __repr__(self):
 		return f"Button({self.id} --> {self.mapping})"
-	
+
 	def __str__(self):
 		return f"{self.id} --> {self.mapping}"
 
@@ -104,16 +104,16 @@ def get_mappings(device_name):
 	:return:
 	:rtype: list of Button
 	"""
-	
+
 	all_properties = xsetwacom("-s", "get", device_name, "all")
-	
+
 	buttons = []
-	
+
 	for prop in all_properties:
 		if prop.startswith(f'xsetwacom set "{device_name}" "Button"'):
 			button = Button.from_string(
 					prop.replace(f'xsetwacom set "{device_name}" "Button"', "").rstrip("\n").strip()
 					)
 			buttons.append(button)
-		
+
 	return buttons

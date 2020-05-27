@@ -1,7 +1,7 @@
 #  !/usr/bin/env python
 #   -*- coding: utf-8 -*-
 #
-#  pysetwacom.py
+#  __main__.py
 #
 #  This file is part of PySetWacom
 #
@@ -23,19 +23,16 @@
 #  MA 02110-1301, USA.
 #
 
-
 # stdlib
 import os
-import sys
-import signal
 import pathlib
+import signal
 
 # 3rd party
 from appdirs import user_data_dir
 from pid import PidFile, PidFileAlreadyLockedError
 
 # this package
-sys.path.append("..")
 from PySetWacom import TrayIcon
 
 
@@ -43,12 +40,12 @@ def main():
 	pid_dir = pathlib.Path(user_data_dir("PySetWacom")) / ".pid"
 	if not pid_dir.exists():
 		pid_dir.mkdir()
-	
+
 	print('My PID is:', os.getpid())
-	
+
 	try:
 		with PidFile(pidname="PySetWacom", piddir=str(pid_dir)) as p:
-			
+
 			# Create Tray Icon, which in turn creates GUI
 			TrayIcon()
 	except (BlockingIOError, PidFileAlreadyLockedError):

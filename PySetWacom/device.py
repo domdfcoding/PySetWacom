@@ -32,7 +32,7 @@ class Device:
 	"""
 	Models a Device such as a tablet or stylus
 	"""
-	
+
 	def __init__(self, name, id, type):
 		"""
 		:param name: The name of the device
@@ -42,12 +42,12 @@ class Device:
 		:param type:
 		:type type:
 		"""
-		
+
 		self.name = name
 		self.id = id
 		self.type = type
 		self._buttons = []
-	
+
 	def add_button(self, button):
 		"""
 		Add the button to the device
@@ -55,9 +55,9 @@ class Device:
 		:param button:
 		:type button: Button
 		"""
-		
+
 		self._buttons.append(button)
-	
+
 	def add_multiple_buttons(self, button_list):
 		"""
 		Add multiple buttons to the device
@@ -65,9 +65,9 @@ class Device:
 		:param button_list:
 		:type button_list: list of Button
 		"""
-		
+
 		self._buttons += button_list
-	
+
 	@property
 	def buttons(self):
 		"""
@@ -75,9 +75,9 @@ class Device:
 		
 		:rtype: list of Button
 		"""
-		
+
 		return self._buttons
-	
+
 	@classmethod
 	def from_string(cls, raw_string):
 		"""
@@ -89,18 +89,18 @@ class Device:
 		:return:
 		:rtype: Device
 		"""
-		
+
 		if raw_string.strip() == '':
 			return
-		
+
 		elements = raw_string.split("\t")
-		
+
 		name = elements[0].strip()
 		id = elements[1].strip().replace("id: ", '')
 		type = elements[2].strip().replace("type: ", '')
 
 		return cls(name, id, type)
-	
+
 	@classmethod
 	def from_dict(cls, data_dict):
 		"""
@@ -112,11 +112,11 @@ class Device:
 		:return:
 		:rtype: Device
 		"""
-		
+
 		device = cls(data_dict["name"], data_dict["id"], data_dict["type"])
 		device.add_multiple_buttons([Button.from_dict(button) for button in data_dict["buttons"]])
 		return device
-		
+
 	def __dict__(self):
 		return {
 				"name": self.name,
@@ -124,17 +124,17 @@ class Device:
 				"type": self.type,
 				"buttons": [dict(button) for button in self.buttons]
 				}
-	
+
 	def __iter__(self):
 		for key, value in self.__dict__().items():
 			yield key, value
-	
+
 	def __repr__(self):
 		return f"Device({self.name}\tid: {self.id}\ttype: {self.type})"
-		
+
 	def __str__(self):
 		return self.__repr__()
-	
+
 	def __eq__(self, other):
 		return self.name == other.name
 
@@ -146,9 +146,9 @@ def detect_devices():
 	:return:
 	:rtype: list of Device
 	"""
-	
+
 	devices_list = (xsetwacom.list()).split("\n")
-	
+
 	devices_list = filter(None, [Device.from_string(device) for device in devices_list])
-	
+
 	return list(devices_list)

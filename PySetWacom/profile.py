@@ -40,7 +40,7 @@ class Profile:
 	"""
 	Models a Profile for mapping the buttons on one or more devices
 	"""
-	
+
 	def __init__(self, name, devices):
 		"""
 		:param name:
@@ -48,10 +48,10 @@ class Profile:
 		:param devices:
 		:type devices: list of Device objects
 		"""
-		
+
 		self._devices = devices
 		self._name = name
-	
+
 	@classmethod
 	def new(cls, name):
 		"""
@@ -62,32 +62,32 @@ class Profile:
 		
 		:rtype: Profile
 		"""
-		
+
 		devices = detect_devices()
 		for device in devices:
 			device.add_multiple_buttons(get_mappings(device.name))
 		return cls(name, devices)
-	
+
 	def __dict__(self):
 		return {
 				"name": self._name,
 				"devices": [dict(device) for device in self._devices],
 				}
-	
+
 	def __iter__(self):
 		for key, value in self.__dict__().items():
 			yield key, value
-	
+
 	def save(self):
 		"""
 		Save the Profile
 		"""
-		
+
 		filename = profiles_dir / f"{self._name}.profile"
-		
+
 		with filename.open("w") as fp:
 			json.dump(dict(self), fp, indent=4)
-	
+
 	@classmethod
 	def load(cls, name):
 		"""
@@ -98,16 +98,16 @@ class Profile:
 		
 		:rtype: Profile
 		"""
-		
+
 		filename = profiles_dir / f"{name}.profile"
-		
+
 		with filename.open("r") as fp:
 			data_dict = json.load(fp)
-		
+
 		data_dict["devices"] = [Device.from_dict(device) for device in data_dict["devices"]]
-		
+
 		return cls(**data_dict)
-	
+
 	@property
 	def name(self):
 		"""
@@ -115,9 +115,9 @@ class Profile:
 		
 		:rtype: str
 		"""
-		
+
 		return self._name
-	
+
 	@property
 	def devices(self):
 		"""
@@ -135,7 +135,7 @@ class Profile:
 		:return:
 		:rtype:
 		"""
-		
+
 		for device in self.devices:
 			for button in device.buttons:
 				# print(xsetwacom(f'--set "{device.name}" Button {button.id} "{button.mapping}"'))
@@ -144,14 +144,14 @@ class Profile:
 				# print(f'--set "{device.name}" Button {button.id} "{button.mapping}"')
 				os.system(f'xsetwacom --set "{device.name}" Button {button.id} "{button.mapping}"')
 
-				
+
 def get_profiles_list():
 	"""
 	Returns a list of existing Profiles
 
 	:rtype:
 	"""
-	
+
 	profile_files = list(profile_file.stem for profile_file in profiles_dir.glob("**/*.profile"))
 	profile_files.sort()
 	return profile_files
