@@ -1,5 +1,4 @@
 #  !/usr/bin/env python
-#   -*- coding: utf-8 -*-
 #
 #  button.py
 #
@@ -22,8 +21,8 @@
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 #  MA 02110-1301, USA.
 #
-
-from sh import xsetwacom
+# 3rd party
+from sh import xsetwacom  # type: ignore
 
 
 class Button:
@@ -84,8 +83,7 @@ class Button:
 				}
 
 	def __iter__(self):
-		for key, value in self.__dict__().items():
-			yield key, value
+		yield from self.__dict__().items()
 
 	def __repr__(self):
 		return f"Button({self.id} --> {self.mapping})"

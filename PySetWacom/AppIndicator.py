@@ -1,5 +1,4 @@
 #  !/usr/bin/env python
-#   -*- coding: utf-8 -*-
 #
 #  AppIndicator.py
 #
@@ -27,17 +26,16 @@
 import signal
 
 # 3rd party
-import wx
-from pubsub import pub
-
 import gi
+import wx  # type: ignore
+from pubsub import pub  # type: ignore
+
 gi.require_version('Gtk', '3.0')
 gi.require_version('AppIndicator3', '0.1')
 gi.require_version('Notify', '0.7')
 
-from gi.repository import Gtk
-from gi.repository import AppIndicator3
-from gi.repository import Notify
+# 3rd party
+from gi.repository import AppIndicator3, Gtk, Notify  # type: ignore  # isort: skip
 
 EVT_APPINDICATOR_BUTTON = wx.NewEventType()
 myEVT_APPINDICATOR_BUTTON = wx.PyEventBinder(EVT_APPINDICATOR_BUTTON, 1)

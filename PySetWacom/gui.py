@@ -1,5 +1,4 @@
 #  !/usr/bin/env python
-#   -*- coding: utf-8 -*-
 #
 #  gui.py
 #
@@ -32,13 +31,13 @@ import signal
 import webbrowser
 
 # 3rd party
-import wx
-from pubsub import pub
-from domdf_wxpython_tools.validators import ValidatorBase
+import wx  # type: ignore
+from domdf_wxpython_tools.validators import ValidatorBase  # type: ignore
+from pubsub import pub  # type: ignore
 
 # this package
-from PySetWacom.profile import get_profiles_list, Profile, profiles_dir
 from PySetWacom.device import detect_devices
+from PySetWacom.profile import Profile, get_profiles_list, profiles_dir
 
 # begin wxGlade: dependencies
 # end wxGlade
@@ -70,8 +69,8 @@ class ManageDevicesDialog(wx.Dialog):
 		self.SetSize((450, 350))
 		self.picker_list_box = wx.ListBox(self, wx.ID_ANY, choices=[])
 		self.button_panel = wx.Panel(self, wx.ID_ANY)
-		self.add_btn = wx.Button(self.button_panel, wx.ID_ANY, u"Add 🡲")
-		self.remove_btn = wx.Button(self.button_panel, wx.ID_ANY, u"🡰 Remove")
+		self.add_btn = wx.Button(self.button_panel, wx.ID_ANY, "Add 🡲")
+		self.remove_btn = wx.Button(self.button_panel, wx.ID_ANY, "🡰 Remove")
 		self.selection_list_box = wx.ListBox(self, wx.ID_ANY, choices=[])
 
 		self.__set_properties()
@@ -231,6 +230,7 @@ class GUI(wx.Frame):
 		# end wxGlade
 
 		# Get Icon
+		# this package
 		from PySetWacom.tray_icon import Gtk
 		icon_theme = Gtk.IconTheme.get_default()
 		icon_info = icon_theme.lookup_icon("input-tablet", 128, 0)

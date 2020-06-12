@@ -1,5 +1,4 @@
 #  !/usr/bin/env python
-#   -*- coding: utf-8 -*-
 #
 #  __init__.py
 #
@@ -23,11 +22,12 @@
 #  MA 02110-1301, USA.
 #
 
+# this package
 from PySetWacom.__main__ import main
 from PySetWacom.button import Button, get_mappings
-from PySetWacom.device import detect_devices, Device
-from PySetWacom.gui import app, CaptureKeystrokeDialog, EditMappingDialog, GUI, NewProfileValidator
-from PySetWacom.profile import get_profiles_list, Profile, profiles_dir
+from PySetWacom.device import Device, detect_devices
+from PySetWacom.gui import GUI, CaptureKeystrokeDialog, EditMappingDialog, NewProfileValidator, app
+from PySetWacom.profile import Profile, get_profiles_list, profiles_dir
 from PySetWacom.tray_icon import TrayIcon
 from PySetWacom.xmodmap import apply_overrides
 

@@ -1,5 +1,4 @@
 #  !/usr/bin/env python
-#   -*- coding: utf-8 -*-
 #
 #  device.py
 #
@@ -22,9 +21,10 @@
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 #  MA 02110-1301, USA.
 #
+# 3rd party
+from sh import xsetwacom  # type: ignore
 
-from sh import xsetwacom
-
+# this package
 from PySetWacom.button import Button
 
 
@@ -126,8 +126,7 @@ class Device:
 				}
 
 	def __iter__(self):
-		for key, value in self.__dict__().items():
-			yield key, value
+		yield from self.__dict__().items()
 
 	def __repr__(self):
 		return f"Device({self.name}\tid: {self.id}\ttype: {self.type})"

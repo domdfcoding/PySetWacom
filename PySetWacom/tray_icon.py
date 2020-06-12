@@ -1,5 +1,4 @@
 #  !/usr/bin/env python
-#   -*- coding: utf-8 -*-
 #
 #  tray_icon.py
 #
@@ -27,12 +26,12 @@
 import sys
 
 # 3rd party
-from pubsub import pub
+from pubsub import pub  # type: ignore
 
 # this package
-from PySetWacom.AppIndicator import AppIndicatorItem, AppIndicator, AppIndicatorMenu, Gtk, AppIndicator3, Notify
+from PySetWacom.AppIndicator import AppIndicator, AppIndicator3, AppIndicatorItem, AppIndicatorMenu, Gtk, Notify
 from PySetWacom.gui import app
-from PySetWacom.profile import get_profiles_list, Profile
+from PySetWacom.profile import Profile, get_profiles_list
 
 
 class TrayIcon(AppIndicator):

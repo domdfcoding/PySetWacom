@@ -1,5 +1,4 @@
 #  !/usr/bin/env python
-#   -*- coding: utf-8 -*-
 #
 #  __main__.py
 #
@@ -29,11 +28,12 @@ import pathlib
 import signal
 
 # 3rd party
-from appdirs import user_data_dir
-from pid import PidFile, PidFileAlreadyLockedError
+from appdirs import user_data_dir  # type: ignore
+from pid import PidFile, PidFileAlreadyLockedError  # type: ignore
 
 
 def main():
+
 	# this package
 	from PySetWacom import TrayIcon
 

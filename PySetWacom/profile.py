@@ -1,5 +1,4 @@
 #  !/usr/bin/env python
-#   -*- coding: utf-8 -*-
 #
 #  profile.py
 #
@@ -29,11 +28,11 @@ import os
 import pathlib
 
 # 3rd party
-from appdirs import user_data_dir
+from appdirs import user_data_dir  # type: ignore
 
 # this package
 from PySetWacom.button import get_mappings
-from PySetWacom.device import detect_devices, Device
+from PySetWacom.device import Device, detect_devices
 
 
 class Profile:
@@ -75,8 +74,7 @@ class Profile:
 				}
 
 	def __iter__(self):
-		for key, value in self.__dict__().items():
-			yield key, value
+		yield from self.__dict__().items()
 
 	def save(self):
 		"""

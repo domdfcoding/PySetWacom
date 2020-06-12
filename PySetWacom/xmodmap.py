@@ -1,5 +1,4 @@
 #  !/usr/bin/env python
-#   -*- coding: utf-8 -*-
 #
 #  xmodmap.py
 """
@@ -52,6 +51,7 @@ uses a different layout.
 #  MA 02110-1301, USA.
 #
 
+# stdlib
 import os
 
 overrides = {
