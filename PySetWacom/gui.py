@@ -458,7 +458,7 @@ class CaptureKeystrokeDialog(wx.Dialog):
 		if code in self.special_keys:
 			keystroke = prefix + self.special_keys[code]
 		else:
-			#if prefix == "+":
+			# if prefix == "+":
 			keystroke = prefix + chr(code).lower()
 			# else:
 			# 	return

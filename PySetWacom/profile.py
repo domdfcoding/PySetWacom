@@ -55,10 +55,10 @@ class Profile:
 	def new(cls, name):
 		"""
 		Create a new Profile
-		
+
 		:param name: The name of the profile
 		:type name: str
-		
+
 		:rtype: Profile
 		"""
 
@@ -90,10 +90,10 @@ class Profile:
 	def load(cls, name):
 		"""
 		Load a profile from file
-		
+
 		:param name: The name of the profile to load
 		:type name: str
-		
+
 		:rtype: Profile
 		"""
 
@@ -110,7 +110,7 @@ class Profile:
 	def name(self):
 		"""
 		Returns the name of the Profile
-		
+
 		:rtype: str
 		"""
 
@@ -129,7 +129,7 @@ class Profile:
 	def apply(self):
 		"""
 		Apply the Profile with xsetwacom
-		
+
 		:return:
 		:rtype:
 		"""

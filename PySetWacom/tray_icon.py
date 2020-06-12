@@ -138,7 +138,7 @@ class TrayIcon(AppIndicator):
 	def show(self):
 		"""
 		Show the PySetWacom GUI
-		
+
 		:return:
 		:rtype:
 		"""
@@ -150,10 +150,10 @@ class TrayIcon(AppIndicator):
 	def select_profile(profile_name):
 		"""
 		Select the Profile with the given name
-		
+
 		:param profile_name:
 		:type profile_name:
-		
+
 		:return:
 		:rtype:
 		"""

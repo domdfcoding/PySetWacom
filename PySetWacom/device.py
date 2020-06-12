@@ -51,7 +51,7 @@ class Device:
 	def add_button(self, button):
 		"""
 		Add the button to the device
-		
+
 		:param button:
 		:type button: Button
 		"""
@@ -61,7 +61,7 @@ class Device:
 	def add_multiple_buttons(self, button_list):
 		"""
 		Add multiple buttons to the device
-		
+
 		:param button_list:
 		:type button_list: list of Button
 		"""
@@ -72,7 +72,7 @@ class Device:
 	def buttons(self):
 		"""
 		Returns the buttons of the device
-		
+
 		:rtype: list of Button
 		"""
 
@@ -141,7 +141,7 @@ class Device:
 def detect_devices():
 	"""
 	Detect devices connected to this computer
-	
+
 	:return:
 	:rtype: list of Device
 	"""

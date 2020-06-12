@@ -45,10 +45,10 @@ class Button:
 	def from_string(cls, raw_string):
 		"""
 		Create a Button object from a string
-		
+
 		:param raw_string:
 		:type raw_string: str
-		
+
 		:return:
 		:rtype: Button
 		"""
@@ -95,10 +95,10 @@ class Button:
 def get_mappings(device_name):
 	"""
 	Return the mappings for the device with the given name
-	
+
 	:param device_name:
 	:type device_name: str
-	
+
 	:return:
 	:rtype: list of Button
 	"""

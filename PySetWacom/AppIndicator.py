@@ -61,7 +61,7 @@ class AppIndicatorItem:
 			):
 		"""
 		An AppIndicatorItem represents an item in an AppIndicator menu.
-		
+
 		:param parentMenu: Menu that the menu item belongs to. Can be None if the item is going to be added to the menu later.
 		:type parentMenu: AppIndicatorMenu
 		:param id: Identifier for this menu item. May be ID_SEPARATOR , in which case the given kind is ignored and taken to be ITEM_SEPARATOR instead.
@@ -108,9 +108,9 @@ class AppIndicatorItem:
 	def Check(self, check=True):
 		"""
 		Checks or unchecks the menu item.
-		
+
 		Note that this only works when the item is already appended to a menu.
-		
+
 		:type check: book
 		"""
 
@@ -119,7 +119,7 @@ class AppIndicatorItem:
 	def Enable(self, enable=True):
 		"""
 		Enables or disables the menu item.
-		
+
 		:type enable: bool
 		"""
 
@@ -128,7 +128,7 @@ class AppIndicatorItem:
 	def GetHelp(self):
 		"""
 		Returns the help string associated with the menu item.
-		
+
 		:rtype: str
 		"""
 
@@ -137,7 +137,7 @@ class AppIndicatorItem:
 	def GetId(self):
 		"""
 		Returns the menu item identifier.
-		
+
 		:rtype: int
 		"""
 
@@ -146,7 +146,7 @@ class AppIndicatorItem:
 	def GetLabel(self):
 		"""
 		Returns the text associated with the menu item
-		
+
 		:rtype: str
 		"""
 
@@ -156,7 +156,7 @@ class AppIndicatorItem:
 		"""
 		Returns the item kind, one of wxITEM_SEPARATOR, wxITEM_NORMAL,
 		wxITEM_CHECK or wxITEM_RADIO.
-		
+
 		:rtype: wx.ItemKind
 		"""
 
@@ -181,7 +181,7 @@ class AppIndicatorItem:
 	def IsCheck(self):
 		"""
 		Returns true if the item is a check item.
-		
+
 		:rtype: bool
 		"""
 
@@ -203,7 +203,7 @@ class AppIndicatorItem:
 	def IsChecked(self):
 		"""
 		Returns true if the item is checked.
-		
+
 		:rtype: bool
 		"""
 
@@ -212,7 +212,7 @@ class AppIndicatorItem:
 	def IsEnabled(self):
 		"""
 		Returns true if the item is enabled.
-		
+
 		:rtype: bool
 		"""
 
@@ -221,7 +221,7 @@ class AppIndicatorItem:
 	def IsRadio(self):
 		"""
 		Returns true if the item is a radio button.
-		
+
 		:rtype: bool
 		"""
 
@@ -230,7 +230,7 @@ class AppIndicatorItem:
 	def IsSeparator(self):
 		"""
 		Returns true if the item is a separator.
-		
+
 		:rtype: bool
 		"""
 
@@ -239,7 +239,7 @@ class AppIndicatorItem:
 	def IsSubMenu(self):
 		"""
 		IsSubMenu() -> bool
-		
+
 		Returns true if the item is a submenu.
 		"""
 		# TODO
@@ -248,7 +248,7 @@ class AppIndicatorItem:
 	def SetHelp(self, help_string):
 		"""
 		SetHelp(help_string)
-		
+
 		Sets the help string.
 		"""
 		# TODO
@@ -257,7 +257,7 @@ class AppIndicatorItem:
 	def SetItemLabel(self, label):
 		"""
 		Sets the label associated with the menu item.
-		
+
 		:type label: str
 		"""
 
@@ -266,7 +266,7 @@ class AppIndicatorItem:
 	def SetMenu(self, menu):
 		"""
 		SetMenu(menu)
-		
+
 		Sets the parent menu which will contain this menu item.
 		"""
 		# TODO
@@ -275,7 +275,7 @@ class AppIndicatorItem:
 	def SetSubMenu(self, menu):
 		"""
 		Sets the submenu of this menu item.
-		
+
 		:param menu:
 		:type menu: AppIndicatorMenu
 		"""
@@ -340,7 +340,7 @@ class AppIndicator:
 	def __init__(self, id, icon_name, category):
 		"""
 		Constructs an AppIndicator object.
-	
+
 		An AppIndicator is a n icon with a popup (or pull down) menu with a list
 		of items, one of which may be selected before the menu goes away
 		(clicking elsewhere dismisses the menu).
@@ -370,7 +370,7 @@ class AppIndicatorMenu:
 	def Append(self, id=wx.ID_ANY, item="", help_string="", kind=wx.ITEM_NORMAL, radiogroup=None):
 		"""
 		Adds a menu item.
-		
+
 		:param id: The menu command identifier. See Window IDs for more information about IDs (same considerations apply to both window and menu item IDs).
 		:type id: int
 		:param item: The string to appear on the menu item. See wx.MenuItem.SetItemLabel for more details.
@@ -381,7 +381,7 @@ class AppIndicatorMenu:
 		:type kind: wx.ItemKind
 		:param radiogroup:
 		:type radiogroup:
-		
+
 		:rtype: AppIndicatorItem
 		"""
 
@@ -393,7 +393,7 @@ class AppIndicatorMenu:
 	def AppendMenuItem(self, menuItem):
 		"""
 		Adds a menu item object.
-		
+
 		:param menuItem:
 		:type menuItem:
 		"""
@@ -414,14 +414,14 @@ class AppIndicatorMenu:
 	def AppendCheckItem(self, id, item, help_string=None):
 		"""
 		Adds a checkable item to the end of the menu.
-		
+
 		:param id:
 		:type id: int
 		:param item:
 		:type item: str
 		:param help_string:
 		:type help_string: str
-		
+
 		:return:
 		:rtype: AppIndicatorItem
 		"""
@@ -431,7 +431,7 @@ class AppIndicatorMenu:
 	def AppendRadioItem(self, id, item, help=None, group=None):
 		"""
 		Adds a radio item to the end of the menu.
-		
+
 		:param id:
 		:type id: int
 		:param item:
@@ -440,7 +440,7 @@ class AppIndicatorMenu:
 		:type help: str
 		:param group:
 		:type group: AppIndicatorItem
-		
+
 		:return:
 		:rtype: AppIndicatorItem
 		"""
@@ -482,7 +482,7 @@ class AppIndicatorMenu:
 		Check(id, check)
 
 		Checks or unchecks the menu item.
-		
+
 		:param id: The menu item identifier.
 		:type id: int
 		:param check: If True, the item will be checked, otherwise it will be unchecked.
@@ -506,7 +506,7 @@ class AppIndicatorMenu:
 		"""
 		DestroyItem(id) -> bool
 		DestroyItem(item) -> bool
-		
+
 		Deletes the menu item from the menu.
 		"""
 		return False
@@ -514,9 +514,9 @@ class AppIndicatorMenu:
 	def Enable(self, id, enable):
 		"""
 		Enable(id, enable)
-		
+
 		Enables or disables (greys out) a menu item.
-		
+
 		:param id: The menu item identifier.
 		:type id: int
 		:param enable: If True, the item will be enabled, otherwise it will be unenabled.
@@ -530,13 +530,13 @@ class AppIndicatorMenu:
 	def FindChildItem(self, id):
 		"""
 		FindChildItem(id) -> (MenuItem, pos)
-		
+
 		Finds the menu item object associated with the given menu item
 		identifier and, optionally, the position of the item in the menu.
-		
+
 		:param id: The identifier of the menu item to find.
 		:type id: int
-		
+
 		:return:
 		:rtype:
 		"""
@@ -549,12 +549,12 @@ class AppIndicatorMenu:
 		"""
 		FindItem(itemString) -> int
 		FindItem(id) -> (MenuItem, menu)
-		
+
 		Finds the menu id for a menu item string.
-		
+
 		:param itemString: Menu item string to find.
 		:type itemString: str
-		
+
 		:return: Menu item identifier, or wx.NOT_FOUND if none is found.
 		:rtype: int
 		"""
@@ -569,10 +569,10 @@ class AppIndicatorMenu:
 		"""
 		Finds the menu item object associated with the given menu item
 		identifier.
-		
+
 		:param id: Menu item identifier.
 		:type id: int
-		
+
 		:return:
 		:rtype:
 		"""
@@ -584,12 +584,12 @@ class AppIndicatorMenu:
 	def FindItemByPosition(self, position):
 		"""
 		FindItemByPosition(position) -> MenuItem
-		
+
 		Returns the wxMenuItem given a position in the menu.
-		
+
 		:param position:
 		:type position: int
-		
+
 		:return:
 		:rtype:
 		"""
@@ -601,12 +601,12 @@ class AppIndicatorMenu:
 	def GetHelpString(self, id):
 		"""
 		GetHelpString(id) -> String
-		
+
 		Returns the help string associated with a menu item.
-		
+
 		:param id: The menu item identifier.
 		:type id: int
-		
+
 		:return: The help string, or the empty string if there is no help string or the item was not found.
 		:rtype: str
 		"""
@@ -621,12 +621,12 @@ class AppIndicatorMenu:
 	def GetLabel(self, id):
 		"""
 		GetLabel(id) -> String
-		
+
 		Returns a menu item label.
-		
+
 		:param id: The menu item identifier.
 		:type id: int
-		
+
 		:return: The item label, or the empty string if the item was not found.
 		:rtype: str
 		"""
@@ -636,9 +636,9 @@ class AppIndicatorMenu:
 	def GetMenuItemCount(self):
 		"""
 		GetMenuItemCount() -> size_t
-		
+
 		Returns the number of items in the menu.
-		
+
 		:rtype: int
 		"""
 
@@ -647,7 +647,7 @@ class AppIndicatorMenu:
 	def GetMenuItems(self):
 		"""
 		GetMenuItems() -> MenuItemList
-		
+
 		Returns the list of items in the menu.
 		"""
 
@@ -672,7 +672,7 @@ class AppIndicatorMenu:
 		Insert(pos, menuItem) -> MenuItem
 		Insert(pos, id, item=EmptyString, help_string=EmptyString, kind=ITEM_NORMAL) -> MenuItem
 		Insert(pos, id, text, submenu, help=EmptyString) -> MenuItem
-		
+
 		Inserts the given item before the position pos.
 		"""
 		return MenuItem
@@ -680,7 +680,7 @@ class AppIndicatorMenu:
 	def InsertCheckItem(self, pos, id, item, help_string=None):
 		"""
 		InsertCheckItem(pos, id, item, help_string=EmptyString) -> MenuItem
-		
+
 		Inserts a checkable item at the given position.
 		"""
 		return MenuItem
@@ -696,7 +696,7 @@ class AppIndicatorMenu:
 	def InsertRadioItem(self, pos, id, item, help_string=None):
 		"""
 		InsertRadioItem(pos, id, item, help_string=EmptyString) -> MenuItem
-		
+
 		Inserts a radio item at the given position.
 		"""
 		return MenuItem
@@ -704,7 +704,7 @@ class AppIndicatorMenu:
 	def InsertSeparator(self, pos):
 		"""
 		InsertSeparator(pos) -> MenuItem
-		
+
 		Inserts a separator at the given position.
 		"""
 		return MenuItem
@@ -716,7 +716,7 @@ class AppIndicatorMenu:
 	def IsChecked(self, id):
 		"""
 		IsChecked(id) -> bool
-		
+
 		Determines whether a menu item is checked.
 		"""
 		return False
@@ -724,7 +724,7 @@ class AppIndicatorMenu:
 	def IsEnabled(self, id):
 		"""
 		IsEnabled(id) -> bool
-		
+
 		Determines whether a menu item is enabled.
 		"""
 		return False
@@ -734,7 +734,7 @@ class AppIndicatorMenu:
 		Prepend(menuItem) -> MenuItem
 		Prepend(id, item=EmptyString, help_string=EmptyString, kind=ITEM_NORMAL) -> MenuItem
 		Prepend(id, text, submenu, help=EmptyString) -> MenuItem
-		
+
 		Inserts the given item at position 0, i.e. before all the other
 		existing items.
 		"""
@@ -743,7 +743,7 @@ class AppIndicatorMenu:
 	def PrependCheckItem(self, id, item, help_string=None):
 		"""
 		PrependCheckItem(id, item, help_string=EmptyString) -> MenuItem
-		
+
 		Inserts a checkable item at position 0.
 		"""
 		return MenuItem
@@ -759,7 +759,7 @@ class AppIndicatorMenu:
 	def PrependRadioItem(self, id, item, help_string=None):
 		"""
 		PrependRadioItem(id, item, help_string=EmptyString) -> MenuItem
-		
+
 		Inserts a radio item at position 0.
 		"""
 		return MenuItem
@@ -767,7 +767,7 @@ class AppIndicatorMenu:
 	def PrependSeparator(self):
 		"""
 		PrependSeparator() -> MenuItem
-		
+
 		Inserts a separator at position 0.
 		"""
 		return MenuItem
@@ -776,7 +776,7 @@ class AppIndicatorMenu:
 		"""
 		Remove(id) -> MenuItem
 		Remove(item) -> MenuItem
-		
+
 		Removes the menu item from the menu but doesn't delete the associated
 		C++ object.
 		"""
@@ -793,7 +793,7 @@ class AppIndicatorMenu:
 	def SetHelpString(self, id, help_string):
 		"""
 		SetHelpString(id, help_string)
-		
+
 		Sets an item's help string.
 		"""
 		pass
@@ -805,7 +805,7 @@ class AppIndicatorMenu:
 	def SetLabel(self, id, label):
 		"""
 		SetLabel(id, label)
-		
+
 		Sets the label of a menu item.
 		"""
 		pass
@@ -817,7 +817,7 @@ class AppIndicatorMenu:
 	def SetTitle(self, title):
 		"""
 		SetTitle(title)
-		
+
 		Sets the title of the menu.
 		"""
 		pass
@@ -831,7 +831,7 @@ class AppIndicatorMenu:
 	def UpdateUI(self, source=None):
 		"""
 		UpdateUI(source=None)
-		
+
 		Sends events to source (or owning window if NULL) to update the menu
 		UI.
 		"""
