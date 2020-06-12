@@ -34,8 +34,7 @@ gi.require_version('Gtk', '3.0')
 gi.require_version('AppIndicator3', '0.1')
 gi.require_version('Notify', '0.7')
 
-# 3rd party
-from gi.repository import AppIndicator3, Gtk, Notify  # type: ignore  # isort: skip
+from gi.repository import AppIndicator3, Gtk, Notify  # type: ignore  # isort: skip  # noqa
 
 EVT_APPINDICATOR_BUTTON = wx.NewEventType()
 myEVT_APPINDICATOR_BUTTON = wx.PyEventBinder(EVT_APPINDICATOR_BUTTON, 1)
