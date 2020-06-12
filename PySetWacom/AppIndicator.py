@@ -26,7 +26,7 @@
 import signal
 
 # 3rd party
-import gi
+import gi  # type: ignore
 import wx  # type: ignore
 from pubsub import pub  # type: ignore
 
