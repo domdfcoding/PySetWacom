@@ -3,16 +3,25 @@
 
 # This file is managed by `git_helper`. Don't edit it directly
 
+# stdlib
 import os
 import re
 import sys
+import warnings
+
+# 3rd party
+from sphinx.locale import _
+
+# Suppress warnings from sphinx_autodoc_typehints
+# TODO: Remove once the following issues is resolved:
+# https://github.com/agronholm/sphinx-autodoc-typehints/issues/133
+warnings.filterwarnings('ignore', message='sphinx.util.inspect.Signature\(\) is deprecated')
 
 sys.path.append(os.path.abspath('.'))
 sys.path.append(os.path.abspath('..'))
 
-from sphinx.locale import _
-
 from __pkginfo__ import __version__
+
 
 import shutil
 
@@ -29,14 +38,13 @@ github_url = f"https://github.com/domdfcoding/PySetWacom"
 rst_prolog = f""".. |pkgname| replace:: PySetWacom
 .. |pkgname2| replace:: ``PySetWacom``
 .. |browse_github| replace:: `Browse the GitHub Repository <{github_url}>`__
-.. |ghurl| replace:: {github_url}
 """
 
 author = "Dominic Davis-Foster"
 project = "PySetWacom"
 slug = re.sub(r'\W+', '-', project.lower())
 release = version = __version__
-copyright = "2020 Dominic Davis-Foster"
+copyright = "2020 Dominic Davis-Foster"  # pylint: disable=redefined-builtin
 language = 'en'
 package_root = "PySetWacom"
 
@@ -49,6 +57,11 @@ extensions = [
 		"sphinxcontrib.extras_require",
 		"sphinx.ext.todo",
 		"sphinxemoji.sphinxemoji",
+		"notfound.extension",
+		"sphinx_tabs.tabs",
+		"sphinx-prompt",
+		"sphinx_autodoc_typehints",
+		"sphinx.ext.autosummary",
 		]
 
 sphinxemoji_style = 'twemoji'

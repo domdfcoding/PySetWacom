@@ -16,28 +16,28 @@ PySetWacom
 	  - |pypi-version| |supported-versions| |supported-implementations| |wheel|
 	* - Other
 	  - |license| |language| |commits-since| |commits-latest| |maintained| 
-	
-.. |docs| image:: https://readthedocs.org/projects/pysetwacom/badge/?version=latest
+
+.. |docs| image:: https://img.shields.io/readthedocs/pysetwacom/latest?logo=read-the-docs
 	:target: https://pysetwacom.readthedocs.io/en/latest/?badge=latest
 	:alt: Documentation Status
 
 .. |travis| image:: https://img.shields.io/travis/com/domdfcoding/PySetWacom/master?logo=travis
 	:target: https://travis-ci.com/domdfcoding/PySetWacom
 	:alt: Travis Build Status
-	
+
 .. |requires| image:: https://requires.io/github/domdfcoding/PySetWacom/requirements.svg?branch=master
 	:target: https://requires.io/github/domdfcoding/PySetWacom/requirements/?branch=master
 	:alt: Requirements Status
 
-.. |codefactor| image:: https://img.shields.io/codefactor/grade/github/domdfcoding/PySetWacom
+.. |codefactor| image:: https://img.shields.io/codefactor/grade/github/domdfcoding/PySetWacom?logo=codefactor
 	:target: https://www.codefactor.io/repository/github/domdfcoding/PySetWacom
 	:alt: CodeFactor Grade
 
-.. |pypi-version| image:: https://img.shields.io/pypi/v/PySetWacom.svg
+.. |pypi-version| image:: https://img.shields.io/pypi/v/PySetWacom
 	:target: https://pypi.org/project/PySetWacom/
 	:alt: PyPI - Package Version
 
-.. |supported-versions| image:: https://img.shields.io/pypi/pyversions/PySetWacom.svg
+.. |supported-versions| image:: https://img.shields.io/pypi/pyversions/PySetWacom
 	:target: https://pypi.org/project/PySetWacom/
 	:alt: PyPI - Supported Python Versions
 
@@ -71,30 +71,37 @@ PySetWacom
 
 A GUI utility for configuring buttons on graphics tablets and styli, using the xsetwacom utility.
 
-Dependencies
-=============
+Installation
+----------------
 
-xsetwacom must be installed for this program to function. Python dependencies include:
+Before installing ``PySetWacom`` ensure you have installed the following:
 
-.. code-block:: bash
+* ``xsetwacom``. This may be installed by default.
+* ``PyGObject``. See https://pygobject.readthedocs.io/en/latest/ for more information and installation instructions.
 
-	appdirs>=1.4.3
-	domdf_python_tools>=0.1.17
-	domdf_wxpython_tools>=0.2.0
-	Pypubsub>=4.0.3
-	pid>=2.2.5
-	sh>=1.12.14
+	On Ubuntu you may need to install ``libgirepository1.0-dev``, ``libcairo2-dev`` and ``python3-gi``.
 
-These can all be installed using ``pip``.
+* ``wxPython`` (version 4.0.7 or greater). See https://wxpython.org/pages/downloads/ for more information and installation instructions.
 
-wxPython (4.0.7 or greater) must also be installed. See https://wxpython.org/pages/downloads/ for more information and installation instructions.
-
-PyGObject must also be installed. See https://pygobject.readthedocs.io/en/latest/ for more information and installation instructions.
-
+	On Ubuntu you may also need to install ``libsdl2-2.0.0``.
 
 Depending on your tablet model you may need to install DIGImend_. See https://digimend.github.io/ for further information, a list of supported devices, and installation instructions.
 
 .. _DIGImend: https://digimend.github.io/
+
+
+.. start installation
+
+``PySetWacom`` can be installed from PyPI.
+
+To install with ``pip``:
+
+.. code-block:: bash
+
+	$ python -m pip install PySetWacom
+
+.. end installation
+
 
 Brief Tutorial
 ================
