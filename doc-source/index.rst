@@ -56,7 +56,7 @@ PySetWacom
 .. |language| image:: https://img.shields.io/github/languages/top/domdfcoding/PySetWacom
 	:alt: GitHub top language
 
-.. |commits-since| image:: https://img.shields.io/github/commits-since/domdfcoding/PySetWacom/v0.1.7
+.. |commits-since| image:: https://img.shields.io/github/commits-since/domdfcoding/PySetWacom/v0.1.8
 	:target: https://github.com/domdfcoding/PySetWacom/pulse
 	:alt: GitHub commits since tagged version
 

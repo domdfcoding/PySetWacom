@@ -2,7 +2,7 @@ modname: PySetWacom
 copyright_years: "2020"
 author: "Dominic Davis-Foster"
 email: "dominic@davis-foster.co.uk"
-version: "0.1.7"
+version: "0.1.8"
 username: "domdfcoding"
 license: 'LGPLv3+'
 short_desc: 'A GUI utility for configuring buttons on graphics tablets and styli'
