@@ -32,11 +32,11 @@ import signal
 from appdirs import user_data_dir
 from pid import PidFile, PidFileAlreadyLockedError
 
-# this package
-from PySetWacom import TrayIcon
-
 
 def main():
+	# this package
+	from PySetWacom import TrayIcon
+
 	pid_dir = pathlib.Path(user_data_dir("PySetWacom")) / ".pid"
 	if not pid_dir.exists():
 		pid_dir.mkdir()

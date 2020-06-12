@@ -106,12 +106,17 @@ class TrayIcon(AppIndicator):
 
 	def build_profiles_menu(self):
 		self._profiles_submenu = AppIndicatorMenu()
-		first_radioitem = self._profiles_submenu.AppendRadioItem(-1, self.profiles[0], None)
-		self.profile_menu_items = [first_radioitem]
 
-		for profile in self.profiles[1:]:
-			item = self._profiles_submenu.AppendRadioItem(-1, profile, group=first_radioitem)
-			self.profile_menu_items.append(item)
+		if self.profiles:
+			first_radioitem = self._profiles_submenu.AppendRadioItem(-1, self.profiles[0], None)
+			self.profile_menu_items = [first_radioitem]
+
+			for profile in self.profiles[1:]:
+				item = self._profiles_submenu.AppendRadioItem(-1, profile, group=first_radioitem)
+				self.profile_menu_items.append(item)
+		else:
+			first_radioitem = self._profiles_submenu.Append(-1, '')
+			self.profile_menu_items = [first_radioitem]
 
 	def build_menu(self):
 		item_show = self._menu.Append(item="Show")
