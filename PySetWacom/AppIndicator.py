@@ -34,7 +34,6 @@ import gi
 gi.require_version('Gtk', '3.0')
 gi.require_version('AppIndicator3', '0.1')
 gi.require_version('Notify', '0.7')
-gi.require_version('Nautilus', '3.0')
 
 from gi.repository import Gtk
 from gi.repository import AppIndicator3
