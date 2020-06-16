@@ -77,3 +77,11 @@ additional_setup_args:
   data_files: data_files
 
 enable_docs: false
+
+keywords:
+  - wxpython
+  - gui
+  - wacom
+  - tablet
+  - linux
+  - utility

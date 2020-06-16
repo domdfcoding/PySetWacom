@@ -92,7 +92,7 @@ classifiers = [
 
 		]
 
-keywords = ""
+keywords = "wxpython gui wacom tablet linux utility"
 
 data_files = [('share/applications', ['PySetWacom.desktop'])]
 __all__.append("data_files")
