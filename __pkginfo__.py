@@ -78,7 +78,6 @@ classifiers = [
 		'Development Status :: 4 - Beta',
 		'Intended Audience :: Developers',
 		'Intended Audience :: End Users/Desktop',
-		'Operating System :: POSIX :: Linux',
 		'Topic :: Utilities',
 		'Topic :: Artistic Software',
 		'Topic :: Multimedia :: Graphics',
@@ -89,7 +88,7 @@ classifiers = [
 		'Programming Language :: Python',
 		'Programming Language :: Python :: 3 :: Only',
 		'License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)',
-		'Operating System :: OS Independent',
+		'Operating System :: POSIX :: Linux',
 
 		]
 

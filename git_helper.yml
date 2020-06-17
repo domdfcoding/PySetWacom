@@ -42,7 +42,6 @@ classifiers:
 #  - "Development Status :: 7 - Inactive"
   - 'Intended Audience :: Developers'
   - 'Intended Audience :: End Users/Desktop'
-  - 'Operating System :: POSIX :: Linux'
   - "Topic :: Utilities"
   - "Topic :: Artistic Software"
   - "Topic :: Multimedia :: Graphics"
@@ -85,3 +84,6 @@ keywords:
   - tablet
   - linux
   - utility
+
+platforms:
+  - linux
