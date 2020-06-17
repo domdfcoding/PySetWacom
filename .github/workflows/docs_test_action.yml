@@ -10,6 +10,6 @@ jobs:
       - uses: actions/checkout@v1
       - uses: ammaraskar/sphinx-action@master
         with:
-          pre-build-command: python -m pip install tox
+          pre-build-command: apt-get install libgirepository1.0-dev libcairo2-dev python3-gi && python -m pip install tox
           docs-folder: "doc-source/"
           build-command: "tox -e docs -- "

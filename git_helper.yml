@@ -16,6 +16,9 @@ additional_ignore:
   - "*.desktop"
   - "**/*.desktop"
 
+exclude_files:
+  - docs_action
+
 console_scripts:
   - "PySetWacom = PySetWacom.__main__:main"
   - "pysetwacom = PySetWacom.__main__:main"
