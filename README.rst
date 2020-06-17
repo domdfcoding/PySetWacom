@@ -8,6 +8,8 @@ PySetWacom
 	:stub-columns: 1
 	:widths: 10 90
 
+	* - Docs
+	  - |docs| |docs_check|
 	* - Tests
 	  - |travis| |codefactor|
 	* - PyPI
@@ -17,7 +19,13 @@ PySetWacom
 	* - Other
 	  - |license| |language| |requires|
 
-
+.. |docs| image:: https://img.shields.io/readthedocs/pysetwacom/latest?logo=read-the-docs
+	:target: https://pysetwacom.readthedocs.io/en/latest/?badge=latest
+	:alt: Documentation Status
+	
+.. |docs_check| image:: https://github.com/domdfcoding/PySetWacom/workflows/Docs%20Check/badge.svg
+	:target: https://github.com/domdfcoding/PySetWacom/actions?query=workflow%3A%22Docs+Check%22
+	:alt: Docs Check Status
 
 .. |travis| image:: https://img.shields.io/travis/com/domdfcoding/PySetWacom/master?logo=travis
 	:target: https://travis-ci.com/domdfcoding/PySetWacom

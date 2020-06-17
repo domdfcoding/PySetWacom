@@ -9,17 +9,23 @@ PySetWacom
 	:widths: 10 90
 
 	* - Docs
-	  - |docs|
+	  - |docs| |docs_check|
 	* - Tests
-	  - |travis| |requires| |codefactor|
+	  - |travis| |codefactor|
 	* - PyPI
 	  - |pypi-version| |supported-versions| |supported-implementations| |wheel|
+	* - Activity
+	  - |commits-latest| |commits-since| |maintained|
 	* - Other
-	  - |license| |language| |commits-since| |commits-latest| |maintained| 
+	  - |license| |language| |requires|
 
 .. |docs| image:: https://img.shields.io/readthedocs/pysetwacom/latest?logo=read-the-docs
 	:target: https://pysetwacom.readthedocs.io/en/latest/?badge=latest
 	:alt: Documentation Status
+	
+.. |docs_check| image:: https://github.com/domdfcoding/PySetWacom/workflows/Docs%20Check/badge.svg
+	:target: https://github.com/domdfcoding/PySetWacom/actions?query=workflow%3A%22Docs+Check%22
+	:alt: Docs Check Status
 
 .. |travis| image:: https://img.shields.io/travis/com/domdfcoding/PySetWacom/master?logo=travis
 	:target: https://travis-ci.com/domdfcoding/PySetWacom
@@ -105,7 +111,7 @@ Depending on your tablet model you may need to install DIGImend_. See https://di
 
 		.. prompt:: bash
 
-			pip install git+https://github.com//PySetWacom@master
+			pip install git+https://github.com/domdfcoding/PySetWacom@master
 
 .. end installation
 

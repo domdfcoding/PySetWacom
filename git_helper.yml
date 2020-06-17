@@ -75,7 +75,7 @@ pkginfo_extra:
 additional_setup_args:
   data_files: data_files
 
-enable_docs: false
+#enable_docs: false
 
 keywords:
   - wxpython

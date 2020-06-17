@@ -1,0 +1,15 @@
+name: "Docs Check"
+on:
+  - pull_request
+  - push
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: ammaraskar/sphinx-action@master
+        with:
+          pre-build-command: python -m pip install tox
+          docs-folder: "doc-source/"
+          build-command: "tox -e docs -- "
