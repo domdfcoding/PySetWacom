@@ -120,7 +120,7 @@ class TrayIcon(AppIndicator):
 	def build_menu(self):
 		item_show = self._menu.Append(item="Show")
 		self.build_profiles_menu()
-		self.menu_item_profile = self._menu.AppendSubMenu(self._profiles_submenu, 'Select Profile')
+		self.menu_item_profile = self._menu.AppendSubMenu(self._profiles_submenu, "Select Profile")
 		item_quit = self._menu.Append(item="Quit")
 
 	def quit(self):

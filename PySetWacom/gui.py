@@ -180,13 +180,13 @@ class GUI(wx.Frame):
 		# Menu Bar
 		self.GUI_menubar = wx.MenuBar()
 		wxglade_tmp_menu = wx.Menu()
-		self.GUI_menubar.menu_new_profile = wxglade_tmp_menu.Append(wx.ID_ANY, "New Profile", "")
+		self.GUI_menubar.menu_new_profile = wxglade_tmp_menu.Append(wx.ID_ANY, "New Profile", '')
 		self.Bind(wx.EVT_MENU, self.on_menu_new_profile, id=self.GUI_menubar.menu_new_profile.GetId())
-		self.GUI_menubar.menu_open_directory = wxglade_tmp_menu.Append(wx.ID_ANY, "Open Profiles Directory", "")
+		self.GUI_menubar.menu_open_directory = wxglade_tmp_menu.Append(wx.ID_ANY, "Open Profiles Directory", '')
 		self.Bind(wx.EVT_MENU, self.on_menu_open_directory, id=self.GUI_menubar.menu_open_directory.GetId())
-		self.GUI_menubar.menu_delete_profile = wxglade_tmp_menu.Append(wx.ID_ANY, "Delete Profile", "")
+		self.GUI_menubar.menu_delete_profile = wxglade_tmp_menu.Append(wx.ID_ANY, "Delete Profile", '')
 		self.Bind(wx.EVT_MENU, self.on_menu_delete_profile, id=self.GUI_menubar.menu_delete_profile.GetId())
-		self.GUI_menubar.menu_quit = wxglade_tmp_menu.Append(wx.ID_ANY, "Quit", "")
+		self.GUI_menubar.menu_quit = wxglade_tmp_menu.Append(wx.ID_ANY, "Quit", '')
 		self.Bind(wx.EVT_MENU, self.on_quit, id=self.GUI_menubar.menu_quit.GetId())
 		self.GUI_menubar.Append(wxglade_tmp_menu, "PySetWacom")
 		self.SetMenuBar(self.GUI_menubar)
@@ -260,8 +260,8 @@ class GUI(wx.Frame):
 		# end wxGlade
 
 	def receive_signal(self, signum, stack):
-		print('My PID is:', os.getpid())
-		print('Received:', signum)
+		print("My PID is:", os.getpid())
+		print("Received:", signum)
 		if signum == signal.SIGUSR1:
 			self.Show()
 
@@ -444,10 +444,10 @@ class CaptureKeystrokeDialog(wx.Dialog):
 		return self.keystrokes
 
 	def OnKeyUp(self, event):
-		self.append_keystroke("-", event.KeyCode)
+		self.append_keystroke('-', event.KeyCode)
 
 	def OnKeyDown(self, event):
-		self.append_keystroke("+", event.KeyCode)
+		self.append_keystroke('+', event.KeyCode)
 
 	def append_keystroke(self, prefix, code):
 		print(code)
@@ -549,7 +549,7 @@ class EditMappingDialog(wx.Dialog):
 		kwds["style"] = kwds.get("style", 0) | wx.DEFAULT_DIALOG_STYLE
 		wx.Dialog.__init__(self, *args, **kwds)
 		self.mapping_label = wx.StaticText(self, wx.ID_ANY, "Mapping")
-		self.combo_value = wx.TextCtrl(self, wx.ID_ANY, "", style=wx.TE_MULTILINE)
+		self.combo_value = wx.TextCtrl(self, wx.ID_ANY, '', style=wx.TE_MULTILINE)
 		self.button_notebook = wx.Notebook(self, wx.ID_ANY)
 		self.keyboard_tab = wx.Panel(self.button_notebook, wx.ID_ANY)
 		self.control_button = wx.Button(self.keyboard_tab, wx.ID_ANY, "Control")
@@ -782,7 +782,7 @@ class EditMappingDialog(wx.Dialog):
 	def on_grab_combo(self, event):  # wxGlade: EditMappingDialog.<event_handler>
 		with CaptureKeystrokeDialog(self) as dlg:
 			if dlg.ShowModal():
-				self.combo_value.WriteText(" ".join(dlg.GetKeyCombo()))
+				self.combo_value.WriteText(' '.join(dlg.GetKeyCombo()))
 
 		self.combo_value.SetFocus()
 
@@ -854,7 +854,7 @@ class EditMappingDialog(wx.Dialog):
 class app(wx.App):
 
 	def OnInit(self):
-		self.GUI = GUI(None, wx.ID_ANY, "")
+		self.GUI = GUI(None, wx.ID_ANY, '')
 		self.SetTopWindow(self.GUI)
 		# self.GUI.Show()
 		return True

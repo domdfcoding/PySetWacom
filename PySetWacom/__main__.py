@@ -41,7 +41,7 @@ def main():
 	if not pid_dir.exists():
 		pid_dir.mkdir()
 
-	print('My PID is:', os.getpid())
+	print("My PID is:", os.getpid())
 
 	try:
 		with PidFile(pidname="PySetWacom", piddir=str(pid_dir)) as p:
@@ -51,7 +51,7 @@ def main():
 	except (BlockingIOError, PidFileAlreadyLockedError):
 		other_pid = int((pid_dir / "PySetWacom.pid").read_text())
 		print("PySetWacom already running")
-		print('The other PID is:', other_pid)
+		print("The other PID is:", other_pid)
 		os.kill(other_pid, signal.SIGUSR1)
 
 

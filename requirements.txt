@@ -5,3 +5,4 @@ Pypubsub>=4.0.3
 pid>=2.2.5
 domdf_wxpython_tools>=0.2.0
 PyGObject
+typing_extensions

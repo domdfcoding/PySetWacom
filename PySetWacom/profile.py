@@ -83,7 +83,7 @@ class Profile:
 
 		filename = profiles_dir / f"{self._name}.profile"
 
-		with filename.open("w") as fp:
+		with filename.open('w') as fp:
 			json.dump(dict(self), fp, indent=4)
 
 	@classmethod
@@ -99,7 +99,7 @@ class Profile:
 
 		filename = profiles_dir / f"{name}.profile"
 
-		with filename.open("r") as fp:
+		with filename.open('r') as fp:
 			data_dict = json.load(fp)
 
 		data_dict["devices"] = [Device.from_dict(device) for device in data_dict["devices"]]

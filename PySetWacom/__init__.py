@@ -49,9 +49,9 @@ __all__ = [
 		"TrayIcon",
 		]
 
-__author__ = "Dominic Davis-Foster"
-__copyright__ = "2020 Dominic Davis-Foster"
+__author__: str = "Dominic Davis-Foster"
+__copyright__: str = "2020 Dominic Davis-Foster"
 
-__license__ = "GPLv3"
-__version__ = "0.1.8"
-__email__ = "dominic@davis-foster.co.uk"
+__license__: str = "GPLv3"
+__version__: str = "0.1.8"
+__email__: str = "dominic@davis-foster.co.uk"

@@ -110,7 +110,7 @@ def get_mappings(device_name):
 	for prop in all_properties:
 		if prop.startswith(f'xsetwacom set "{device_name}" "Button"'):
 			button = Button.from_string(
-					prop.replace(f'xsetwacom set "{device_name}" "Button"', "").rstrip("\n").strip()
+					prop.replace(f'xsetwacom set "{device_name}" "Button"', '').rstrip('\n').strip()  # noqa: Q000
 					)
 			buttons.append(button)
 
