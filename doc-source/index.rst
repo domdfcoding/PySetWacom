@@ -2,7 +2,7 @@
 PySetWacom
 ======================
 
-.. start shields 
+.. start shields
 
 .. list-table::
 	:stub-columns: 1
@@ -22,7 +22,7 @@ PySetWacom
 .. |docs| image:: https://img.shields.io/readthedocs/pysetwacom/latest?logo=read-the-docs
 	:target: https://pysetwacom.readthedocs.io/en/latest/?badge=latest
 	:alt: Documentation Status
-	
+
 .. |docs_check| image:: https://github.com/domdfcoding/PySetWacom/workflows/Docs%20Check/badge.svg
 	:target: https://github.com/domdfcoding/PySetWacom/actions?query=workflow%3A%22Docs+Check%22
 	:alt: Docs Check Status
@@ -43,7 +43,7 @@ PySetWacom
 	:target: https://pypi.org/project/PySetWacom/
 	:alt: PyPI - Package Version
 
-.. |supported-versions| image:: https://img.shields.io/pypi/pyversions/PySetWacom
+.. |supported-versions| image:: https://img.shields.io/pypi/pyversions/PySetWacom?logo=python&logoColor=white
 	:target: https://pypi.org/project/PySetWacom/
 	:alt: PyPI - Supported Python Versions
 
@@ -56,8 +56,8 @@ PySetWacom
 	:alt: PyPI - Wheel
 
 .. |license| image:: https://img.shields.io/github/license/domdfcoding/PySetWacom
-	:alt: License
 	:target: https://github.com/domdfcoding/PySetWacom/blob/master/LICENSE
+	:alt: License
 
 .. |language| image:: https://img.shields.io/github/languages/top/domdfcoding/PySetWacom
 	:alt: GitHub top language
@@ -104,14 +104,14 @@ Depending on your tablet model you may need to install DIGImend_. See https://di
 
 		.. prompt:: bash
 
-			pip install PySetWacom
+			python3 -m pip install PySetWacom --user
 
 
 	.. tab:: from GitHub
 
 		.. prompt:: bash
 
-			pip install git+https://github.com/domdfcoding/PySetWacom@master
+			python3 -m pip install git+https://github.com/domdfcoding/PySetWacom@master --user
 
 .. end installation
 

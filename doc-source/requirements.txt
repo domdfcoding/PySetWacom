@@ -1,3 +1,4 @@
+autodocsumm
 dummy_wx
 extras_require
 sphinx >=3.0.3

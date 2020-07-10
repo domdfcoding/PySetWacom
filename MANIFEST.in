@@ -4,4 +4,4 @@ include requirements.txt
 recursive-exclude **/__pycache__ *
 include create_dotdesktop.py
 recursive-include PySetWacom/ *.pyi
-recursive-include PySetWacom/ py.typed
+include PySetWacom/py.typed
