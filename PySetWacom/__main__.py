@@ -31,6 +31,8 @@ import signal
 from appdirs import user_data_dir  # type: ignore
 from pid import PidFile, PidFileAlreadyLockedError  # type: ignore
 
+__all__ = ["main"]
+
 
 def main():
 

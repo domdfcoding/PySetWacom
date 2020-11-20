@@ -54,6 +54,8 @@ uses a different layout.
 # stdlib
 import os
 
+__all__ = ["apply_overrides"]
+
 overrides = {
 		17: [8, "asterisk", 8, "asterisk", 8, "trademark"],
 		18: [9, "parenleft", 9, "parenleft", 9, "plusminus"],

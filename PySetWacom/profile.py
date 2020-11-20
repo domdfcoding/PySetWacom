@@ -34,6 +34,8 @@ from appdirs import user_data_dir  # type: ignore
 from PySetWacom.button import get_mappings
 from PySetWacom.device import Device, detect_devices
 
+__all__ = ["Profile", "get_profiles_list"]
+
 
 class Profile:
 	"""

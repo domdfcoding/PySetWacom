@@ -24,6 +24,8 @@
 # 3rd party
 from sh import xsetwacom  # type: ignore
 
+__all__ = ["Button", "get_mappings"]
+
 
 class Button:
 	"""

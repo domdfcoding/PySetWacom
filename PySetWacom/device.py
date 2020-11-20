@@ -27,6 +27,8 @@ from sh import xsetwacom  # type: ignore
 # this package
 from PySetWacom.button import Button
 
+__all__ = ["Device", "detect_devices"]
+
 
 class Device:
 	"""
@@ -93,7 +95,7 @@ class Device:
 		if raw_string.strip() == '':
 			return
 
-		elements = raw_string.split("\t")
+		elements = raw_string.split('\t')
 
 		name = elements[0].strip()
 		id = elements[1].strip().replace("id: ", '')
@@ -146,7 +148,7 @@ def detect_devices():
 	:rtype: list of Device
 	"""
 
-	devices_list = (xsetwacom.list()).split("\n")
+	devices_list = (xsetwacom.list()).split('\n')
 
 	devices_list = filter(None, [Device.from_string(device) for device in devices_list])
 

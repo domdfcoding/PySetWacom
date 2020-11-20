@@ -29,7 +29,7 @@ from typing import Optional
 
 # 3rd party
 import gi  # type: ignore
-import wx  # type: ignore
+import wx  # type: ignore  # nodep
 from pubsub import pub  # type: ignore
 from typing_extensions import Literal
 
@@ -37,6 +37,8 @@ gi.require_version("Gtk", "3.0")
 gi.require_version("AppIndicator3", "0.1")
 gi.require_version("Notify", "0.7")
 from gi.repository import AppIndicator3, Gtk, Notify  # type: ignore  # isort: skip  # noqa
+
+__all__ = ["AppIndicator", "AppIndicatorItem", "AppIndicatorMenu"]
 
 EVT_APPINDICATOR_BUTTON = wx.NewEventType()
 myEVT_APPINDICATOR_BUTTON = wx.PyEventBinder(EVT_APPINDICATOR_BUTTON, 1)
@@ -635,7 +637,9 @@ class AppIndicatorMenu:
 		return self.FindItemById(id).GetHelp()
 
 	def GetInvokingWindow(self):
-		""" GetInvokingWindow() -> Window """
+		"""
+		GetInvokingWindow() -> Window
+		"""
 		# TODO
 		return Window
 

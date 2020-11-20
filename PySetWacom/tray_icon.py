@@ -33,6 +33,8 @@ from PySetWacom.AppIndicator import AppIndicator, AppIndicator3, AppIndicatorIte
 from PySetWacom.gui import app
 from PySetWacom.profile import Profile, get_profiles_list
 
+__all__ = ["TrayIcon"]
+
 
 class TrayIcon(AppIndicator):
 

@@ -31,13 +31,17 @@ import signal
 import webbrowser
 
 # 3rd party
-import wx  # type: ignore
+import wx  # type: ignore  # nodep
 from domdf_wxpython_tools.validators import ValidatorBase  # type: ignore
 from pubsub import pub  # type: ignore
 
 # this package
 from PySetWacom.device import detect_devices
 from PySetWacom.profile import Profile, get_profiles_list, profiles_dir
+
+__all__ = [
+		"CaptureKeystrokeDialog", "EditMappingDialog", "GUI", "ManageDevicesDialog", "NewProfileValidator", "app",
+		]
 
 # begin wxGlade: dependencies
 # end wxGlade
