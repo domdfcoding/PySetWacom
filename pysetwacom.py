@@ -1,5 +1,4 @@
 #  !/usr/bin/env python
-#   -*- coding: utf-8 -*-
 #
 #  pysetwacom.py
 #
@@ -23,6 +22,7 @@
 #  MA 02110-1301, USA.
 #
 
-
+# this package
 from PySetWacom.__main__ import main
+
 main()

@@ -1,8 +1,8 @@
-domdf_python_tools>=0.1.17
 appdirs>=1.4.3
-sh>=1.12.14
-Pypubsub>=4.0.3
+domdf-python-tools>=0.1.17
+domdf-wxpython-tools>=0.2.0
 pid>=2.2.5
-domdf_wxpython_tools>=0.2.0
-PyGObject
-typing_extensions
+pygobject>=3.38.0
+pypubsub>=4.0.3
+sh>=1.12.14
+typing-extensions>=3.7.4.3

@@ -1,7 +1,7 @@
 include __pkginfo__.py
 include LICENSE
 include requirements.txt
-recursive-exclude **/__pycache__ *
+prune **/__pycache__
 include create_dotdesktop.py
-recursive-include PySetWacom/ *.pyi
+recursive-include PySetWacom *.pyi
 include PySetWacom/py.typed
