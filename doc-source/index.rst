@@ -11,67 +11,76 @@ PySetWacom
 	* - Docs
 	  - |docs| |docs_check|
 	* - Tests
-	  - |travis| |codefactor|
+	  - |travis| |codefactor| |pre_commit_ci|
 	* - PyPI
 	  - |pypi-version| |supported-versions| |supported-implementations| |wheel|
 	* - Activity
 	  - |commits-latest| |commits-since| |maintained|
 	* - Other
-	  - |license| |language| |requires|
+	  - |license| |language| |requires| |pre_commit|
 
-.. |docs| image:: https://img.shields.io/readthedocs/pysetwacom/latest?logo=read-the-docs
-	:target: https://pysetwacom.readthedocs.io/en/latest/?badge=latest
-	:alt: Documentation Status
+.. |docs| rtfd-shield::
+	:project: pysetwacom
+	:alt: Documentation Build Status
 
-.. |docs_check| image:: https://github.com/domdfcoding/PySetWacom/workflows/Docs%20Check/badge.svg
-	:target: https://github.com/domdfcoding/PySetWacom/actions?query=workflow%3A%22Docs+Check%22
+.. |docs_check| actions-shield::
+	:workflow: Docs Check
 	:alt: Docs Check Status
 
-.. |travis| image:: https://img.shields.io/travis/com/domdfcoding/PySetWacom/master?logo=travis
-	:target: https://travis-ci.com/domdfcoding/PySetWacom
-	:alt: Travis Build Status
+.. |travis| actions-shield::
+	:workflow: Linux Tests
+	:alt: Linux Test Status
 
-.. |requires| image:: https://requires.io/github/domdfcoding/PySetWacom/requirements.svg?branch=master
-	:target: https://requires.io/github/domdfcoding/PySetWacom/requirements/?branch=master
+.. |requires| requires-io-shield::
 	:alt: Requirements Status
 
-.. |codefactor| image:: https://img.shields.io/codefactor/grade/github/domdfcoding/PySetWacom?logo=codefactor
-	:target: https://www.codefactor.io/repository/github/domdfcoding/PySetWacom
+.. |codefactor| codefactor-shield::
 	:alt: CodeFactor Grade
 
-.. |pypi-version| image:: https://img.shields.io/pypi/v/PySetWacom
-	:target: https://pypi.org/project/PySetWacom/
+.. |pypi-version| pypi-shield::
+	:project: PySetWacom
+	:version:
 	:alt: PyPI - Package Version
 
-.. |supported-versions| image:: https://img.shields.io/pypi/pyversions/PySetWacom?logo=python&logoColor=white
-	:target: https://pypi.org/project/PySetWacom/
+.. |supported-versions| pypi-shield::
+	:project: PySetWacom
+	:py-versions:
 	:alt: PyPI - Supported Python Versions
 
-.. |supported-implementations| image:: https://img.shields.io/pypi/implementation/PySetWacom
-	:target: https://pypi.org/project/PySetWacom/
+.. |supported-implementations| pypi-shield::
+	:project: PySetWacom
+	:implementations:
 	:alt: PyPI - Supported Implementations
 
-.. |wheel| image:: https://img.shields.io/pypi/wheel/PySetWacom
-	:target: https://pypi.org/project/PySetWacom/
+.. |wheel| pypi-shield::
+	:project: PySetWacom
+	:wheel:
 	:alt: PyPI - Wheel
 
-.. |license| image:: https://img.shields.io/github/license/domdfcoding/PySetWacom
-	:target: https://github.com/domdfcoding/PySetWacom/blob/master/LICENSE
+.. |license| github-shield::
+	:license:
 	:alt: License
 
-.. |language| image:: https://img.shields.io/github/languages/top/domdfcoding/PySetWacom
+.. |language| github-shield::
+	:top-language:
 	:alt: GitHub top language
 
-.. |commits-since| image:: https://img.shields.io/github/commits-since/domdfcoding/PySetWacom/v0.1.8
-	:target: https://github.com/domdfcoding/PySetWacom/pulse
+.. |commits-since| github-shield::
+	:commits-since: v0.1.8
 	:alt: GitHub commits since tagged version
 
-.. |commits-latest| image:: https://img.shields.io/github/last-commit/domdfcoding/PySetWacom
-	:target: https://github.com/domdfcoding/PySetWacom/commit/master
+.. |commits-latest| github-shield::
+	:last-commit:
 	:alt: GitHub last commit
 
-.. |maintained| image:: https://img.shields.io/maintenance/yes/2020
+.. |maintained| maintained-shield:: 2020
 	:alt: Maintenance
+
+.. |pre_commit| pre-commit-shield::
+	:alt: pre-commit
+
+.. |pre_commit_ci| pre-commit-ci-shield::
+	:alt: pre-commit.ci status
 
 .. end shields
 
@@ -98,20 +107,9 @@ Depending on your tablet model you may need to install DIGImend_. See https://di
 
 .. start installation
 
-.. tabs::
-
-	.. tab:: from PyPI
-
-		.. prompt:: bash
-
-			python3 -m pip install PySetWacom --user
-
-
-	.. tab:: from GitHub
-
-		.. prompt:: bash
-
-			python3 -m pip install git+https://github.com/domdfcoding/PySetWacom@master --user
+.. installation:: PySetWacom
+	:pypi:
+	:github:
 
 .. end installation
 
