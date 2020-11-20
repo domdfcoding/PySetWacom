@@ -675,17 +675,26 @@ class AppIndicatorMenu:
 		return self._gtk_menu_items
 
 	def GetParent(self):
-		""" GetParent() -> Menu """
+		"""
+		GetParent() -> Menu
+		"""
+
 		# TODO
 		return Menu
 
 	def GetStyle(self):
-		""" GetStyle() -> long """
+		"""
+		GetStyle() -> long
+		"""
+
 		# TODo
 		return 0
 
 	def GetWindow(self):
-		""" GetWindow() -> Window """
+		"""
+		GetWindow() -> Window
+		"""
+
 		return Window
 
 	def Insert(self, pos, *__args):
@@ -731,7 +740,10 @@ class AppIndicatorMenu:
 		return MenuItem
 
 	def IsAttached(self):
-		""" IsAttached() -> bool """
+		"""
+		IsAttached() -> bool
+		"""
+
 		return False
 
 	def IsChecked(self, id):
@@ -740,6 +752,7 @@ class AppIndicatorMenu:
 
 		Determines whether a menu item is checked.
 		"""
+
 		return False
 
 	def IsEnabled(self, id):
@@ -748,6 +761,7 @@ class AppIndicatorMenu:
 
 		Determines whether a menu item is enabled.
 		"""
+
 		return False
 
 	def Prepend(self, *__args):
@@ -759,6 +773,7 @@ class AppIndicatorMenu:
 		Inserts the given item at position 0, i.e. before all the other
 		existing items.
 		"""
+
 		return MenuItem
 
 	def PrependCheckItem(self, id, item, help_string=None):
@@ -767,6 +782,7 @@ class AppIndicatorMenu:
 
 		Inserts a checkable item at position 0.
 		"""
+
 		return MenuItem
 
 	def PrependItem(*args, **kw):  # reliably restored by inspect
@@ -783,6 +799,7 @@ class AppIndicatorMenu:
 
 		Inserts a radio item at position 0.
 		"""
+
 		return MenuItem
 
 	def PrependSeparator(self):
@@ -791,6 +808,7 @@ class AppIndicatorMenu:
 
 		Inserts a separator at position 0.
 		"""
+
 		return MenuItem
 
 	def Remove(self, *__args):
@@ -801,6 +819,7 @@ class AppIndicatorMenu:
 		Removes the menu item from the menu but doesn't delete the associated
 		C++ object.
 		"""
+
 		return MenuItem
 
 	def RemoveItem(*args, **kw):  # reliably restored by inspect
@@ -817,11 +836,11 @@ class AppIndicatorMenu:
 
 		Sets an item's help string.
 		"""
-		pass
 
 	def SetInvokingWindow(self, win):
-		""" SetInvokingWindow(win) """
-		pass
+		"""
+		SetInvokingWindow(win)
+		"""
 
 	def SetLabel(self, id, label):
 		"""
@@ -829,11 +848,11 @@ class AppIndicatorMenu:
 
 		Sets the label of a menu item.
 		"""
-		pass
 
 	def SetParent(self, parent):
-		""" SetParent(parent) """
-		pass
+		"""
+		SetParent(parent)
+		"""
 
 	def SetTitle(self, title):
 		"""
@@ -856,31 +875,44 @@ class AppIndicatorMenu:
 		Sends events to source (or owning window if NULL) to update the menu
 		UI.
 		"""
-		pass
 
 	InvokingWindow = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
-	"""GetInvokingWindow() -> Window"""
+	"""
+	GetInvokingWindow() -> Window
+	"""
 
 	MenuItemCount = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
-	"""GetMenuItemCount() -> size_t
+	"""
+	GetMenuItemCount() -> size_t
 
-Returns the number of items in the menu."""
+	Returns the number of items in the menu.
+	"""
 
 	MenuItems = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
-	"""GetMenuItems() -> MenuItemList
+	"""
+	GetMenuItems() -> MenuItemList
 
-Returns the list of items in the menu."""
+	Returns the list of items in the menu.
+	"""
 
 	Parent = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
-	"""GetParent() -> Menu"""
+	"""
+	GetParent() -> Menu
+	"""
 
 	Style = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
-	"""GetStyle() -> long"""
+	"""
+	GetStyle() -> long
+	"""
 
 	Title = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
-	"""GetTitle() -> String
+	"""
+	GetTitle() -> String
 
-Returns the title of the menu."""
+	Returns the title of the menu.
+	"""
 
 	Window = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
-	"""GetWindow() -> Window"""
+	"""
+	GetWindow() -> Window
+	"""

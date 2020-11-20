@@ -40,7 +40,12 @@ from PySetWacom.device import detect_devices
 from PySetWacom.profile import Profile, get_profiles_list, profiles_dir
 
 __all__ = [
-		"CaptureKeystrokeDialog", "EditMappingDialog", "GUI", "ManageDevicesDialog", "NewProfileValidator", "app",
+		"CaptureKeystrokeDialog",
+		"EditMappingDialog",
+		"GUI",
+		"ManageDevicesDialog",
+		"NewProfileValidator",
+		"app",
 		]
 
 # begin wxGlade: dependencies
