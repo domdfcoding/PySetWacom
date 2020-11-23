@@ -89,3 +89,6 @@ keywords:
 
 platforms:
   - Linux
+
+standalone_contrib_guide: true
+sphinx_html_theme: furo

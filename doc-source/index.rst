@@ -166,10 +166,12 @@ https://wiki.archlinux.org/index.php/Wacom_tablet
 
 
 .. toctree::
-    :maxdepth: 3
-    :caption: Documentation
+	:maxdepth: 3
+	:caption: Documentation
 
-    docs
+	docs
+	contributing
+	Source
 
 .. start links
 
