@@ -59,7 +59,12 @@ class _ItemKind(int, Enum):
 	ITEM_SEPARATOR = -1
 
 
-ItemKind = Literal[_ItemKind.ITEM_CHECK, _ItemKind.ITEM_NORMAL, _ItemKind.ITEM_RADIO, _ItemKind.ITEM_SEPARATOR]
+ItemKind = Literal[
+	_ItemKind.ITEM_CHECK,
+	_ItemKind.ITEM_NORMAL,
+	_ItemKind.ITEM_RADIO,
+	_ItemKind.ITEM_SEPARATOR
+	]
 
 
 class AppIndicatorItem:
