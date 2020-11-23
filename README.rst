@@ -28,7 +28,7 @@ PySetWacom
 	:alt: Docs Check Status
 
 .. |travis| image:: https://github.com/domdfcoding/PySetWacom/workflows/Linux%20Tests/badge.svg
-	:target: https://github.com/domdfcoding/PySetWacom/actions?query=workflow%3A%Linux+Tests%22
+	:target: https://github.com/domdfcoding/PySetWacom/actions?query=workflow%3A%22Linux+Tests%22
 	:alt: Linux Test Status
 
 .. |requires| image:: https://requires.io/github/domdfcoding/PySetWacom/requirements.svg?branch=master
