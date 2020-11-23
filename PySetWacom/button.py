@@ -21,6 +21,9 @@
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 #  MA 02110-1301, USA.
 #
+# stdlib
+from typing import Dict, List, Optional
+
 # 3rd party
 from sh import xsetwacom  # type: ignore
 
@@ -32,48 +35,38 @@ class Button:
 	Models a button on a tablet or stylus
 	"""
 
-	def __init__(self, id, mapping):
+	def __init__(self, id: int, mapping: str):
 		"""
 		:param id: The id of the button
-		:type id: int
 		:param mapping: The mapping of the button
-		:type mapping: str
 		"""
 
 		self.id = id
 		self.mapping = mapping
 
 	@classmethod
-	def from_string(cls, raw_string):
+	def from_string(cls, raw_string: str) -> Optional["Button"]:
 		"""
 		Create a Button object from a string
 
 		:param raw_string:
-		:type raw_string: str
-
-		:return:
-		:rtype: Button
 		"""
 
 		if raw_string.strip() == '':
-			return
+			return None
 
 		elements = (raw_string.strip('"').split('" "'))
 		id = elements[0]
 		mapping = elements[1]
 
-		return cls(id, mapping)
+		return cls(int(id), mapping)
 
 	@classmethod
-	def from_dict(cls, data_dict):
+	def from_dict(cls, data_dict: Dict) -> "Button":
 		"""
 		Create a Button object from a string
 
 		:param data_dict:
-		:type data_dict: dict
-
-		:return:
-		:rtype: Button
 		"""
 
 		return cls(**data_dict)
@@ -94,15 +87,11 @@ class Button:
 		return f"{self.id} --> {self.mapping}"
 
 
-def get_mappings(device_name):
+def get_mappings(device_name: str) -> List[Button]:
 	"""
 	Return the mappings for the device with the given name
 
 	:param device_name:
-	:type device_name: str
-
-	:return:
-	:rtype: list of Button
 	"""
 
 	all_properties = xsetwacom("-s", "get", device_name, "all")
@@ -116,4 +105,4 @@ def get_mappings(device_name):
 					)
 			buttons.append(button)
 
-	return buttons
+	return list(filter(None, buttons))

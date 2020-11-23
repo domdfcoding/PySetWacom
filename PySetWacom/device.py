@@ -21,6 +21,9 @@
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 #  MA 02110-1301, USA.
 #
+# stdlib
+from typing import Dict, List, Optional
+
 # 3rd party
 from sh import xsetwacom  # type: ignore
 
@@ -35,65 +38,54 @@ class Device:
 	Models a Device such as a tablet or stylus
 	"""
 
-	def __init__(self, name, id, type):
+	def __init__(self, name: str, id: str, type):
 		"""
 		:param name: The name of the device
-		:type name: str
 		:param id: The id of the device
-		:type id: str
 		:param type:
-		:type type:
 		"""
 
 		self.name = name
 		self.id = id
 		self.type = type
-		self._buttons = []
+		self._buttons: List[Button] = []
 
-	def add_button(self, button):
+	def add_button(self, button: Button):
 		"""
 		Add the button to the device
 
 		:param button:
-		:type button: Button
 		"""
 
 		self._buttons.append(button)
 
-	def add_multiple_buttons(self, button_list):
+	def add_multiple_buttons(self, button_list: List[Button]):
 		"""
 		Add multiple buttons to the device
 
 		:param button_list:
-		:type button_list: list of Button
 		"""
 
 		self._buttons += button_list
 
 	@property
-	def buttons(self):
+	def buttons(self) -> List[Button]:
 		"""
 		Returns the buttons of the device
-
-		:rtype: list of Button
 		"""
 
 		return self._buttons
 
 	@classmethod
-	def from_string(cls, raw_string):
+	def from_string(cls, raw_string: str) -> Optional["Device"]:
 		"""
 		Create a Device object from a string
 
 		:param raw_string:
-		:type raw_string: str
-
-		:return:
-		:rtype: Device
 		"""
 
 		if raw_string.strip() == '':
-			return
+			return None
 
 		elements = raw_string.split('\t')
 
@@ -104,15 +96,11 @@ class Device:
 		return cls(name, id, type)
 
 	@classmethod
-	def from_dict(cls, data_dict):
+	def from_dict(cls, data_dict: Dict) -> "Device":
 		"""
 		Create a Device object from a string
 
 		:param data_dict:
-		:type data_dict: dict
-
-		:return:
-		:rtype: Device
 		"""
 
 		device = cls(data_dict["name"], data_dict["id"], data_dict["type"])
@@ -140,12 +128,9 @@ class Device:
 		return self.name == other.name
 
 
-def detect_devices():
+def detect_devices() -> List[Device]:
 	"""
 	Detect devices connected to this computer
-
-	:return:
-	:rtype: list of Device
 	"""
 
 	devices_list = (xsetwacom.list()).split('\n')

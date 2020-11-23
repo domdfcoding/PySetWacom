@@ -80,15 +80,11 @@ class TrayIcon(AppIndicator):
 				print("Selecting profile: " + selected_profile)
 				profile.Check(True)
 
-	def menu_item_activated(self, item):
+	def menu_item_activated(self, item: AppIndicatorItem):
 		"""
 		Handler for menu item being selected.
 
 		:param item:
-		:type item: AppIndicatorItem
-
-		:return:
-		:rtype:
 		"""
 
 		# print(f"Item = {item}")
@@ -109,7 +105,7 @@ class TrayIcon(AppIndicator):
 		self._profiles_submenu = AppIndicatorMenu()
 
 		if self.profiles:
-			first_radioitem = self._profiles_submenu.AppendRadioItem(-1, self.profiles[0], None)
+			first_radioitem = self._profiles_submenu.AppendRadioItem(-1, self.profiles[0])
 			self.profile_menu_items = [first_radioitem]
 
 			for profile in self.profiles[1:]:
@@ -128,8 +124,6 @@ class TrayIcon(AppIndicator):
 	def quit(self):
 		"""
 		Exit the application
-		:return:
-		:rtype:
 		"""
 
 		Notify.uninit()
@@ -140,9 +134,6 @@ class TrayIcon(AppIndicator):
 	def show(self):
 		"""
 		Show the PySetWacom GUI
-
-		:return:
-		:rtype:
 		"""
 
 		print("Show")
@@ -154,10 +145,6 @@ class TrayIcon(AppIndicator):
 		Select the Profile with the given name
 
 		:param profile_name:
-		:type profile_name:
-
-		:return:
-		:rtype:
 		"""
 
 		print(f"Profile = {profile_name}")

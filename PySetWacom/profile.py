@@ -26,6 +26,7 @@
 import json
 import os
 import pathlib
+from typing import List
 
 # 3rd party
 from appdirs import user_data_dir  # type: ignore
@@ -42,26 +43,21 @@ class Profile:
 	Models a Profile for mapping the buttons on one or more devices
 	"""
 
-	def __init__(self, name, devices):
+	def __init__(self, name: str, devices: List[Device]):
 		"""
 		:param name:
-		:type name: str
 		:param devices:
-		:type devices: list of Device objects
 		"""
 
-		self._devices = devices
+		self.devices = self._devices = devices
 		self._name = name
 
 	@classmethod
-	def new(cls, name):
+	def new(cls, name: str) -> "Profile":
 		"""
 		Create a new Profile
 
 		:param name: The name of the profile
-		:type name: str
-
-		:rtype: Profile
 		"""
 
 		devices = detect_devices()
@@ -72,7 +68,7 @@ class Profile:
 	def __dict__(self):
 		return {
 				"name": self._name,
-				"devices": [dict(device) for device in self._devices],
+				"devices": [dict(device) for device in self.devices],
 				}
 
 	def __iter__(self):
@@ -89,14 +85,11 @@ class Profile:
 			json.dump(dict(self), fp, indent=4)
 
 	@classmethod
-	def load(cls, name):
+	def load(cls, name: str) -> "Profile":
 		"""
 		Load a profile from file
 
 		:param name: The name of the profile to load
-		:type name: str
-
-		:rtype: Profile
 		"""
 
 		filename = profiles_dir / f"{name}.profile"
@@ -109,31 +102,16 @@ class Profile:
 		return cls(**data_dict)
 
 	@property
-	def name(self):
+	def name(self) -> str:
 		"""
 		Returns the name of the Profile
-
-		:rtype: str
 		"""
 
 		return self._name
 
-	@property
-	def devices(self):
-		"""
-		Returns a list of Devices in the Profile
-
-		:rtype: list of Device
-		"""
-
-		return self._devices
-
 	def apply(self):
 		"""
 		Apply the Profile with xsetwacom
-
-		:return:
-		:rtype:
 		"""
 
 		for device in self.devices:
@@ -145,16 +123,12 @@ class Profile:
 				os.system(f'xsetwacom --set "{device.name}" Button {button.id} "{button.mapping}"')
 
 
-def get_profiles_list():
+def get_profiles_list() -> List[str]:
 	"""
 	Returns a list of existing Profiles
-
-	:rtype:
 	"""
 
-	profile_files = list(profile_file.stem for profile_file in profiles_dir.glob("**/*.profile"))
-	profile_files.sort()
-	return profile_files
+	return sorted(profile_file.stem for profile_file in profiles_dir.glob("**/*.profile"))
 
 
 profiles_dir = pathlib.Path(user_data_dir("PySetWacom"))

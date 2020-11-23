@@ -82,15 +82,13 @@ class AppIndicatorItem:
 		"""
 		An AppIndicatorItem represents an item in an AppIndicator menu.
 
-		:param parentMenu: Menu that the menu item belongs to. Can be None if the item is going to be added to the menu later.
-		:type parentMenu: AppIndicatorMenu
-		:param id: Identifier for this menu item. May be ID_SEPARATOR , in which case the given kind is ignored and taken to be ITEM_SEPARATOR instead.
-		:type id: int
+		:param parentMenu: Menu that the menu item belongs to.
+			Can be :py:obj:`None` if the item is going to be added to the menu later.
+		:param id: Identifier for this menu item. May be ``ID_SEPARATOR``,
+			in which case the given kind is ignored and taken to be ``ITEM_SEPARATOR`` instead.
 		:param text: Text for the menu item, as shown on the menu. See SetItemLabel for more info.
-		:type text: str
 		:param help_string: Optional help string that will be shown on the status bar.
-		:type help_string: str
-		:param kind: May be ITEM_SEPARATOR , ITEM_NORMAL , ITEM_CHECK or ITEM_RADIO .
+		:param kind: May be ``ITEM_SEPARATOR``, ``ITEM_NORMAL``, ``ITEM_CHECK`` or ``ITEM_RADIO``.
 		:param submenu: If not None, indicates that the menu item is a submenu.
 		:param radiogroup:
 		"""
@@ -104,20 +102,18 @@ class AppIndicatorItem:
 		if kind == wx.ITEM_SEPARATOR:
 			self._gtkitem = Gtk.SeparatorMenuItem()
 		elif kind == wx.ITEM_CHECK:
-			self._gtkitem = Gtk.CheckMenuItem(label=text, use_underline=False)  # type: ignore  # noqa
-			self._gtkitem.set_active(False)  # type: ignore  # noqa
+			self._gtkitem = Gtk.CheckMenuItem(label=text, use_underline=False)
+			self._gtkitem.set_active(False)
 		elif kind == wx.ITEM_RADIO:
 			if radiogroup:
-				self._gtkitem = Gtk.RadioMenuItem( # type: ignore  # noqa
-					group=radiogroup._gtkitem, label=text, use_underline=False
-					)  # type: ignore  # noqa
+				self._gtkitem = Gtk.RadioMenuItem(group=radiogroup._gtkitem, label=text, use_underline=False)
 			else:
-				self._gtkitem = Gtk.RadioMenuItem(label=text, use_underline=False)  # type: ignore  # noqa
-			self._gtkitem.set_active(False)  # type: ignore  # noqa
+				self._gtkitem = Gtk.RadioMenuItem(label=text, use_underline=False)
+			self._gtkitem.set_active(False)
 		else:
-			self._gtkitem = Gtk.MenuItem(label=text, use_underline=False)  # type: ignore  # noqa
+			self._gtkitem = Gtk.MenuItem(label=text, use_underline=False)
 			if submenu:
-				self._gtkitem.set_submenu(submenu._gtk_menu)  # type: ignore  # noqa
+				self._gtkitem.set_submenu(submenu._gtk_menu)
 
 	# 	self._gtkitem.connect('activate', self.on_click)
 	#
@@ -130,25 +126,23 @@ class AppIndicatorItem:
 
 		Note that this only works when the item is already appended to a menu.
 
-		:type check: book
+		:param check:
 		"""
 
-		self._gtkitem.set_active(check)  # type: ignore  # noqa
+		self._gtkitem.set_active(check)
 
 	def Enable(self, enable: bool = True):
 		"""
 		Enables or disables the menu item.
 
-		:type enable: bool
+		:param enable:
 		"""
 
-		self._gtkitem.set_sensitive(enable)  # type: ignore  # noqa
+		self._gtkitem.set_sensitive(enable)
 
 	def GetHelp(self) -> str:
 		"""
 		Returns the help string associated with the menu item.
-
-		:rtype: str
 		"""
 
 		return self._help_string
@@ -156,8 +150,6 @@ class AppIndicatorItem:
 	def GetId(self) -> int:
 		"""
 		Returns the menu item identifier.
-
-		:rtype: int
 		"""
 
 		return self._id
@@ -165,18 +157,14 @@ class AppIndicatorItem:
 	def GetLabel(self) -> str:
 		"""
 		Returns the text associated with the menu item
-
-		:rtype: str
 		"""
 
 		return self._text
 
-	def GetKind(self):
+	def GetKind(self) -> wx.ItemKind:
 		"""
 		Returns the item kind, one of wxITEM_SEPARATOR, wxITEM_NORMAL,
 		wxITEM_CHECK or wxITEM_RADIO.
-
-		:rtype: wx.ItemKind
 		"""
 
 		return self._kind
@@ -187,7 +175,7 @@ class AppIndicatorItem:
 		not attached.
 		"""
 		# TODO
-		return Menu
+		return Menu  # type: ignore
 
 	def GetSubMenu(self):
 		"""
@@ -195,108 +183,89 @@ class AppIndicatorItem:
 		isn't one.
 		"""
 		# TODO
-		return Menu
+		return Menu  # type: ignore
 
-	def IsCheck(self):
+	def IsCheck(self) -> bool:
 		"""
 		Returns true if the item is a check item.
-
-		:rtype: bool
 		"""
 
 		return self._kind == wx.ITEM_CHECK
 
-	def IsCheckable(self):
+	def IsCheckable(self) -> bool:
 		"""
 		Returns True if the item is checkable.
 
 		Notice that the radio buttons are considered to be checkable as well,
 		so this method returns True for them too. Use IsCheck if you want to
 		test for the check items only.
-
-		:rtype: bool
 		"""
 
 		return self._kind in {wx.ITEM_CHECK, wx.ITEM_RADIO}
 
-	def IsChecked(self):
+	def IsChecked(self) -> bool:
 		"""
 		Returns true if the item is checked.
-
-		:rtype: bool
 		"""
 
 		return self._gtkitem.get_active()
 
-	def IsEnabled(self):
+	def IsEnabled(self) -> bool:
 		"""
 		Returns true if the item is enabled.
-
-		:rtype: bool
 		"""
 
 		return self._gtkitem.is_sensitive()
 
-	def IsRadio(self):
+	def IsRadio(self) -> bool:
 		"""
 		Returns true if the item is a radio button.
-
-		:rtype: bool
 		"""
 
 		return self._kind == wx.ITEM_RADIO
 
-	def IsSeparator(self):
+	def IsSeparator(self) -> bool:
 		"""
 		Returns true if the item is a separator.
-
-		:rtype: bool
 		"""
 
 		return self._kind == wx.ITEM_SEPARATOR
 
-	def IsSubMenu(self):
+	def IsSubMenu(self) -> bool:
 		"""
-		IsSubMenu() -> bool
-
 		Returns true if the item is a submenu.
 		"""
 		# TODO
 		return False
 
-	def SetHelp(self, help_string):
+	def SetHelp(self, help_string: str):
 		"""
-		SetHelp(help_string)
-
 		Sets the help string.
 		"""
 		# TODO
 		pass
 
-	def SetItemLabel(self, label):
+	def SetItemLabel(self, label: str):
 		"""
 		Sets the label associated with the menu item.
 
-		:type label: str
+		:param label:
 		"""
 
 		self._gtkitem.set_label(label)
 
 	def SetMenu(self, menu):
 		"""
-		SetMenu(menu)
-
 		Sets the parent menu which will contain this menu item.
 		"""
 		# TODO
 		pass
 
-	def SetSubMenu(self, menu):
+	def SetSubMenu(self, menu: "AppIndicatorMenu"):
 		"""
 		Sets the submenu of this menu item.
 
 		:param menu:
-		:type menu: AppIndicatorMenu
 		"""
 
 		self._gtkitem.set_submenu(menu._gtk_menu)
@@ -399,17 +368,12 @@ class AppIndicatorMenu:
 
 		:param id: The menu command identifier. See Window IDs for more information about IDs
 			(same considerations apply to both window and menu item IDs).
-		:type id: int
 		:param item: The string to appear on the menu item.
 			See wx.MenuItem.SetItemLabel for more details.
-		:type item: str
 		:param help_string: An optional help string associated with the item.
 			By default, the handler for the wxEVT_MENU_HIGHLIGHT event displays this string in the status line.
-		:type help_string: str
 		:param kind: May be ITEM_SEPARATOR , ITEM_NORMAL , ITEM_CHECK or ITEM_RADIO .
-		:type kind: wx.ItemKind
 		:param radiogroup:
-		:type radiogroup:
 
 		"""
 
@@ -423,7 +387,6 @@ class AppIndicatorMenu:
 		Adds a menu item object.
 
 		:param menuItem:
-		:type menuItem:
 		"""
 
 		self._gtk_menu_items.append(menuItem)
@@ -444,13 +407,8 @@ class AppIndicatorMenu:
 		Adds a checkable item to the end of the menu.
 
 		:param id:
-		:type id: int
 		:param item:
-		:type item: str
 		:param help_string:
-		:type help_string: str
-
-		:return:
 		"""
 
 		return self.Append(id, item, help_string, kind=wx.ITEM_CHECK)
@@ -466,14 +424,9 @@ class AppIndicatorMenu:
 		Adds a radio item to the end of the menu.
 
 		:param id:
-		:type id: int
 		:param item:
-		:type item: str
 		:param help:
-		:type help: str
 		:param group:
-
-		:return:
 		"""
 
 		# TODO: add to group when added to menu
@@ -488,16 +441,13 @@ class AppIndicatorMenu:
 
 		return self.Append(id=wx.ID_ANY, kind=wx.ITEM_SEPARATOR)
 
-	def AppendSubMenu(self, submenu, text: str, help_string: str = '') -> AppIndicatorItem:
+	def AppendSubMenu(self, submenu: "AppIndicatorMenu", text: str, help_string: str = '') -> AppIndicatorItem:
 		"""
 		Adds the given submenu to this menu.
 
 		:param submenu:
-		:type submenu:
 		:param text:
-		:type text: str
 		:param help_string:
-		:type help_string: str
 
 		:return:
 		"""
@@ -514,9 +464,7 @@ class AppIndicatorMenu:
 		Checks or unchecks the menu item.
 
 		:param id: The menu item identifier.
-		:type id: int
 		:param check: If True, the item will be checked, otherwise it will be unchecked.
-		:type check: bool
 		"""
 
 		for item in self._gtk_menu_items:
@@ -548,9 +496,7 @@ class AppIndicatorMenu:
 		Enables or disables (greys out) a menu item.
 
 		:param id: The menu item identifier.
-		:type id: int
 		:param enable: If True, the item will be enabled, otherwise it will be unenabled.
-		:type enable: bool
 		"""
 
 		for item in self._gtk_menu_items:
@@ -565,10 +511,6 @@ class AppIndicatorMenu:
 		identifier and, optionally, the position of the item in the menu.
 
 		:param id: The identifier of the menu item to find.
-		:type id: int
-
-		:return:
-		:rtype:
 		"""
 
 		for index, item in enumerate(self._gtk_menu_items):
@@ -583,10 +525,8 @@ class AppIndicatorMenu:
 		Finds the menu id for a menu item string.
 
 		:param itemString: Menu item string to find.
-		:type itemString: str
 
 		:return: Menu item identifier, or wx.NOT_FOUND if none is found.
-		:rtype: int
 		"""
 
 		for index, item in enumerate(self._gtk_menu_items):
@@ -601,10 +541,6 @@ class AppIndicatorMenu:
 		identifier.
 
 		:param id: Menu item identifier.
-		:type id: int
-
-		:return:
-		:rtype:
 		"""
 
 		for item in self._gtk_menu_items:
@@ -618,10 +554,6 @@ class AppIndicatorMenu:
 		Returns the wxMenuItem given a position in the menu.
 
 		:param position:
-		:type position: int
-
-		:return:
-		:rtype:
 		"""
 
 		for index, item in enumerate(self._gtk_menu_items):
@@ -633,10 +565,8 @@ class AppIndicatorMenu:
 		Returns the help string associated with a menu item.
 
 		:param id: The menu item identifier.
-		:type id: int
 
 		:return: The help string, or the empty string if there is no help string or the item was not found.
-		:rtype: str
 		"""
 
 		return self.FindItemById(id).GetHelp()
@@ -646,17 +576,15 @@ class AppIndicatorMenu:
 		GetInvokingWindow() -> Window
 		"""
 		# TODO
-		return Window
+		return Window  # type: ignore
 
 	def GetLabel(self, id: int) -> str:
 		"""
 		Returns a menu item label.
 
 		:param id: The menu item identifier.
-		:type id: int
 
 		:return: The item label, or the empty string if the item was not found.
-		:rtype: str
 		"""
 
 		return self.FindItemById(id).GetLabel()
@@ -664,8 +592,6 @@ class AppIndicatorMenu:
 	def GetMenuItemCount(self) -> int:
 		"""
 		Returns the number of items in the menu.
-
-		:rtype: int
 		"""
 
 		return len(self._gtk_menu_items)
@@ -685,7 +611,7 @@ class AppIndicatorMenu:
 		"""
 
 		# TODO
-		return Menu
+		return Menu  # type: ignore
 
 	def GetStyle(self):
 		"""
@@ -700,7 +626,7 @@ class AppIndicatorMenu:
 		GetWindow() -> Window
 		"""
 
-		return Window
+		return Window  # type: ignore
 
 	def Insert(self, pos, *__args):
 		"""
@@ -710,7 +636,7 @@ class AppIndicatorMenu:
 
 		Inserts the given item before the position pos.
 		"""
-		return MenuItem
+		return MenuItem  # type: ignore
 
 	def InsertCheckItem(self, pos, id, item, help_string=None):
 		"""
@@ -718,7 +644,7 @@ class AppIndicatorMenu:
 
 		Inserts a checkable item at the given position.
 		"""
-		return MenuItem
+		return MenuItem  # type: ignore
 
 	def InsertItem(*args, **kw):  # reliably restored by inspect
 		# no doc
@@ -734,7 +660,7 @@ class AppIndicatorMenu:
 
 		Inserts a radio item at the given position.
 		"""
-		return MenuItem
+		return MenuItem  # type: ignore
 
 	def InsertSeparator(self, pos):
 		"""
@@ -742,7 +668,7 @@ class AppIndicatorMenu:
 
 		Inserts a separator at the given position.
 		"""
-		return MenuItem
+		return MenuItem  # type: ignore
 
 	def IsAttached(self):
 		"""
@@ -779,7 +705,7 @@ class AppIndicatorMenu:
 		existing items.
 		"""
 
-		return MenuItem
+		return MenuItem  # type: ignore
 
 	def PrependCheckItem(self, id, item, help_string=None):
 		"""
@@ -788,7 +714,7 @@ class AppIndicatorMenu:
 		Inserts a checkable item at position 0.
 		"""
 
-		return MenuItem
+		return MenuItem  # type: ignore
 
 	def PrependItem(*args, **kw):  # reliably restored by inspect
 		# no doc
@@ -805,7 +731,7 @@ class AppIndicatorMenu:
 		Inserts a radio item at position 0.
 		"""
 
-		return MenuItem
+		return MenuItem  # type: ignore
 
 	def PrependSeparator(self):
 		"""
@@ -814,7 +740,7 @@ class AppIndicatorMenu:
 		Inserts a separator at position 0.
 		"""
 
-		return MenuItem
+		return MenuItem  # type: ignore
 
 	def Remove(self, *__args):
 		"""
@@ -825,7 +751,7 @@ class AppIndicatorMenu:
 		C++ object.
 		"""
 
-		return MenuItem
+		return MenuItem  # type: ignore
 
 	def RemoveItem(*args, **kw):  # reliably restored by inspect
 		# no doc

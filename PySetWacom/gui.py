@@ -29,6 +29,7 @@
 import os
 import signal
 import webbrowser
+from typing import Optional
 
 # 3rd party
 import wx  # type: ignore  # nodep
@@ -36,7 +37,7 @@ from domdf_wxpython_tools.validators import ValidatorBase  # type: ignore
 from pubsub import pub  # type: ignore
 
 # this package
-from PySetWacom.device import detect_devices
+from PySetWacom.device import Device, detect_devices
 from PySetWacom.profile import Profile, get_profiles_list, profiles_dir
 
 __all__ = [
@@ -218,8 +219,8 @@ class GUI(wx.Frame):
 
 		self.refresh_profiles_list()
 
-		self.selected_device = None
-		self.selected_profile = None
+		self.selected_device: Optional[Device] = None
+		self.selected_profile: Optional[Profile] = None
 
 		# Create pubsub receiver to listen for TrayIcon changing the Profile
 		pub.subscribe(self.tray_changed_profile, "tray_changed_profile")
@@ -275,6 +276,9 @@ class GUI(wx.Frame):
 			self.Show()
 
 	def tray_changed_profile(self, selected_profile):
+		if self.selected_profile is None:
+			return
+
 		if self.selected_profile.name == selected_profile:
 			return
 
@@ -288,6 +292,9 @@ class GUI(wx.Frame):
 		self.Hide()
 
 	def on_profile_changed(self, event=None):  # wxGlade: GUI.<event_handler>
+		if self.selected_profile is None:
+			return
+
 		index = self.profile_choice.GetSelection()
 
 		profile_name = self.profile_choice.GetString(index)
@@ -314,6 +321,9 @@ class GUI(wx.Frame):
 			self.profile_choice.Append(profile)
 
 	def on_device_changed(self, event):  # wxGlade: GUI.<event_handler>
+		if self.selected_profile is None:
+			return
+
 		devices_list = event.GetEventObject()
 		self.selected_device = self.selected_profile.devices[devices_list.GetSelection()]
 		self.update_mapping_list()
@@ -321,11 +331,16 @@ class GUI(wx.Frame):
 		event.Skip()
 
 	def update_mapping_list(self):
+		if self.selected_device is None:
+			return
+
 		self.buttons_list.Clear()
 		self.buttons_list.AppendItems([str(button) for button in self.selected_device.buttons])
 		self.buttons_list.Refresh()
 
 	def on_button_edit(self, event):  # wxGlade: GUI.<event_handler>
+		if self.selected_profile is None or self.selected_device is None:
+			return
 
 		selection_index = event.GetEventObject().GetSelection()
 		selected_button = self.selected_device._buttons[selection_index]
@@ -342,6 +357,9 @@ class GUI(wx.Frame):
 		event.Skip()
 
 	def create_new_profile(self):
+		if self.selected_profile is None:
+			return
+
 		# New Profile
 		with wx.TextEntryDialog(self, "Profile Name", caption="New Profile") as dlg:
 			textctrl = dlg.FindWindowById(3000)
@@ -367,6 +385,9 @@ class GUI(wx.Frame):
 		event.Skip()
 
 	def on_menu_delete_profile(self, event):  # wxGlade: GUI.<event_handler>
+		if self.selected_profile is None:
+			return
+
 		with wx.MultiChoiceDialog(
 				self, "Select Profiles to delete", "Delete Profile", choices=self.profiles
 				) as dlg:
