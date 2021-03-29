@@ -1,0 +1,38 @@
+# This file is managed by 'repo_helper'. Don't edit it directly.
+---
+name: mypy
+
+on:
+  push:
+
+jobs:
+  Run:
+    name: "mypy / ${{ matrix.os }}"
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: ['ubuntu-20.04']
+      fail-fast: false
+
+    steps:
+      - name: Checkout 🛎️
+        uses: "actions/checkout@v2"
+
+      - name: Setup Python 🐍
+        uses: "actions/setup-python@v2"
+        with:
+          python-version: "3.6"
+
+      - name: Install dependencies (Linux) 🔧
+        if: ${{ matrix.os == 'ubuntu-20.04' }}
+        run: |
+          sudo apt update
+          sudo apt install libcairo2-dev pkg-config python3-dev libgirepository1.0-dev xserver-xorg-input-wacom libwacom2 libwacom-common
+          python -VV
+          python -m site
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install --upgrade tox virtualenv
+
+      - name: "Run mypy"
+        run: "python -m tox -e mypy"

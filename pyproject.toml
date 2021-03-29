@@ -1,3 +1,31 @@
 [build-system]
-requires = ["setuptools>=40.6.0", "wheel>=0.34.2"]
+requires = [ "setuptools>=40.6.0", "wheel>=0.34.2",]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "PySetWacom"
+version = "0.1.8"
+description = "A GUI utility for configuring buttons on graphics tablets and styli"
+readme = "README.rst"
+keywords = [ "wxpython", "gui", "wacom", "tablet", "linux", "utility",]
+dynamic = [ "requires-python", "classifiers", "dependencies",]
+
+[[project.authors]]
+email = "dominic@davis-foster.co.uk"
+name = "Dominic Davis-Foster"
+
+
+[project.license]
+file = "LICENSE"
+
+[project.urls]
+Homepage = "https://github.com/domdfcoding/PySetWacom"
+"Issue Tracker" = "https://github.com/domdfcoding/PySetWacom/issues"
+"Source Code" = "https://github.com/domdfcoding/PySetWacom"
+Documentation = "https://pysetwacom.readthedocs.io/en/latest"
+
+[project.scripts]
+PySetWacom = "PySetWacom.__main__:main"
+pysetwacom = "PySetWacom.__main__:main"
+
+[tool.importcheck]

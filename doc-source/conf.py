@@ -34,7 +34,7 @@ rst_prolog = f""".. |pkgname| replace:: PySetWacom
 """
 
 author = "Dominic Davis-Foster"
-project = "PySetWacom"
+project = "PySetWacom".replace('_', '-')
 slug = re.sub(r'\W+', '-', project.lower())
 release = version = __version__
 copyright = "2020 Dominic Davis-Foster"  # pylint: disable=redefined-builtin
@@ -45,7 +45,9 @@ extensions = [
 		"sphinx_toolbox",
 		"sphinx_toolbox.more_autodoc",
 		"sphinx_toolbox.more_autosummary",
+		"sphinx_toolbox.documentation_summary",
 		"sphinx_toolbox.tweaks.param_dash",
+		"sphinx_toolbox.tweaks.latex_toc",
 		"sphinx.ext.intersphinx",
 		"sphinx.ext.mathjax",
 		"sphinxcontrib.httpdomain",
@@ -56,6 +58,7 @@ extensions = [
 		"sphinx_copybutton",
 		"sphinxcontrib.default_values",
 		"sphinxcontrib.toctree_plus",
+		"sphinx_debuginfo",
 		"seed_intersphinx_mapping",
 		]
 
@@ -66,8 +69,6 @@ gitstamp_fmt = "%d %b %Y"
 templates_path = ["_templates"]
 html_static_path = ["_static"]
 source_suffix = ".rst"
-exclude_patterns = []
-
 master_doc = "index"
 suppress_warnings = ["image.nonlocal_uri"]
 pygments_style = "default"
@@ -121,7 +122,7 @@ add_module_names = False
 hide_none_rtype = True
 all_typevars = True
 overloads_location = "bottom"
-
+documentation_summary = "A GUI utility for configuring buttons on graphics tablets and styli"
 
 autodoc_exclude_members = [   # Exclude "standard" methods.
 		"__dict__",
