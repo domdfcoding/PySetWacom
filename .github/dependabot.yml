@@ -1,0 +1,12 @@
+version: 2
+updates:
+- package-ecosystem: pip
+  directory: "/"
+  schedule:
+    interval: weekly
+    day: tuesday
+    time: "07:00"
+    timezone: Universal
+  open-pull-requests-limit: 10
+  reviewers:
+  - domdfcoding
