@@ -71,13 +71,13 @@ class AppIndicatorItem:
 
 	def __init__(
 			self,
-			parentMenu: "AppIndicatorMenu" = None,
+			parentMenu: Optional["AppIndicatorMenu"] = None,
 			id: int = wx.ID_SEPARATOR,
 			text: str = '',
 			help_string: str = '',
 			kind: ItemKind = wx.ITEM_NORMAL,
-			submenu: "AppIndicatorMenu" = None,
-			radiogroup: "AppIndicatorItem" = None,
+			submenu: Optional["AppIndicatorMenu"] = None,
+			radiogroup: Optional["AppIndicatorItem"] = None,
 			):
 		"""
 		An AppIndicatorItem represents an item in an AppIndicator menu.
