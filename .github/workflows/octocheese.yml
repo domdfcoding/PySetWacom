@@ -3,9 +3,8 @@
 
 name: "GitHub Releases"
 on:
-  push:
   schedule:
-    - cron: 0 12 * * 2,4,6
+    - cron: 0 12 * * *
 
 jobs:
   Run:
@@ -16,3 +15,4 @@ jobs:
           pypi_name: "PySetWacom"
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        if: startsWith(github.ref, 'refs/tags/') != true
