@@ -57,7 +57,7 @@ jobs:
         if: steps.setup-python.outcome == 'success'
         run: |
           sudo apt update
-          sudo apt install libcairo2-dev pkg-config python3-dev libgirepository1.0-dev xserver-xorg-input-wacom libwacom2 libwacom-common
+          sudo apt install libcairo2-dev pkg-config python3-dev libgirepository1.0-dev xserver-xorg-input-wacom libwacom9 libwacom-common
           python -VV
           python -m site
           python -m pip install --upgrade pip setuptools wheel

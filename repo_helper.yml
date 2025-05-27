@@ -62,7 +62,7 @@ sphinx_conf_preamble:
 
 travis_extra_install_pre:
   - "sudo apt update"
-  - sudo apt install libcairo2-dev pkg-config python3-dev libgirepository1.0-dev xserver-xorg-input-wacom libwacom2 libwacom-common
+  - sudo apt install libcairo2-dev pkg-config python3-dev libgirepository1.0-dev xserver-xorg-input-wacom libwacom9 libwacom-common
 
 
 travis_ubuntu_version: bionic
