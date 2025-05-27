@@ -24,6 +24,7 @@
 
 # stdlib
 import signal
+import warnings
 from enum import Enum
 from typing import Optional, Tuple
 
@@ -34,9 +35,14 @@ from pubsub import pub  # type: ignore
 from typing_extensions import Literal
 
 gi.require_version("Gtk", "3.0")
-gi.require_version("AppIndicator3", "0.1")
 gi.require_version("Notify", "0.7")
-from gi.repository import AppIndicator3, Gtk, Notify  # type: ignore  # isort: skip  # noqa
+from gi.repository import Gtk, Notify  # type: ignore  # isort: skip  # noqa
+
+try:
+	gi.require_version("AppIndicator3", "0.1")
+	from gi.repository import AppIndicator3  # isort: skip  # noqa
+except ValueError as e:
+	warnings.warn(str(e))
 
 __all__ = ["AppIndicator", "AppIndicatorItem", "AppIndicatorMenu"]
 

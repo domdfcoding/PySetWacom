@@ -29,7 +29,7 @@ import pathlib
 from typing import Iterator, List
 
 # 3rd party
-from appdirs import user_data_dir  # type: ignore
+from platformdirs import user_data_dir
 
 # this package
 from PySetWacom.button import get_mappings

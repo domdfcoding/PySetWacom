@@ -1,8 +1,7 @@
-appdirs>=1.4.3
 domdf-wxpython-tools>=0.2.0
 pid>=2.2.5
-pygobject>=3.38.0
-pygobject==3.50.0
+platformdirs>=2.3.0
+pygobject<=3.50.0,>=3.38.0
 pypubsub>=4.0.3
 sh>=1.12.14
 typing-extensions>=3.7.4.3

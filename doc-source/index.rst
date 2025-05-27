@@ -184,6 +184,7 @@ https://wiki.archlinux.org/index.php/Wacom_tablet
 	docs
 	contributing
 	Source
+	license
 
 .. sidebar-links::
 	:caption: Links

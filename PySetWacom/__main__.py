@@ -28,8 +28,8 @@ import pathlib
 import signal
 
 # 3rd party
-from appdirs import user_data_dir  # type: ignore
 from pid import PidFile, PidFileAlreadyLockedError  # type: ignore
+from platformdirs import user_data_dir
 
 __all__ = ["main"]
 

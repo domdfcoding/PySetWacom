@@ -29,7 +29,7 @@ API Reference
 
 
 :mod:`PySetWacom.tray_icon`
---------------------------
+----------------------------
 
 .. automodule:: PySetWacom.tray_icon
 
