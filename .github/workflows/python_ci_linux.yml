@@ -1,73 +1,113 @@
 # This file is managed by 'repo_helper'. Don't edit it directly.
 ---
-name: Linux Tests
+name: Linux
 
 on:
   push:
+    branches-ignore:
+      - 'repo-helper-update'
+      - 'pre-commit-ci-update-config'
+      - 'imgbot'
+    tags:
+      - '*'
   pull_request:
-    branches: ["master"]
+
+permissions:
+  actions: write
+  issues: write
+  contents: read
 
 jobs:
   tests:
-    name: "Python ${{ matrix.python-version }}"
-    runs-on: "ubuntu-18.04"
+    name: "ubuntu-22.04 / Python ${{ matrix.config.python-version }}"
+    runs-on: "ubuntu-22.04"
+    continue-on-error: ${{ matrix.config.experimental }}
     env:
       USING_COVERAGE: '3.6,3.7,3.8'
 
     strategy:
       fail-fast: False
       matrix:
-        python-version: ["3.6","3.7","3.8"]
+        config:
+          - {python-version: "3.7", testenvs: "py37,build", experimental: False}
+          - {python-version: "3.8", testenvs: "py38,build", experimental: False}
 
     steps:
       - name: Checkout 🛎️
-        uses: "actions/checkout@v2"
-      - name: Setup Python 🐍
-        uses: "actions/setup-python@v2"
+        uses: "actions/checkout@v4"
+
+      - name: Check for changed files
+        if: startsWith(github.ref, 'refs/tags/') != true
+        uses: dorny/paths-filter@v2
+        id: changes
         with:
-          python-version: "${{ matrix.python-version }}"
+          list-files: "json"
+          filters: |
+            code:
+              - '!(doc-source/**|CONTRIBUTING.rst|.imgbotconfig|.pre-commit-config.yaml|.pylintrc|.readthedocs.yml)'
+
+      - name: Setup Python 🐍
+        id: setup-python
+        if: ${{ steps.changes.outputs.code == 'true' || steps.changes.outcome == 'skipped' }}
+        uses: "actions/setup-python@v5"
+        with:
+          python-version: "${{ matrix.config.python-version }}"
+
       - name: Install dependencies 🔧
+        if: steps.setup-python.outcome == 'success'
         run: |
           sudo apt update
           sudo apt install libcairo2-dev pkg-config python3-dev libgirepository1.0-dev xserver-xorg-input-wacom libwacom2 libwacom-common
           python -VV
           python -m site
           python -m pip install --upgrade pip setuptools wheel
-          python -m pip install --upgrade tox tox-gh-actions virtualenv
+          python -m pip install --upgrade tox~=3.0 virtualenv!=20.16.0
 
-
-      - name: "Run Tests for Python ${{ matrix.python-version }}"
-        run: "python -m tox"
+      - name: "Run Tests for Python ${{ matrix.config.python-version }}"
+        if: steps.setup-python.outcome == 'success'
+        run: python -m tox -e "${{ matrix.config.testenvs }}" -s false
 
 
 
   Deploy:
     needs: tests
 
-    runs-on: "ubuntu-18.04"
+    runs-on: "ubuntu-22.04"
     steps:
       - name: Checkout 🛎️
-        uses: "actions/checkout@v2"
+        uses: "actions/checkout@v4"
+        if: startsWith(github.ref, 'refs/tags/')
 
       - name: Setup Python 🐍
-        uses: "actions/setup-python@v2"
+        uses: "actions/setup-python@v5"
+        if: startsWith(github.ref, 'refs/tags/')
         with:
           python-version: 3.8
 
       - name: Install dependencies 🔧
+        if: startsWith(github.ref, 'refs/tags/')
         run: |
           python -m pip install --upgrade pip setuptools wheel
-          python -m pip install --upgrade tox
+          python -m pip install --upgrade tox~=3.0
 
       - name: Build distributions 📦
+        if: startsWith(github.ref, 'refs/tags/')
         run: |
           tox -e build
 
 
-      - name: Upload distribution 📦 to PyPI
+      - name: Upload distribution to PyPI 🚀
         if: startsWith(github.ref, 'refs/tags/')
-        uses: pypa/gh-action-pypi-publish@master
+        uses: pypa/gh-action-pypi-publish@v1.4.2
         with:
           user: __token__
           password: ${{ secrets.PYPI_TOKEN }}
           skip_existing: true
+
+      - name: Close milestone 🚪
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          python -m pip install --upgrade github3.py packaging
+          python .github/milestones.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

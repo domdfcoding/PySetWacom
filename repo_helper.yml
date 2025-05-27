@@ -18,6 +18,7 @@ additional_ignore:
 
 exclude_files:
   - docs_action
+  - setup
 
 console_scripts:
   - "PySetWacom = PySetWacom.__main__:main"
@@ -36,6 +37,7 @@ python_versions:
 # additional lines for MANIFEST.in
 manifest_additional:
   - include create_dotdesktop.py
+  - include PySetWacom/wxglade.wxg
 
 classifiers:
   - 'Development Status :: 4 - Beta'
@@ -67,15 +69,8 @@ travis_extra_install_pre:
 
 travis_ubuntu_version: bionic
 
-pkginfo_extra:
-  - data_files = [('share/applications', ['PySetWacom.desktop'])]
-  - __all__.append("data_files")
-  - ''
-  - from create_dotdesktop import create_dotdesktop
-  - create_dotdesktop(__version__)
-
 additional_setup_args:
-  data_files: data_files
+  data_files: "[('share/applications', ['PySetWacom.desktop'])]"
 
 #enable_docs: false
 
