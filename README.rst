@@ -120,7 +120,7 @@ To install with ``pip``:
 Brief Tutorial
 ================
 
-`PySetWacom` can be run from the terminal with the command
+``PySetWacom`` can be run from the terminal with the command
 
 .. code-block:: bash
 
@@ -135,25 +135,25 @@ Once started, you should see an AppIndicator icon appear that looks like this:
 
 .. image:: images/AppIndicator.png
 
-You can click this icon to show the `Editor` window, switch profiles, or quit `PySetWacom`.
+You can click this icon to show the ``Editor`` window, switch profiles, or quit ``PySetWacom``.
 
 .. image:: images/AppIndicatorMenu.png
 
 Editor
 -------
 
-In the `Editor` window, you can change profiles and edit the mappings for the different buttons on your tablet.
+In the ``Editor`` window, you can change profiles and edit the mappings for the different buttons on your tablet.
 
 .. image:: images/Editor.png
 	:width: 400
 
-Double clicking on a button opens the `Edit Mapping` dialog, where you can type in the mapping or capture it from your keyboard.
+Double clicking on a button opens the ``Edit Mapping`` dialog, where you can type in the mapping or capture it from your keyboard.
 
 
 .. image:: images/Edit_Mapping.png
 	:width: 400
 
-If there are devices in the list that you don't want to configure, or if there is a new device you want to add, you can click the `Manage Devices` button in the `Editor` window.
+If there are devices in the list that you don't want to configure, or if there is a new device you want to add, you can click the ``Manage Devices`` button in the ``Editor`` window.
 
 .. image:: images/Manage_Devices.png
 	:width: 400
