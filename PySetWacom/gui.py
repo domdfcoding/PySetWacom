@@ -29,7 +29,7 @@
 import os
 import signal
 import webbrowser
-from typing import Optional
+from typing import List, Optional
 
 # 3rd party
 import wx  # type: ignore  # nodep
@@ -56,13 +56,13 @@ __all__ = [
 # end wxGlade
 
 
-class ManageDevicesDialog(wx.Dialog):
+class ManageDevicesDialog(wx.Dialog):  # noqa: D101
 
 	def __init__(
 			self,
 			parent,
 			current_devices,
-			id=wx.ID_ANY,
+			id=wx.ID_ANY,  # noqa: A002  # pylint: disable=redefined-builtin
 			pos=wx.DefaultPosition,
 			size=wx.DefaultSize,
 			style=wx.DEFAULT_DIALOG_STYLE,
@@ -104,7 +104,7 @@ class ManageDevicesDialog(wx.Dialog):
 
 		self.Bind(wx.EVT_BUTTON, self.OnApply, id=wx.ID_APPLY)
 
-	def __set_properties(self):
+	def __set_properties(self) -> None:
 		# begin wxGlade: ManageDevicesDialog.__set_properties
 		self.SetTitle("Manage Devices")
 		self.SetSize((450, 350))
@@ -112,7 +112,7 @@ class ManageDevicesDialog(wx.Dialog):
 		self.selection_list_box.SetMinSize((170, 256))
 		# end wxGlade
 
-	def __do_layout(self):
+	def __do_layout(self) -> None:
 		# begin wxGlade: ManageDevicesDialog.__do_layout
 		outer_sizer = wx.BoxSizer(wx.VERTICAL)
 		list_grid_sizer = wx.BoxSizer(wx.HORIZONTAL)
@@ -131,7 +131,7 @@ class ManageDevicesDialog(wx.Dialog):
 		self.btns = self.CreateStdDialogButtonSizer(wx.APPLY | wx.CANCEL)
 		outer_sizer.Add(self.btns, 0, wx.BOTTOM | wx.EXPAND, 5)
 
-	def OnApply(self, event):
+	def OnApply(self, event) -> None:  # noqa: D102,MAN001
 		# Work out which devices from self.all_devices should be in self.current_devices
 		# Remove devices that aren't now in selection_list_box
 		selection_contents = set()
@@ -149,7 +149,7 @@ class ManageDevicesDialog(wx.Dialog):
 
 		self.EndModal(wx.ID_APPLY)
 
-	def add(self, event):  # wxGlade: ManageDevicesDialog.<event_handler>
+	def add(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: ManageDevicesDialog.<event_handler>
 		selection = self.picker_list_box.GetSelection()
 		if selection == -1:
 			return
@@ -163,7 +163,7 @@ class ManageDevicesDialog(wx.Dialog):
 
 		event.Skip()
 
-	def remove(self, event):  # wxGlade: ManageDevicesDialog.<event_handler>
+	def remove(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: ManageDevicesDialog.<event_handler>
 		selection = self.selection_list_box.GetSelection()
 		if selection == -1:
 			return
@@ -179,7 +179,7 @@ class ManageDevicesDialog(wx.Dialog):
 
 
 # end of class ManageDevicesDialog
-class GUI(wx.Frame):
+class GUI(wx.Frame):  # noqa: D101
 
 	def __init__(self, *args, **kwds):
 		# begin wxGlade: GUI.__init__
@@ -231,7 +231,7 @@ class GUI(wx.Frame):
 		self.Bind(wx.EVT_TIMER, lambda *args: None, self.timer)
 		self.timer.Start(1000)
 
-	def __set_properties(self):
+	def __set_properties(self) -> None:
 		# begin wxGlade: GUI.__set_properties
 		self.SetTitle("PySetWacom")
 		self.profile_choice.SetMinSize((-1, 32))
@@ -247,7 +247,7 @@ class GUI(wx.Frame):
 
 		self.SetIcon(wx.Icon(icon_info.get_filename()))
 
-	def __do_layout(self):
+	def __do_layout(self) -> None:
 		# begin wxGlade: GUI.__do_layout
 		sizer_1 = wx.BoxSizer(wx.VERTICAL)
 		grid_sizer_1 = wx.BoxSizer(wx.VERTICAL)
@@ -269,13 +269,13 @@ class GUI(wx.Frame):
 		self.Layout()
 		# end wxGlade
 
-	def receive_signal(self, signum, stack):
+	def receive_signal(self, signum, stack) -> None:  # noqa: D102
 		print("My PID is:", os.getpid())
 		print("Received:", signum)
 		if signum == signal.SIGUSR1:
 			self.Show()
 
-	def tray_changed_profile(self, selected_profile):
+	def tray_changed_profile(self, selected_profile) -> None:  # noqa: D102
 		if self.selected_profile is None:
 			return
 
@@ -286,12 +286,12 @@ class GUI(wx.Frame):
 		self.profile_choice.SetStringSelection(selected_profile)
 		self.on_profile_changed()
 
-	def OnClose(self, event):
+	def OnClose(self, event) -> None:  # noqa: D102,MAN001
 		if event.CanVeto():
 			event.Veto()
 		self.Hide()
 
-	def on_profile_changed(self, event=None):  # wxGlade: GUI.<event_handler>
+	def on_profile_changed(self, event=None) -> None:  # noqa: D102  # wxGlade: GUI.<event_handler>
 		if self.selected_profile is None:
 			return
 
@@ -302,7 +302,7 @@ class GUI(wx.Frame):
 		self.load_profile(profile_name)
 		pub.sendMessage("gui_changed_profile", selected_profile=self.selected_profile.name)
 
-	def load_profile(self, profile_name):
+	def load_profile(self, profile_name) -> None:  # noqa: D102
 		# Clear Devices and Buttons
 		self.buttons_list.Clear()
 		self.devices_list.Clear()
@@ -312,7 +312,7 @@ class GUI(wx.Frame):
 		for index, device in enumerate(self.selected_profile.devices):
 			self.devices_list.Append(device.name)
 
-	def refresh_profiles_list(self):
+	def refresh_profiles_list(self) -> None:  # noqa: D102
 		self.profile_choice.Clear()
 
 		self.profiles = get_profiles_list()
@@ -320,7 +320,7 @@ class GUI(wx.Frame):
 		for profile in self.profiles:
 			self.profile_choice.Append(profile)
 
-	def on_device_changed(self, event):  # wxGlade: GUI.<event_handler>
+	def on_device_changed(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: GUI.<event_handler>
 		if self.selected_profile is None:
 			return
 
@@ -330,7 +330,7 @@ class GUI(wx.Frame):
 
 		event.Skip()
 
-	def update_mapping_list(self):
+	def update_mapping_list(self) -> None:  # noqa: D102
 		if self.selected_device is None:
 			return
 
@@ -338,7 +338,7 @@ class GUI(wx.Frame):
 		self.buttons_list.AppendItems([str(button) for button in self.selected_device.buttons])
 		self.buttons_list.Refresh()
 
-	def on_button_edit(self, event):  # wxGlade: GUI.<event_handler>
+	def on_button_edit(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: GUI.<event_handler>
 		if self.selected_profile is None or self.selected_device is None:
 			return
 
@@ -356,7 +356,7 @@ class GUI(wx.Frame):
 
 		event.Skip()
 
-	def create_new_profile(self):
+	def create_new_profile(self) -> None:  # noqa: D102
 		if self.selected_profile is None:
 			return
 
@@ -376,15 +376,15 @@ class GUI(wx.Frame):
 			self.load_profile(self.selected_profile.name)
 			pub.sendMessage("new_profile_created", selected_profile=self.selected_profile.name)
 
-	def on_menu_new_profile(self, event):  # wxGlade: GUI.<event_handler>
+	def on_menu_new_profile(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: GUI.<event_handler>
 		self.create_new_profile()
 		event.Skip()
 
-	def on_menu_open_directory(self, event):  # wxGlade: GUI.<event_handler>
+	def on_menu_open_directory(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: GUI.<event_handler>
 		webbrowser.open(str(profiles_dir))
 		event.Skip()
 
-	def on_menu_delete_profile(self, event):  # wxGlade: GUI.<event_handler>
+	def on_menu_delete_profile(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: GUI.<event_handler>
 		if self.selected_profile is None:
 			return
 
@@ -413,11 +413,11 @@ class GUI(wx.Frame):
 
 		event.Skip()
 
-	def on_quit(self, event):  # wxGlade: GUI.<event_handler>
+	def on_quit(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: GUI.<event_handler>
 		pub.sendMessage("quit")
 		event.Skip()
 
-	def on_manage_devices(self, event):  # wxGlade: GUI.<event_handler>
+	def on_manage_devices(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: GUI.<event_handler>
 		if self.selected_profile:
 			with ManageDevicesDialog(self, self.selected_profile.devices) as dlg:
 				if dlg.ShowModal() == wx.ID_APPLY:
@@ -437,7 +437,7 @@ class GUI(wx.Frame):
 # end of class GUI
 
 
-class CaptureKeystrokeDialog(wx.Dialog):
+class CaptureKeystrokeDialog(wx.Dialog):  # noqa: D101
 
 	def __init__(self, *args, **kwds):
 		# begin wxGlade: CaptureKeystrokeDialog.__init__
@@ -455,14 +455,14 @@ class CaptureKeystrokeDialog(wx.Dialog):
 
 		self.keystrokes = []
 
-	def __set_properties(self):
+	def __set_properties(self) -> None:
 		# begin wxGlade: CaptureKeystrokeDialog.__set_properties
 		self.SetTitle("Capture Key Combo")
 		self.SetSize((200, 200))
 		self.panel_1.SetBackgroundColour(wx.Colour(107, 142, 35))
 		# end wxGlade
 
-	def __do_layout(self):
+	def __do_layout(self) -> None:
 		# begin wxGlade: CaptureKeystrokeDialog.__do_layout
 		grid_sizer_5 = wx.GridSizer(1, 1, 0, 0)
 		grid_sizer_5.Add(self.panel_1, 1, wx.EXPAND, 0)
@@ -470,16 +470,16 @@ class CaptureKeystrokeDialog(wx.Dialog):
 		self.Layout()
 		# end wxGlade
 
-	def GetKeyCombo(self):
+	def GetKeyCombo(self) -> List[str]:  # noqa: D102
 		return self.keystrokes
 
-	def OnKeyUp(self, event):
+	def OnKeyUp(self, event) -> None:  # noqa: D102,MAN001
 		self.append_keystroke('-', event.KeyCode)
 
-	def OnKeyDown(self, event):
+	def OnKeyDown(self, event) -> None:  # noqa: D102,MAN001
 		self.append_keystroke('+', event.KeyCode)
 
-	def append_keystroke(self, prefix, code):
+	def append_keystroke(self, prefix, code) -> None:  # noqa: D102
 		print(code)
 
 		if code in self.broken_keys:
@@ -558,13 +558,13 @@ class CaptureKeystrokeDialog(wx.Dialog):
 # end of class CaptureKeystrokeDialog
 
 
-class EditMappingDialog(wx.Dialog):
+class EditMappingDialog(wx.Dialog):  # noqa: D101
 
 	def __init__(
 			self,
 			parent,
 			button_object,
-			id=wx.ID_ANY,
+			id=wx.ID_ANY,  # noqa: A002  # pylint: disable=redefined-builtin
 			pos=wx.DefaultPosition,
 			size=wx.DefaultSize,
 			style=wx.DEFAULT_DIALOG_STYLE,
@@ -650,7 +650,7 @@ class EditMappingDialog(wx.Dialog):
 		self.combo_value.SetValue(self.button.mapping)
 		self.combo_value.SetFocus()
 
-	def __set_properties(self):
+	def __set_properties(self) -> None:
 		# begin wxGlade: EditMappingDialog.__set_properties
 		self.SetTitle("Edit Mapping")
 		self.control_button.SetMinSize((90, -1))
@@ -685,7 +685,7 @@ class EditMappingDialog(wx.Dialog):
 		self.SetTitle(f'Edit Mapping for button "{self.button.id}"')
 		self.Bind(wx.EVT_BUTTON, self.OnApply, id=wx.ID_APPLY)
 
-	def __do_layout(self):
+	def __do_layout(self) -> None:
 		# begin wxGlade: EditMappingDialog.__do_layout
 		outer_sizer = wx.BoxSizer(wx.VERTICAL)
 		main_sizer = wx.BoxSizer(wx.VERTICAL)
@@ -738,10 +738,10 @@ class EditMappingDialog(wx.Dialog):
 		self.btns = self.CreateStdDialogButtonSizer(wx.APPLY | wx.CANCEL)
 		outer_sizer.Add(self.btns, 0, wx.BOTTOM | wx.EXPAND, 5)
 
-	def OnApply(self, event):
+	def OnApply(self, event) -> None:  # noqa: D102,MAN001
 		self.EndModal(wx.ID_APPLY)
 
-	def add_special_key(self, spl_key_str):
+	def add_special_key(self, spl_key_str: str) -> None:  # noqa: D102
 		# Possible values
 		# KEY: MODIFIER, SPECIALKEY or ASCIIKEY
 		# MODIFIER: (each can be prefix with an l or an r for the left / right modifier (no prefix = left)
@@ -753,126 +753,126 @@ class EditMappingDialog(wx.Dialog):
 		self.combo_value.SetInsertionPoint(self.combo_value.GetInsertionPoint() - len(spl_key_str) - 3)
 		self.combo_value.SetFocus()
 
-	def add_button(self, button_id):
+	def add_button(self, button_id) -> None:  # noqa: D102
 		self.combo_value.WriteText(f"button +{button_id} ")
 		self.combo_value.SetFocus()
 
-	def on_add_control(self, event):  # wxGlade: EditMappingDialog.<event_handler>
+	def on_add_control(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: EditMappingDialog.<event_handler>
 		self.add_special_key("ctrl")
 		event.Skip()
 
-	def on_add_alt(self, event):  # wxGlade: EditMappingDialog.<event_handler>
+	def on_add_alt(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: EditMappingDialog.<event_handler>
 		self.add_special_key("alt")
 		event.Skip()
 
-	def on_add_delete(self, event):  # wxGlade: EditMappingDialog.<event_handler>
+	def on_add_delete(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: EditMappingDialog.<event_handler>
 		self.add_special_key("delete")
 		event.Skip()
 
-	def on_add_shift(self, event):  # wxGlade: EditMappingDialog.<event_handler>
+	def on_add_shift(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: EditMappingDialog.<event_handler>
 		self.add_special_key("shift")
 		event.Skip()
 
-	def on_add_left(self, event):  # wxGlade: EditMappingDialog.<event_handler>
+	def on_add_left(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: EditMappingDialog.<event_handler>
 		self.add_special_key("left")
 		event.Skip()
 
-	def on_add_right(self, event):  # wxGlade: EditMappingDialog.<event_handler>
+	def on_add_right(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: EditMappingDialog.<event_handler>
 		self.add_special_key("right")
 		event.Skip()
 
-	def on_add_pgup(self, event):  # wxGlade: EditMappingDialog.<event_handler>
+	def on_add_pgup(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: EditMappingDialog.<event_handler>
 		self.add_special_key("PgUp")
 		event.Skip()
 
-	def on_add_up(self, event):  # wxGlade: EditMappingDialog.<event_handler>
+	def on_add_up(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: EditMappingDialog.<event_handler>
 		self.add_special_key("up")
 		event.Skip()
 
-	def on_add_down(self, event):  # wxGlade: EditMappingDialog.<event_handler>
+	def on_add_down(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: EditMappingDialog.<event_handler>
 		self.add_special_key("down")
 		event.Skip()
 
-	def on_add_pgdown(self, event):  # wxGlade: EditMappingDialog.<event_handler>
+	def on_add_pgdown(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: EditMappingDialog.<event_handler>
 		self.add_special_key("PgDn")
 		event.Skip()
 
-	def on_add_home(self, event):  # wxGlade: EditMappingDialog.<event_handler>
+	def on_add_home(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: EditMappingDialog.<event_handler>
 		self.add_special_key("home")
 		event.Skip()
 
-	def on_add_end(self, event):  # wxGlade: EditMappingDialog.<event_handler>
+	def on_add_end(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: EditMappingDialog.<event_handler>
 		self.add_special_key("end")
 		event.Skip()
 
-	def on_add_super(self, event):  # wxGlade: EditMappingDialog.<event_handler>
+	def on_add_super(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: EditMappingDialog.<event_handler>
 		self.add_special_key("super")
 		event.Skip()
 
-	def on_grab_combo(self, event):  # wxGlade: EditMappingDialog.<event_handler>
+	def on_grab_combo(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: EditMappingDialog.<event_handler>
 		with CaptureKeystrokeDialog(self) as dlg:
 			if dlg.ShowModal():
 				self.combo_value.WriteText(' '.join(dlg.GetKeyCombo()))
 
 		self.combo_value.SetFocus()
 
-	def on_add_backspace(self, event):  # wxGlade: EditMappingDialog.<event_handler>
+	def on_add_backspace(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: EditMappingDialog.<event_handler>
 		self.add_special_key("backspace")
 		event.Skip()
 
-	def on_add_hyper(self, event):  # wxGlade: EditMappingDialog.<event_handler>
+	def on_add_hyper(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: EditMappingDialog.<event_handler>
 		self.add_special_key("hyper")
 		event.Skip()
 
-	def on_add_meta(self, event):  # wxGlade: EditMappingDialog.<event_handler>
+	def on_add_meta(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: EditMappingDialog.<event_handler>
 		self.add_special_key("meta")
 		event.Skip()
 
-	def on_add_esc(self, event):  # wxGlade: EditMappingDialog.<event_handler>
+	def on_add_esc(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: EditMappingDialog.<event_handler>
 		self.add_special_key("esc")
 		event.Skip()
 
-	def on_add_lmb(self, event):  # wxGlade: EditMappingDialog.<event_handler>
+	def on_add_lmb(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: EditMappingDialog.<event_handler>
 		self.add_button(1)
 		event.Skip()
 
-	def on_add_rmb(self, event):  # wxGlade: EditMappingDialog.<event_handler>
+	def on_add_rmb(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: EditMappingDialog.<event_handler>
 		self.add_button(3)
 		event.Skip()
 
-	def on_add_mmb(self, event):  # wxGlade: EditMappingDialog.<event_handler>
+	def on_add_mmb(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: EditMappingDialog.<event_handler>
 		self.add_button(2)
 		event.Skip()
 
-	def on_add_scroll_up(self, event):  # wxGlade: EditMappingDialog.<event_handler>
+	def on_add_scroll_up(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: EditMappingDialog.<event_handler>
 		self.add_button(4)
 		event.Skip()
 
-	def on_add_scroll_down(self, event):  # wxGlade: EditMappingDialog.<event_handler>
+	def on_add_scroll_down(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: EditMappingDialog.<event_handler>
 		self.add_button(5)
 		event.Skip()
 
-	def on_add_scroll_right(self, event):  # wxGlade: EditMappingDialog.<event_handler>
+	def on_add_scroll_right(self, event) -> None:  # noqa: D102  # wxGlade: EditMappingDialog.<event_handler>
 		self.add_button(7)
 		event.Skip()
 
-	def on_add_scroll_left(self, event):  # wxGlade: EditMappingDialog.<event_handler>
+	def on_add_scroll_left(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: EditMappingDialog.<event_handler>
 		self.add_button(6)
 		event.Skip()
 
-	def on_add_mouse_back(self, event):  # wxGlade: EditMappingDialog.<event_handler>
+	def on_add_mouse_back(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: EditMappingDialog.<event_handler>
 		self.add_button(8)
 		event.Skip()
 
-	def on_add_mouse_forward(self, event):  # wxGlade: EditMappingDialog.<event_handler>
+	def on_add_mouse_forward(self, event) -> None:  # noqa: D102  # wxGlade: EditMappingDialog.<event_handler>
 		self.add_button(9)
 		event.Skip()
 
-	def on_add_tab(self, event):  # wxGlade: EditMappingDialog.<event_handler>
+	def on_add_tab(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: EditMappingDialog.<event_handler>
 		self.add_special_key("tab")
 		event.Skip()
 
-	def on_clear_combo(self, event):  # wxGlade: EditMappingDialog.<event_handler>
+	def on_clear_combo(self, event) -> None:  # noqa: D102,MAN001  # wxGlade: EditMappingDialog.<event_handler>
 		self.combo_value.Clear()
 		self.combo_value.SetFocus()
 		event.Skip()
@@ -881,15 +881,15 @@ class EditMappingDialog(wx.Dialog):
 # end of class EditMappingDialog
 
 
-class app(wx.App):
+class app(wx.App):  # noqa: D101
 
-	def OnInit(self):
+	def OnInit(self) -> bool:  # noqa: D102
 		self.GUI = GUI(None, wx.ID_ANY, '')
 		self.SetTopWindow(self.GUI)
 		# self.GUI.Show()
 		return True
 
-	def Show(self, show=True):
+	def Show(self, show=True) -> None:  # noqa: D102
 		self.GUI.Show(show)
 		if show:
 			self.GUI.Raise()
@@ -899,8 +899,8 @@ class app(wx.App):
 
 
 class NewProfileValidator(ValidatorBase):
-	""" This validator is used to ensure that the user has entered something
-		into the text object editor dialog's text field.
+	"""
+	This validator is used to ensure that the user has entered something into the text object editor dialog's text field.
 	"""
 
 	def __init__(self, existing_profiles):
@@ -911,15 +911,16 @@ class NewProfileValidator(ValidatorBase):
 		ValidatorBase.__init__(self)
 		self.existing_profiles = existing_profiles
 
-	def Clone(self):
+	def Clone(self) -> "NewProfileValidator":
 		"""
 		Standard cloner.
 
 		Note that every validator must implement the Clone() method.
 		"""
+
 		return self.__class__(self.existing_profiles)
 
-	def Validate(self, win):
+	def Validate(self, win) -> bool:
 		"""
 		Validate the contents of the given text control.
 		"""

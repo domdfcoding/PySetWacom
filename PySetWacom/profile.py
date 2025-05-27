@@ -26,7 +26,7 @@
 import json
 import os
 import pathlib
-from typing import List
+from typing import Iterator, List
 
 # 3rd party
 from appdirs import user_data_dir  # type: ignore
@@ -40,22 +40,20 @@ __all__ = ["Profile", "get_profiles_list"]
 
 class Profile:
 	"""
-	Models a Profile for mapping the buttons on one or more devices
+	Models a Profile for mapping the buttons on one or more devices.
+
+	:param name:
+	:param devices:
 	"""
 
 	def __init__(self, name: str, devices: List[Device]):
-		"""
-		:param name:
-		:param devices:
-		"""
-
 		self.devices = self._devices = devices
 		self._name = name
 
 	@classmethod
 	def new(cls, name: str) -> "Profile":
 		"""
-		Create a new Profile
+		Create a new Profile.
 
 		:param name: The name of the profile
 		"""
@@ -71,12 +69,12 @@ class Profile:
 				"devices": [dict(device) for device in self.devices],
 				}
 
-	def __iter__(self):
+	def __iter__(self) -> Iterator:
 		yield from self.__dict__().items()
 
-	def save(self):
+	def save(self) -> None:
 		"""
-		Save the Profile
+		Save the Profile.
 		"""
 
 		filename = profiles_dir / f"{self._name}.profile"
@@ -87,7 +85,7 @@ class Profile:
 	@classmethod
 	def load(cls, name: str) -> "Profile":
 		"""
-		Load a profile from file
+		Load a profile from file.
 
 		:param name: The name of the profile to load
 		"""
@@ -104,14 +102,14 @@ class Profile:
 	@property
 	def name(self) -> str:
 		"""
-		Returns the name of the Profile
+		Returns the name of the Profile.
 		"""
 
 		return self._name
 
-	def apply(self):
+	def apply(self) -> None:
 		"""
-		Apply the Profile with xsetwacom
+		Apply the Profile with xsetwacom.
 		"""
 
 		for device in self.devices:
@@ -125,7 +123,7 @@ class Profile:
 
 def get_profiles_list() -> List[str]:
 	"""
-	Returns a list of existing Profiles
+	Returns a list of existing Profiles.
 	"""
 
 	return sorted(profile_file.stem for profile_file in profiles_dir.glob("**/*.profile"))

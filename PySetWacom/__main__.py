@@ -34,7 +34,7 @@ from pid import PidFile, PidFileAlreadyLockedError  # type: ignore
 __all__ = ["main"]
 
 
-def main():
+def main() -> None:  # noqa: D103
 
 	# this package
 	from PySetWacom import TrayIcon

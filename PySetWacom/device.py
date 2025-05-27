@@ -22,7 +22,7 @@
 #  MA 02110-1301, USA.
 #
 # stdlib
-from typing import Dict, List, Optional
+from typing import Dict, Iterator, List, Optional
 
 # 3rd party
 from sh import xsetwacom  # type: ignore
@@ -35,33 +35,31 @@ __all__ = ["Device", "detect_devices"]
 
 class Device:
 	"""
-	Models a Device such as a tablet or stylus
+	Models a Device such as a tablet or stylus.
+
+	:param name: The name of the device
+	:param id: The id of the device
+	:param type:
 	"""
 
-	def __init__(self, name: str, id: str, type):
-		"""
-		:param name: The name of the device
-		:param id: The id of the device
-		:param type:
-		"""
-
+	def __init__(self, name: str, id: str, type):  # noqa: A002  # pylint: disable=redefined-builtin
 		self.name = name
 		self.id = id
 		self.type = type
 		self._buttons: List[Button] = []
 
-	def add_button(self, button: Button):
+	def add_button(self, button: Button) -> None:
 		"""
-		Add the button to the device
+		Add the button to the device.
 
 		:param button:
 		"""
 
 		self._buttons.append(button)
 
-	def add_multiple_buttons(self, button_list: List[Button]):
+	def add_multiple_buttons(self, button_list: List[Button]) -> None:
 		"""
-		Add multiple buttons to the device
+		Add multiple buttons to the device.
 
 		:param button_list:
 		"""
@@ -71,7 +69,7 @@ class Device:
 	@property
 	def buttons(self) -> List[Button]:
 		"""
-		Returns the buttons of the device
+		Returns the buttons of the device.
 		"""
 
 		return self._buttons
@@ -79,7 +77,7 @@ class Device:
 	@classmethod
 	def from_string(cls, raw_string: str) -> Optional["Device"]:
 		"""
-		Create a Device object from a string
+		Create a Device object from a string.
 
 		:param raw_string:
 		"""
@@ -89,16 +87,16 @@ class Device:
 
 		elements = raw_string.split('\t')
 
-		name = elements[0].strip()
-		id = elements[1].strip().replace("id: ", '')
-		type = elements[2].strip().replace("type: ", '')
-
-		return cls(name, id, type)
+		return cls(
+				elements[0].strip(),
+				elements[1].strip().replace("id: ", ''),
+				elements[2].strip().replace("type: ", ''),
+				)
 
 	@classmethod
 	def from_dict(cls, data_dict: Dict) -> "Device":
 		"""
-		Create a Device object from a string
+		Create a Device object from a string.
 
 		:param data_dict:
 		"""
@@ -115,22 +113,22 @@ class Device:
 				"buttons": [dict(button) for button in self.buttons]
 				}
 
-	def __iter__(self):
+	def __iter__(self) -> Iterator:
 		yield from self.__dict__().items()
 
-	def __repr__(self):
+	def __repr__(self) -> str:
 		return f"Device({self.name}\tid: {self.id}\ttype: {self.type})"
 
-	def __str__(self):
+	def __str__(self) -> str:
 		return self.__repr__()
 
-	def __eq__(self, other):
+	def __eq__(self, other) -> bool:
 		return self.name == other.name
 
 
 def detect_devices() -> List[Device]:
 	"""
-	Detect devices connected to this computer
+	Detect devices connected to this computer.
 	"""
 
 	devices_list = (xsetwacom.list()).split('\n')

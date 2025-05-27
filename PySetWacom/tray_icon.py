@@ -36,11 +36,14 @@ from PySetWacom.profile import Profile, get_profiles_list
 __all__ = ["TrayIcon"]
 
 
-class TrayIcon(AppIndicator):
+class TrayIcon(AppIndicator):  # noqa: D101
 
 	def __init__(self):
 		AppIndicator.__init__(
-				self, "PySetWacom-tray", "input-tablet", AppIndicator3.IndicatorCategory.SYSTEM_SERVICES
+				self,
+				"PySetWacom-tray",
+				"input-tablet",
+				AppIndicator3.IndicatorCategory.SYSTEM_SERVICES,
 				)
 
 		self.profiles = get_profiles_list()
@@ -65,7 +68,7 @@ class TrayIcon(AppIndicator):
 
 		self.Show()
 
-	def new_profile_created(self, selected_profile):
+	def new_profile_created(self, selected_profile) -> None:  # noqa: D102,MAN001
 		# Rebuild Menu
 		self.profiles = get_profiles_list()
 		print("##########")
@@ -73,14 +76,14 @@ class TrayIcon(AppIndicator):
 		self.build_profiles_menu()
 		self.menu_item_profile.SetSubMenu(self._profiles_submenu)
 
-	def gui_changed_profile(self, selected_profile):
+	def gui_changed_profile(self, selected_profile) -> None:  # noqa: D102
 		print(f"GUI Changed Profile To {selected_profile}")
 		for profile in self.profile_menu_items:
 			if profile.GetLabel() == selected_profile:
 				print("Selecting profile: " + selected_profile)
 				profile.Check(True)
 
-	def menu_item_activated(self, item: AppIndicatorItem):
+	def menu_item_activated(self, item: AppIndicatorItem) -> None:
 		"""
 		Handler for menu item being selected.
 
@@ -101,7 +104,7 @@ class TrayIcon(AppIndicator):
 			if item.IsChecked():
 				self.select_profile(label)
 
-	def build_profiles_menu(self):
+	def build_profiles_menu(self) -> None:  # noqa: D102
 		self._profiles_submenu = AppIndicatorMenu()
 
 		if self.profiles:
@@ -115,15 +118,15 @@ class TrayIcon(AppIndicator):
 			first_radioitem = self._profiles_submenu.Append(-1, '')
 			self.profile_menu_items = [first_radioitem]
 
-	def build_menu(self):
+	def build_menu(self) -> None:  # noqa: D102
 		item_show = self._menu.Append(item="Show")
 		self.build_profiles_menu()
 		self.menu_item_profile = self._menu.AppendSubMenu(self._profiles_submenu, "Select Profile")
 		item_quit = self._menu.Append(item="Quit")
 
-	def quit(self):
+	def quit(self) -> None:
 		"""
-		Exit the application
+		Exit the application.
 		"""
 
 		Notify.uninit()
@@ -131,18 +134,18 @@ class TrayIcon(AppIndicator):
 		self.app.Destroy()
 		sys.exit(0)
 
-	def show(self):
+	def show(self) -> None:
 		"""
-		Show the PySetWacom GUI
+		Show the PySetWacom GUI.
 		"""
 
 		print("Show")
 		self.app.Show()
 
 	@staticmethod
-	def select_profile(profile_name):
+	def select_profile(profile_name) -> None:
 		"""
-		Select the Profile with the given name
+		Select the Profile with the given name.
 
 		:param profile_name:
 		"""

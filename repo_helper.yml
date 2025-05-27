@@ -24,8 +24,6 @@ console_scripts:
   - "PySetWacom = PySetWacom.__main__:main"
   - "pysetwacom = PySetWacom.__main__:main"
 
-python_deploy_version: 3.6
-
 # Versions to run tests for
 python_versions:
   - '3.6'

@@ -25,7 +25,7 @@
 # stdlib
 import signal
 from enum import Enum
-from typing import Optional
+from typing import Optional, Tuple
 
 # 3rd party
 import gi  # type: ignore
@@ -68,30 +68,30 @@ ItemKind = Literal[
 
 
 class AppIndicatorItem:
+	"""
+	An AppIndicatorItem represents an item in an AppIndicator menu.
+
+	:param parentMenu: Menu that the menu item belongs to.
+		Can be :py:obj:`None` if the item is going to be added to the menu later.
+	:param id: Identifier for this menu item. May be ``ID_SEPARATOR``,
+		in which case the given kind is ignored and taken to be ``ITEM_SEPARATOR`` instead.
+	:param text: Text for the menu item, as shown on the menu. See SetItemLabel for more info.
+	:param help_string: Optional help string that will be shown on the status bar.
+	:param kind: May be ``ITEM_SEPARATOR``, ``ITEM_NORMAL``, ``ITEM_CHECK`` or ``ITEM_RADIO``.
+	:param submenu: If not None, indicates that the menu item is a submenu.
+	:param radiogroup:
+	"""
 
 	def __init__(
 			self,
 			parentMenu: Optional["AppIndicatorMenu"] = None,
-			id: int = wx.ID_SEPARATOR,
+			id: int = wx.ID_SEPARATOR,  # noqa: A002  # pylint: disable=redefined-builtin
 			text: str = '',
 			help_string: str = '',
 			kind: ItemKind = wx.ITEM_NORMAL,
 			submenu: Optional["AppIndicatorMenu"] = None,
 			radiogroup: Optional["AppIndicatorItem"] = None,
 			):
-		"""
-		An AppIndicatorItem represents an item in an AppIndicator menu.
-
-		:param parentMenu: Menu that the menu item belongs to.
-			Can be :py:obj:`None` if the item is going to be added to the menu later.
-		:param id: Identifier for this menu item. May be ``ID_SEPARATOR``,
-			in which case the given kind is ignored and taken to be ``ITEM_SEPARATOR`` instead.
-		:param text: Text for the menu item, as shown on the menu. See SetItemLabel for more info.
-		:param help_string: Optional help string that will be shown on the status bar.
-		:param kind: May be ``ITEM_SEPARATOR``, ``ITEM_NORMAL``, ``ITEM_CHECK`` or ``ITEM_RADIO``.
-		:param submenu: If not None, indicates that the menu item is a submenu.
-		:param radiogroup:
-		"""
 
 		self._id: int = int(id)
 		self._label: str = str(text)
@@ -120,7 +120,7 @@ class AppIndicatorItem:
 	# def on_click(self, source):
 	# 	pass
 
-	def Check(self, check: bool = True):
+	def Check(self, check: bool = True) -> None:
 		"""
 		Checks or unchecks the menu item.
 
@@ -131,7 +131,7 @@ class AppIndicatorItem:
 
 		self._gtkitem.set_active(check)
 
-	def Enable(self, enable: bool = True):
+	def Enable(self, enable: bool = True) -> None:
 		"""
 		Enables or disables the menu item.
 
@@ -156,34 +156,31 @@ class AppIndicatorItem:
 
 	def GetLabel(self) -> str:
 		"""
-		Returns the text associated with the menu item
+		Returns the text associated with the menu item.
 		"""
 
 		return self._text
 
 	def GetKind(self) -> wx.ItemKind:
 		"""
-		Returns the item kind, one of wxITEM_SEPARATOR, wxITEM_NORMAL,
-		wxITEM_CHECK or wxITEM_RADIO.
+		Returns the item kind, one of wxITEM_SEPARATOR, wxITEM_NORMAL, wxITEM_CHECK or wxITEM_RADIO.
 		"""
 
 		return self._kind
 
-	def GetMenu(self):
+	def GetMenu(self) -> wx.Menu:
 		"""
-		Returns the menu this menu item is in, or NULL if this menu item is
-		not attached.
+		Returns the menu this menu item is in, or :py:obj:`None` if this menu item is not attached.
 		"""
-		# TODO
-		return Menu  # type: ignore
 
-	def GetSubMenu(self):
-		"""
-		Returns the submenu associated with the menu item, or NULL if there
-		isn't one.
-		"""
 		# TODO
-		return Menu  # type: ignore
+
+	def GetSubMenu(self) -> wx.Menu:
+		"""
+		Returns the submenu associated with the menu item, or :py:obj:`None` if there isn't one.
+		"""
+
+		# TODO
 
 	def IsCheck(self) -> bool:
 		"""
@@ -238,14 +235,14 @@ class AppIndicatorItem:
 		# TODO
 		return False
 
-	def SetHelp(self, help_string: str):
+	def SetHelp(self, help_string: str):  # noqa: MAN002
 		"""
 		Sets the help string.
 		"""
-		# TODO
-		pass
 
-	def SetItemLabel(self, label: str):
+		# TODO
+
+	def SetItemLabel(self, label: str) -> None:
 		"""
 		Sets the label associated with the menu item.
 
@@ -254,14 +251,13 @@ class AppIndicatorItem:
 
 		self._gtkitem.set_label(label)
 
-	def SetMenu(self, menu):
+	def SetMenu(self, menu):  # noqa: MAN002,MAN001
 		"""
 		Sets the parent menu which will contain this menu item.
 		"""
 		# TODO
-		pass
 
-	def SetSubMenu(self, menu: "AppIndicatorMenu"):
+	def SetSubMenu(self, menu: "AppIndicatorMenu") -> None:
 		"""
 		Sets the submenu of this menu item.
 
@@ -271,68 +267,68 @@ class AppIndicatorItem:
 		self._gtkitem.set_submenu(menu._gtk_menu)
 
 	@property
-	def Enabled(self):
+	def Enabled(self) -> bool:  # noqa: D102
 		return self.IsEnabled()
 
 	@Enabled.setter
-	def Enabled(self, value):
+	def Enabled(self, value: bool) -> None:
 		self.Enable(value)
 
 	@property
-	def Help(self):
+	def Help(self) -> str:  # noqa: D102
 		return self.GetHelp()
 
 	@Help.setter
-	def Help(self, value):
+	def Help(self, value: str) -> None:
 		self.SetHelp(value)
 
 	@property
-	def Id(self):
+	def Id(self) -> int:  # noqa: D102
 		return self.GetId()
 
 	@property
-	def ItemLabel(self):
+	def ItemLabel(self) -> str:  # noqa: D102
 		return self.GetLabel()
 
 	@ItemLabel.setter
-	def ItemLabel(self, value):
+	def ItemLabel(self, value) -> None:
 		self.SetItemLabel(value)
 
 	@property
-	def ItemLabelText(self):
+	def ItemLabelText(self) -> str:  # noqa: D102
 		return self.GetLabel()
 
 	@property
-	def Kind(self):
+	def Kind(self) -> wx.ItemKind:  # noqa: D102
 		return self.GetKind()
 
 	@property
-	def Menu(self):
+	def Menu(self) -> wx.Menu:  # noqa: D102
 		return self.GetMenu()
 
 	@Menu.setter
-	def Menu(self, value):
+	def Menu(self, value) -> None:
 		self.SetMenu(value)
 
 	@property
-	def SubMenu(self):
+	def SubMenu(self) -> None:  # noqa: D102
 		return self.GetSubMenu()
 
 	@SubMenu.setter
-	def SubMenu(self, value):
+	def SubMenu(self, value: "AppIndicatorMenu") -> None:
 		self.SetSubMenu(value)
 
 
 class AppIndicator:
+	"""
+	Constructs an AppIndicator object.
 
-	def __init__(self, id, icon_name, category):
-		"""
-		Constructs an AppIndicator object.
+	An AppIndicator is a n icon with a popup (or pull down) menu with a list
+	of items, one of which may be selected before the menu goes away
+	(clicking elsewhere dismisses the menu).
+	"""
 
-		An AppIndicator is a n icon with a popup (or pull down) menu with a list
-		of items, one of which may be selected before the menu goes away
-		(clicking elsewhere dismisses the menu).
-		"""
+	def __init__(self, id: str, icon_name: str, category: str):  # noqa: A002  # pylint: disable=redefined-builtin
 
 		self._menu = AppIndicatorMenu()
 
@@ -344,11 +340,11 @@ class AppIndicator:
 		signal.signal(signal.SIGINT, signal.SIG_DFL)
 		Notify.init(id)
 
-	def Show(self):
+	def Show(self) -> None:  # noqa: D102
 		Gtk.main()
 
 
-class AppIndicatorMenu:
+class AppIndicatorMenu:  # noqa: D101
 
 	def __init__(self):
 
@@ -357,7 +353,7 @@ class AppIndicatorMenu:
 
 	def Append(
 			self,
-			id: int = wx.ID_ANY,
+			id: int = wx.ID_ANY,  # noqa: A002  # pylint: disable=redefined-builtin
 			item: str = '',
 			help_string: str = '',
 			kind: ItemKind = wx.ITEM_NORMAL,
@@ -382,7 +378,7 @@ class AppIndicatorMenu:
 
 		return _item
 
-	def AppendMenuItem(self, menuItem):
+	def AppendMenuItem(self, menuItem: wx.MenuItem) -> None:
 		"""
 		Adds a menu item object.
 
@@ -394,7 +390,7 @@ class AppIndicatorMenu:
 		self._gtk_menu.show_all()
 		menuItem._gtkitem.connect("activate", self.on_item_activated)
 
-	def on_item_activated(self, source):
+	def on_item_activated(self, source) -> wx.MenuItem:  # noqa: D102
 
 		# Find the AppIndicatorItem object that contains the item that was activated
 		for item in self._gtk_menu_items:
@@ -402,7 +398,7 @@ class AppIndicatorMenu:
 				pub.sendMessage("menu_item_activated", item=item)
 				break
 
-	def AppendCheckItem(self, id: int, item: str, help_string: str = '') -> AppIndicatorItem:
+	def AppendCheckItem(self, id: int, item: str, help_string: str = '') -> AppIndicatorItem:  # noqa: A002  # pylint: disable=redefined-builtin
 		"""
 		Adds a checkable item to the end of the menu.
 
@@ -415,9 +411,9 @@ class AppIndicatorMenu:
 
 	def AppendRadioItem(
 			self,
-			id: int,
+			id: int,  # noqa: A002  # pylint: disable=redefined-builtin
 			item: str,
-			help: str = '',
+			help: str = '',  # noqa: A002  # pylint: disable=redefined-builtin
 			group: Optional[AppIndicatorItem] = None
 			) -> AppIndicatorItem:
 		"""
@@ -435,8 +431,6 @@ class AppIndicatorMenu:
 	def AppendSeparator(self) -> AppIndicatorItem:
 		"""
 		Adds a separator to the end of the menu.
-
-		:return:
 		"""
 
 		return self.Append(id=wx.ID_ANY, kind=wx.ITEM_SEPARATOR)
@@ -448,8 +442,6 @@ class AppIndicatorMenu:
 		:param submenu:
 		:param text:
 		:param help_string:
-
-		:return:
 		"""
 
 		_item = AppIndicatorItem(self, text=text, help_string=help_string, submenu=submenu)
@@ -457,10 +449,8 @@ class AppIndicatorMenu:
 
 		return _item
 
-	def Check(self, id: int, check: bool) -> None:
+	def Check(self, id: int, check: bool) -> None:  # noqa: A002  # pylint: disable=redefined-builtin
 		"""
-		Check(id, check)
-
 		Checks or unchecks the menu item.
 
 		:param id: The menu item identifier.
@@ -477,7 +467,8 @@ class AppIndicatorMenu:
 		Delete(item) -> bool
 
 		Deletes the menu item from the menu.
-		"""
+		"""  # noqa: D400,D402
+
 		return False
 
 	def DestroyItem(self, *__args) -> bool:
@@ -486,13 +477,12 @@ class AppIndicatorMenu:
 		DestroyItem(item) -> bool
 
 		Deletes the menu item from the menu.
-		"""
+		"""  # noqa: D400,D402
+
 		return False
 
-	def Enable(self, id: int, enable: bool):
+	def Enable(self, id: int, enable: bool) -> None:  # noqa: A002  # pylint: disable=redefined-builtin
 		"""
-		Enable(id, enable)
-
 		Enables or disables (greys out) a menu item.
 
 		:param id: The menu item identifier.
@@ -503,12 +493,9 @@ class AppIndicatorMenu:
 			if item.id == id:
 				item.Enable(enable)
 
-	def FindChildItem(self, id: int):
+	def FindChildItem(self, id: int) -> Tuple[wx.MenuItem, int]:  # noqa: A002  # pylint: disable=redefined-builtin
 		"""
-		FindChildItem(id) -> (MenuItem, pos)
-
-		Finds the menu item object associated with the given menu item
-		identifier and, optionally, the position of the item in the menu.
+		Finds the menu item object associated with the given menu item identifier and, optionally, the position of the item in the menu.
 
 		:param id: The identifier of the menu item to find.
 		"""
@@ -516,6 +503,8 @@ class AppIndicatorMenu:
 		for index, item in enumerate(self._gtk_menu_items):
 			if item.id == id:
 				return item, index
+
+		raise IndexError
 
 	def FindItem(self, itemString: str) -> int:
 		"""
@@ -527,7 +516,7 @@ class AppIndicatorMenu:
 		:param itemString: Menu item string to find.
 
 		:return: Menu item identifier, or wx.NOT_FOUND if none is found.
-		"""
+		"""  # noqa: D400,D402
 
 		for index, item in enumerate(self._gtk_menu_items):
 			if item.label == itemString:
@@ -535,10 +524,9 @@ class AppIndicatorMenu:
 
 		return wx.NOT_FOUND
 
-	def FindItemById(self, id: int):
+	def FindItemById(self, id: int) -> wx.MenuItem:  # noqa: A002  # pylint: disable=redefined-builtin
 		"""
-		Finds the menu item object associated with the given menu item
-		identifier.
+		Finds the menu item object associated with the given menu item identifier.
 
 		:param id: Menu item identifier.
 		"""
@@ -547,10 +535,8 @@ class AppIndicatorMenu:
 			if item.id == id:
 				return item
 
-	def FindItemByPosition(self, position: int):
+	def FindItemByPosition(self, position: int) -> wx.MenuItem:
 		"""
-		FindItemByPosition(position) -> MenuItem
-
 		Returns the wxMenuItem given a position in the menu.
 
 		:param position:
@@ -560,7 +546,7 @@ class AppIndicatorMenu:
 			if index == position:
 				return item
 
-	def GetHelpString(self, id: int) -> str:
+	def GetHelpString(self, id: int) -> str:  # noqa: A002  # pylint: disable=redefined-builtin
 		"""
 		Returns the help string associated with a menu item.
 
@@ -571,14 +557,12 @@ class AppIndicatorMenu:
 
 		return self.FindItemById(id).GetHelp()
 
-	def GetInvokingWindow(self):
-		"""
-		GetInvokingWindow() -> Window
-		"""
-		# TODO
-		return Window  # type: ignore
+	def GetInvokingWindow(self) -> wx.Window:  # noqa: D102
 
-	def GetLabel(self, id: int) -> str:
+		# TODO
+		pass
+
+	def GetLabel(self, id: int) -> str:  # noqa: A002  # pylint: disable=redefined-builtin
 		"""
 		Returns a menu item label.
 
@@ -596,215 +580,173 @@ class AppIndicatorMenu:
 
 		return len(self._gtk_menu_items)
 
-	def GetMenuItems(self):
+	def GetMenuItems(self) -> wx.MenuItemList:
 		"""
-		GetMenuItems() -> MenuItemList
-
 		Returns the list of items in the menu.
 		"""
 
 		return self._gtk_menu_items
 
-	def GetParent(self):
-		"""
-		GetParent() -> Menu
-		"""
-
+	def GetParent(self) -> wx.Menu:  # noqa: D102
 		# TODO
-		return Menu  # type: ignore
+		pass
 
-	def GetStyle(self):
-		"""
-		GetStyle() -> long
-		"""
-
-		# TODo
+	def GetStyle(self) -> int:  # noqa: D102
+		# TODO
 		return 0
 
-	def GetWindow(self):
-		"""
-		GetWindow() -> Window
-		"""
+	def GetWindow(self) -> wx.Window:  # noqa: D102
+		pass
 
-		return Window  # type: ignore
-
-	def Insert(self, pos, *__args):
+	def Insert(self, pos, *__args) -> wx.MenuItem:
 		"""
 		Insert(pos, menuItem) -> MenuItem
 		Insert(pos, id, item=EmptyString, help_string=EmptyString, kind=ITEM_NORMAL) -> MenuItem
 		Insert(pos, id, text, submenu, help=EmptyString) -> MenuItem
 
 		Inserts the given item before the position pos.
-		"""
-		return MenuItem  # type: ignore
+		"""  # noqa: D400,D402
 
-	def InsertCheckItem(self, pos, id, item, help_string=None):
+	def InsertCheckItem(self, pos, id, item, help_string: Optional[str] = None) -> wx.MenuItem:  # noqa: A002,MAN001  # pylint: disable=redefined-builtin
 		"""
-		InsertCheckItem(pos, id, item, help_string=EmptyString) -> MenuItem
-
 		Inserts a checkable item at the given position.
-		"""
-		return MenuItem  # type: ignore
 
-	def InsertItem(*args, **kw):  # reliably restored by inspect
-		# no doc
+		:param pos:
+		:param id:
+		:param item:
+		:param help_string:
+		"""
+
+	def InsertItem(*args, **kw):  # noqa: D102,MAN002
 		pass
 
-	def InsertMenu(*args, **kw):  # reliably restored by inspect
-		# no doc
+	def InsertMenu(*args, **kw):  # noqa: D102,MAN002
 		pass
 
-	def InsertRadioItem(self, pos, id, item, help_string=None):
+	def InsertRadioItem(self, pos, id, item, help_string: Optional[str] = None) -> wx.MenuItem:  # noqa: A002,MAN001  # pylint: disable=redefined-builtin
 		"""
-		InsertRadioItem(pos, id, item, help_string=EmptyString) -> MenuItem
-
 		Inserts a radio item at the given position.
-		"""
-		return MenuItem  # type: ignore
 
-	def InsertSeparator(self, pos):
+		:param pos:
+		:param id:
+		:param item:
+		:param help_string:
 		"""
-		InsertSeparator(pos) -> MenuItem
 
+	def InsertSeparator(self, pos) -> wx.MenuItem:  # noqa: MAN001
+		"""
 		Inserts a separator at the given position.
 		"""
-		return MenuItem  # type: ignore
 
-	def IsAttached(self):
-		"""
-		IsAttached() -> bool
-		"""
-
+	def IsAttached(self) -> bool:  # noqa: D102
 		return False
 
-	def IsChecked(self, id):
+	def IsChecked(self, id: int) -> bool:  # noqa: A002  # pylint: disable=redefined-builtin
 		"""
-		IsChecked(id) -> bool
-
 		Determines whether a menu item is checked.
 		"""
 
 		return False
 
-	def IsEnabled(self, id):
+	def IsEnabled(self, id: int) -> bool:  # noqa: A002  # pylint: disable=redefined-builtin
 		"""
-		IsEnabled(id) -> bool
-
 		Determines whether a menu item is enabled.
 		"""
 
 		return False
 
-	def Prepend(self, *__args):
+	def Prepend(self, *__args) -> wx.MenuItem:
 		"""
 		Prepend(menuItem) -> MenuItem
 		Prepend(id, item=EmptyString, help_string=EmptyString, kind=ITEM_NORMAL) -> MenuItem
 		Prepend(id, text, submenu, help=EmptyString) -> MenuItem
 
-		Inserts the given item at position 0, i.e. before all the other
-		existing items.
+		Inserts the given item at position 0, i.e. before all the other existing items.
+		"""  # noqa: D400,D402
+
+	def PrependCheckItem(self, id, item, help_string: Optional[str] = None) -> wx.MenuItem:  # noqa: A002,MAN001  # pylint: disable=redefined-builtin
 		"""
-
-		return MenuItem  # type: ignore
-
-	def PrependCheckItem(self, id, item, help_string=None):
-		"""
-		PrependCheckItem(id, item, help_string=EmptyString) -> MenuItem
-
 		Inserts a checkable item at position 0.
+
+		:param id:
+		:param item:
+		:param help_string:
 		"""
 
-		return MenuItem  # type: ignore
-
-	def PrependItem(*args, **kw):  # reliably restored by inspect
-		# no doc
+	def PrependItem(*args, **kw):  # noqa: D102,MAN002
 		pass
 
-	def PrependMenu(*args, **kw):  # reliably restored by inspect
-		# no doc
+	def PrependMenu(*args, **kw):  # noqa: D102,MAN002
 		pass
 
-	def PrependRadioItem(self, id, item, help_string=None):
+	def PrependRadioItem(self, id, item, help_string: Optional[str] = None) -> wx.MenuItem:  # noqa: A002,MAN001  # pylint: disable=redefined-builtin
 		"""
-		PrependRadioItem(id, item, help_string=EmptyString) -> MenuItem
-
 		Inserts a radio item at position 0.
+
+		:param id:
+		:param item:
+		:param help_string:
 		"""
 
-		return MenuItem  # type: ignore
-
-	def PrependSeparator(self):
+	def PrependSeparator(self) -> wx.MenuItem:
 		"""
-		PrependSeparator() -> MenuItem
-
 		Inserts a separator at position 0.
 		"""
 
-		return MenuItem  # type: ignore
-
-	def Remove(self, *__args):
+	def Remove(self, *__args) -> wx.MenuItem:
 		"""
 		Remove(id) -> MenuItem
 		Remove(item) -> MenuItem
 
-		Removes the menu item from the menu but doesn't delete the associated
-		C++ object.
-		"""
+		Removes the menu item from the menu but doesn't delete the associated C++ object.
+		"""  # noqa: D402,D400
 
-		return MenuItem  # type: ignore
-
-	def RemoveItem(*args, **kw):  # reliably restored by inspect
-		# no doc
+	def RemoveItem(*args, **kw):  # noqa: D102,MAN002
 		pass
 
-	def RemoveMenu(*args, **kw):  # reliably restored by inspect
-		# no doc
+	def RemoveMenu(*args, **kw):  # noqa: D102,MAN002
 		pass
 
-	def SetHelpString(self, id, help_string):
+	def SetHelpString(self, id, help_string):  # noqa: A002,MAN002,MAN001  # pylint: disable=redefined-builtin
 		"""
-		SetHelpString(id, help_string)
-
 		Sets an item's help string.
+
+		:param id:
+		:param help_string:
 		"""
 
-	def SetInvokingWindow(self, win):
-		"""
-		SetInvokingWindow(win)
-		"""
+	def SetInvokingWindow(self, win):  # noqa: D102,MAN002,MAN001
+		pass
 
-	def SetLabel(self, id, label):
+	def SetLabel(self, id, label):  # noqa: A002,MAN002,MAN001  # pylint: disable=redefined-builtin
 		"""
-		SetLabel(id, label)
-
 		Sets the label of a menu item.
+
+		:param id:
+		:param label:
 		"""
 
-	def SetParent(self, parent):
-		"""
-		SetParent(parent)
-		"""
+	def SetParent(self, parent):  # noqa: D102,MAN002,MAN001
+		pass
 
-	def SetTitle(self, title):
+	def SetTitle(self, title):  # noqa: MAN002,MAN001
 		"""
-		SetTitle(title)
-
 		Sets the title of the menu.
+
+		:param title:
 		"""
+
+	def TryAfter(self, *args, **kwargs):  # noqa: D102,MAN002
 		pass
 
-	def TryAfter(self, *args, **kwargs):
+	def TryBefore(self, *args, **kwargs):  # noqa: D102,MAN002
 		pass
 
-	def TryBefore(self, *args, **kwargs):
-		pass
-
-	def UpdateUI(self, source=None):
+	def UpdateUI(self, source=None):  # noqa: MAN002,MAN001
 		"""
-		UpdateUI(source=None)
+		Sends events to source (or owning window if NULL) to update the menu UI.
 
-		Sends events to source (or owning window if NULL) to update the menu
-		UI.
+		:param source:
 		"""
 
 	InvokingWindow = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default

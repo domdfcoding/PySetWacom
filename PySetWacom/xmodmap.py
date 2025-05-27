@@ -62,7 +62,7 @@ overrides = {
 		}
 
 
-def apply_overrides():
+def apply_overrides() -> None:  # noqa: D103
 	print("Applying xmodmap overrides")
 	for key, value in overrides.items():
 		os.system(f"xmodmap  -e 'keycode  {key} = {' '.join([str(x) for x in value])}'")

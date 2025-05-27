@@ -22,7 +22,7 @@
 #  MA 02110-1301, USA.
 #
 # stdlib
-from typing import Dict, List, Optional
+from typing import Dict, Iterator, List, Optional
 
 # 3rd party
 from sh import xsetwacom  # type: ignore
@@ -32,22 +32,20 @@ __all__ = ["Button", "get_mappings"]
 
 class Button:
 	"""
-	Models a button on a tablet or stylus
+	Models a button on a tablet or stylus.
+
+	:param id: The id of the button
+	:param mapping: The mapping of the button
 	"""
 
-	def __init__(self, id: int, mapping: str):
-		"""
-		:param id: The id of the button
-		:param mapping: The mapping of the button
-		"""
-
+	def __init__(self, id: int, mapping: str):  # noqa: A002  # pylint: disable=redefined-builtin
 		self.id = id
 		self.mapping = mapping
 
 	@classmethod
 	def from_string(cls, raw_string: str) -> Optional["Button"]:
 		"""
-		Create a Button object from a string
+		Create a Button object from a string.
 
 		:param raw_string:
 		"""
@@ -56,15 +54,12 @@ class Button:
 			return None
 
 		elements = (raw_string.strip('"').split('" "'))
-		id = elements[0]
-		mapping = elements[1]
-
-		return cls(int(id), mapping)
+		return cls(int(elements[0]), elements[1])
 
 	@classmethod
 	def from_dict(cls, data_dict: Dict) -> "Button":
 		"""
-		Create a Button object from a string
+		Create a Button object from a string.
 
 		:param data_dict:
 		"""
@@ -77,19 +72,19 @@ class Button:
 				"mapping": self.mapping,
 				}
 
-	def __iter__(self):
+	def __iter__(self) -> Iterator:
 		yield from self.__dict__().items()
 
-	def __repr__(self):
+	def __repr__(self) -> str:
 		return f"Button({self.id} --> {self.mapping})"
 
-	def __str__(self):
+	def __str__(self) -> str:
 		return f"{self.id} --> {self.mapping}"
 
 
 def get_mappings(device_name: str) -> List[Button]:
 	"""
-	Return the mappings for the device with the given name
+	Return the mappings for the device with the given name.
 
 	:param device_name:
 	"""
