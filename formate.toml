@@ -33,6 +33,7 @@ known_third_party = [
     "domdf_wxpython_tools",
     "github",
     "pid",
+    "platformdirs",
     "pygobject",
     "pypubsub",
     "requests",
