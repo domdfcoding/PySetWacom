@@ -4,83 +4,95 @@ PySetWacom
 
 .. start shields
 
-.. list-table::
-	:stub-columns: 1
-	:widths: 10 90
+.. only:: html
 
-	* - Docs
-	  - |docs| |docs_check|
-	* - Tests
-	  - |travis| |codefactor| |pre_commit_ci|
-	* - PyPI
-	  - |pypi-version| |supported-versions| |supported-implementations| |wheel|
-	* - Activity
-	  - |commits-latest| |commits-since| |maintained|
-	* - Other
-	  - |license| |language| |requires| |pre_commit|
+	.. list-table::
+		:stub-columns: 1
+		:widths: 10 90
 
-.. |docs| rtfd-shield::
-	:project: pysetwacom
-	:alt: Documentation Build Status
+		* - Docs
+		  - |docs| |docs_check|
+		* - Tests
+		  - |actions_linux|
+		* - PyPI
+		  - |pypi-version| |supported-versions| |supported-implementations| |wheel|
+		* - Activity
+		  - |commits-latest| |commits-since| |maintained| |pypi-downloads|
+		* - QA
+		  - |codefactor| |actions_flake8| |actions_mypy|
+		* - Other
+		  - |license| |language| |requires|
 
-.. |docs_check| actions-shield::
-	:workflow: Docs Check
-	:alt: Docs Check Status
+	.. |docs| rtfd-shield::
+		:project: pysetwacom
+		:alt: Documentation Build Status
 
-.. |travis| actions-shield::
-	:workflow: Linux Tests
-	:alt: Linux Test Status
+	.. |docs_check| actions-shield::
+		:workflow: Docs Check
+		:alt: Docs Check Status
 
-.. |requires| requires-io-shield::
-	:alt: Requirements Status
+	.. |actions_linux| actions-shield::
+		:workflow: Linux
+		:alt: Linux Test Status
 
-.. |codefactor| codefactor-shield::
-	:alt: CodeFactor Grade
+	.. |actions_flake8| actions-shield::
+		:workflow: Flake8
+		:alt: Flake8 Status
 
-.. |pypi-version| pypi-shield::
-	:project: PySetWacom
-	:version:
-	:alt: PyPI - Package Version
+	.. |actions_mypy| actions-shield::
+		:workflow: mypy
+		:alt: mypy status
 
-.. |supported-versions| pypi-shield::
-	:project: PySetWacom
-	:py-versions:
-	:alt: PyPI - Supported Python Versions
+	.. |requires| image:: https://dependency-dash.repo-helper.uk/github/domdfcoding/PySetWacom/badge.svg
+		:target: https://dependency-dash.repo-helper.uk/github/domdfcoding/PySetWacom/
+		:alt: Requirements Status
 
-.. |supported-implementations| pypi-shield::
-	:project: PySetWacom
-	:implementations:
-	:alt: PyPI - Supported Implementations
+	.. |codefactor| codefactor-shield::
+		:alt: CodeFactor Grade
 
-.. |wheel| pypi-shield::
-	:project: PySetWacom
-	:wheel:
-	:alt: PyPI - Wheel
+	.. |pypi-version| pypi-shield::
+		:project: PySetWacom
+		:version:
+		:alt: PyPI - Package Version
 
-.. |license| github-shield::
-	:license:
-	:alt: License
+	.. |supported-versions| pypi-shield::
+		:project: PySetWacom
+		:py-versions:
+		:alt: PyPI - Supported Python Versions
 
-.. |language| github-shield::
-	:top-language:
-	:alt: GitHub top language
+	.. |supported-implementations| pypi-shield::
+		:project: PySetWacom
+		:implementations:
+		:alt: PyPI - Supported Implementations
 
-.. |commits-since| github-shield::
-	:commits-since: v0.1.8
-	:alt: GitHub commits since tagged version
+	.. |wheel| pypi-shield::
+		:project: PySetWacom
+		:wheel:
+		:alt: PyPI - Wheel
 
-.. |commits-latest| github-shield::
-	:last-commit:
-	:alt: GitHub last commit
+	.. |license| github-shield::
+		:license:
+		:alt: License
 
-.. |maintained| maintained-shield:: 2020
-	:alt: Maintenance
+	.. |language| github-shield::
+		:top-language:
+		:alt: GitHub top language
 
-.. |pre_commit| pre-commit-shield::
-	:alt: pre-commit
+	.. |commits-since| github-shield::
+		:commits-since: v0.1.8
+		:alt: GitHub commits since tagged version
 
-.. |pre_commit_ci| pre-commit-ci-shield::
-	:alt: pre-commit.ci status
+	.. |commits-latest| github-shield::
+		:last-commit:
+		:alt: GitHub last commit
+
+	.. |maintained| maintained-shield:: 2025
+		:alt: Maintenance
+
+	.. |pypi-downloads| pypi-shield::
+		:project: PySetWacom
+		:downloads: month
+		:alt: PyPI - Downloads
 
 .. end shields
 
@@ -173,10 +185,18 @@ https://wiki.archlinux.org/index.php/Wacom_tablet
 	contributing
 	Source
 
+.. sidebar-links::
+	:caption: Links
+	:github:
+	:pypi: PySetWacom
+
+
 .. start links
 
-View the :ref:`Function Index <genindex>` or browse the `Source Code <_modules/index.html>`__.
+.. only:: html
 
-`Browse the GitHub Repository <https://github.com/domdfcoding/PySetWacom>`__
+	View the :ref:`Function Index <genindex>` or browse the `Source Code <_modules/index.html>`__.
+
+	:github:repo:`Browse the GitHub Repository <domdfcoding/PySetWacom>`
 
 .. end links

@@ -7,14 +7,18 @@ import os
 import re
 import sys
 
-sys.path.append(os.path.abspath('.'))
-sys.path.append(os.path.abspath(".."))
+# 3rd party
+from sphinx_pyproject import SphinxConfig
+
+sys.path.append('.')
+
+config = SphinxConfig(globalns=globals())
+project = config["project"]
+author = config["author"]
+documentation_summary = config.description
 
 # stdlib
 import shutil
-
-# this package
-from __pkginfo__ import __version__
 
 for image in os.listdir("../images"):
 	s = os.path.join("../images", image)
@@ -24,60 +28,24 @@ for image in os.listdir("../images"):
 	else:
 		shutil.copy2(s, d)
 
-github_username = "domdfcoding"
-github_repository = "PySetWacom"
-github_url = f"https://github.com/{github_username}/{github_repository}"
+github_url = "https://github.com/{github_username}/{github_repository}".format_map(config)
 
 rst_prolog = f""".. |pkgname| replace:: PySetWacom
 .. |pkgname2| replace:: ``PySetWacom``
 .. |browse_github| replace:: `Browse the GitHub Repository <{github_url}>`__
 """
 
-author = "Dominic Davis-Foster"
-project = "PySetWacom"
 slug = re.sub(r'\W+', '-', project.lower())
-release = version = __version__
-copyright = "2020 Dominic Davis-Foster"  # pylint: disable=redefined-builtin
-language = "en"
-package_root = "PySetWacom"
+release = version = config.version
 
-extensions = [
-		"sphinx_toolbox",
-		"sphinx_toolbox.more_autodoc",
-		"sphinx_toolbox.more_autosummary",
-		"sphinx_toolbox.tweaks.param_dash",
-		"sphinx.ext.intersphinx",
-		"sphinx.ext.mathjax",
-		"sphinxcontrib.httpdomain",
-		"sphinxcontrib.extras_require",
-		"sphinx.ext.todo",
-		"sphinxemoji.sphinxemoji",
-		"notfound.extension",
-		"sphinx_copybutton",
-		"sphinxcontrib.default_values",
-		"sphinxcontrib.toctree_plus",
-		"seed_intersphinx_mapping",
-		]
-
-sphinxemoji_style = "twemoji"
-todo_include_todos = bool(os.environ.get("SHOW_TODOS", 0))
-gitstamp_fmt = "%d %b %Y"
-
-templates_path = ["_templates"]
-html_static_path = ["_static"]
-source_suffix = ".rst"
-exclude_patterns = []
-
-master_doc = "index"
-suppress_warnings = ["image.nonlocal_uri"]
-pygments_style = "default"
+sphinx_builder = os.environ.get("SPHINX_BUILDER", "html").lower()
+todo_include_todos = int(os.environ.get("SHOW_TODOS", 0)) and sphinx_builder != "latex"
 
 intersphinx_mapping = {
 		"python": ("https://docs.python.org/3/", None),
 		"sphinx": ("https://www.sphinx-doc.org/en/stable/", None),
 		}
 
-html_theme = "furo"
 html_theme_options = {
 		"light_css_variables": {
 				"toc-title-font-size": "12pt",
@@ -90,8 +58,6 @@ html_theme_options = {
 				"admonition-font-size": "12pt",
 				},
 		}
-html_theme_path = ["../.."]
-html_show_sourcelink = True  # True will show link to source
 
 html_context = {}
 htmlhelp_basename = slug
@@ -100,51 +66,45 @@ latex_documents = [("index", f'{slug}.tex', project, author, "manual")]
 man_pages = [("index", slug, project, [author], 1)]
 texinfo_documents = [("index", slug, project, author, slug, project, "Miscellaneous")]
 
-toctree_plus_types = {
-		"class",
-		"function",
-		"method",
-		"data",
-		"enum",
-		"flag",
-		"confval",
-		"directive",
-		"role",
-		"confval",
-		"protocol",
-		"typeddict",
-		"namedtuple",
-		"exception",
-		}
+toctree_plus_types = set(config["toctree_plus_types"])
 
-add_module_names = False
-hide_none_rtype = True
-all_typevars = True
-overloads_location = "bottom"
-
-
-autodoc_exclude_members = [   # Exclude "standard" methods.
-		"__dict__",
-		"__class__",
-		"__dir__",
-		"__weakref__",
-		"__module__",
-		"__annotations__",
-		"__orig_bases__",
-		"__parameters__",
-		"__subclasshook__",
-		"__init_subclass__",
-		"__attrs_attrs__",
-		"__init__",
-		"__new__",
-		"__getnewargs__",
-		"__abstractmethods__",
-		"__hash__",
-		]
 autodoc_default_options = {
 		"members": None,  # Include all members (methods).
 		"special-members": None,
 		"autosummary": None,
 		"show-inheritance": None,
-		"exclude-members": ','.join(autodoc_exclude_members),
+		"exclude-members": ','.join(config["autodoc_exclude_members"]),
 		}
+
+latex_elements = {
+		"printindex": "\\begin{flushleft}\n\\printindex\n\\end{flushleft}",
+		"tableofcontents": "\\pdfbookmark[0]{\\contentsname}{toc}\\sphinxtableofcontents",
+		}
+
+
+# Fix for pathlib issue with sphinxemoji on Python 3.9 and Sphinx 4.x
+def copy_asset_files(app, exc):
+	# 3rd party
+	from domdf_python_tools.compat import importlib_resources
+	from sphinx.util.fileutil import copy_asset
+
+	if exc:
+		return
+
+	asset_files = ["twemoji.js", "twemoji.css"]
+	for path in asset_files:
+		path_str = os.fspath(importlib_resources.files("sphinxemoji") / path)
+		copy_asset(path_str, os.path.join(app.outdir, "_static"))
+
+
+def setup(app):
+	# 3rd party
+	from sphinx_toolbox.latex import better_header_layout
+	from sphinxemoji import sphinxemoji
+
+	app.connect("config-inited", lambda app, config: better_header_layout(config))
+	app.connect("build-finished", copy_asset_files)
+	app.add_js_file("https://unpkg.com/twemoji@latest/dist/twemoji.min.js")
+	app.add_js_file("twemoji.js")
+	app.add_css_file("twemoji.css")
+	app.add_transform(sphinxemoji.EmojiSubstitutions)
