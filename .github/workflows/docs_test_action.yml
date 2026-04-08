@@ -21,6 +21,9 @@ jobs:
         uses: sphinx-toolbox/sphinx-action@sphinx-3.3.1-py39
 
         with:
-          pre-build-command: apt-get update && apt-get install -y libgirepository1.0-dev libcairo2-dev python3-gi && python -m pip install tox
+          pre-build-command: |
+            python -m pip install tox
+            apt update
+            apt install libgirepository1.0-dev libcairo2-dev python3-gi -y
           docs-folder: "doc-source/"
           build-command: "tox -e docs -- "

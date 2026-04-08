@@ -17,7 +17,6 @@ additional_ignore:
   - "**/*.desktop"
 
 exclude_files:
-  - docs_action
   - setup
 
 console_scripts:
@@ -57,9 +56,16 @@ sphinx_conf_preamble:
   - "\telse:"
   - "\t\tshutil.copy2(s, d)"
 
-travis_extra_install_pre:
-  - "sudo apt update"
-  - sudo apt install libcairo2-dev pkg-config python3-dev libgirepository1.0-dev xserver-xorg-input-wacom libwacom9 libwacom-common
+github_ci_requirements:
+  Linux:
+    pre:
+      - "sudo apt update"
+      - sudo apt install libcairo2-dev pkg-config python3-dev libgirepository1.0-dev xserver-xorg-input-wacom libwacom9 libwacom-common
+
+docs_apt_packages:
+  - libgirepository1.0-dev
+  - libcairo2-dev
+  - python3-gi
 
 additional_setup_args:
   data_files: "[('share/applications', ['PySetWacom.desktop'])]"
