@@ -22,10 +22,10 @@
 #  MA 02110-1301, USA.
 #
 # stdlib
-from typing import Dict, Iterator, List, Optional
+from typing import Any, Dict, Iterator, List, Optional
 
 # 3rd party
-from sh import xsetwacom  # type: ignore
+from sh import xsetwacom  # type: ignore[import-untyped]
 
 # this package
 from PySetWacom.button import Button
@@ -105,16 +105,20 @@ class Device:
 		device.add_multiple_buttons([Button.from_dict(button) for button in data_dict["buttons"]])
 		return device
 
-	def __dict__(self):
+	def to_dict(self) -> Dict[str, Any]:
+		"""
+		Returns a dictionary representation of the :class:`~.Device` and its buttons.
+		"""
+
 		return {
 				"name": self.name,
 				"id": self.id,
 				"type": self.type,
-				"buttons": [dict(button) for button in self.buttons]
+				"buttons": [button.to_dict() for button in self.buttons],
 				}
 
 	def __iter__(self) -> Iterator:
-		yield from self.__dict__().items()
+		yield from self.to_dict().items()
 
 	def __repr__(self) -> str:
 		return f"Device({self.name}\tid: {self.id}\ttype: {self.type})"

@@ -29,8 +29,6 @@ python_versions:
   - '3.7'
   - '3.8'
 
-# travis secure password for PyPI
-
 # additional lines for MANIFEST.in
 manifest_additional:
   - include create_dotdesktop.py
@@ -62,9 +60,6 @@ sphinx_conf_preamble:
 travis_extra_install_pre:
   - "sudo apt update"
   - sudo apt install libcairo2-dev pkg-config python3-dev libgirepository1.0-dev xserver-xorg-input-wacom libwacom9 libwacom-common
-
-
-travis_ubuntu_version: bionic
 
 additional_setup_args:
   data_files: "[('share/applications', ['PySetWacom.desktop'])]"

@@ -29,14 +29,14 @@ from enum import Enum
 from typing import Optional, Tuple
 
 # 3rd party
-import gi  # type: ignore
-import wx  # type: ignore  # nodep
-from pubsub import pub  # type: ignore
+import gi  # type: ignore[import-untyped]
+import wx  # type: ignore[import-untyped,import-not-found,unused-ignore]  # nodep
+from pubsub import pub
 from typing_extensions import Literal
 
 gi.require_version("Gtk", "3.0")
 gi.require_version("Notify", "0.7")
-from gi.repository import Gtk, Notify  # type: ignore  # isort: skip  # noqa
+from gi.repository import Gtk, Notify  # type: ignore[import-untyped]  # isort: skip  # noqa
 
 try:
 	gi.require_version("AppIndicator3", "0.1")
@@ -241,7 +241,7 @@ class AppIndicatorItem:
 		# TODO
 		return False
 
-	def SetHelp(self, help_string: str):  # noqa: MAN002
+	def SetHelp(self, help_string: str):  # noqa: MAN002,PRM002
 		"""
 		Sets the help string.
 		"""
@@ -257,7 +257,7 @@ class AppIndicatorItem:
 
 		self._gtkitem.set_label(label)
 
-	def SetMenu(self, menu):  # noqa: MAN002,MAN001
+	def SetMenu(self, menu):  # noqa: PRM002,MAN002,MAN001
 		"""
 		Sets the parent menu which will contain this menu item.
 		"""
@@ -325,7 +325,7 @@ class AppIndicatorItem:
 		self.SetSubMenu(value)
 
 
-class AppIndicator:
+class AppIndicator:  # noqa: PRM002  # TODO
 	"""
 	Constructs an AppIndicator object.
 
@@ -420,7 +420,7 @@ class AppIndicatorMenu:  # noqa: D101
 			id: int,  # noqa: A002  # pylint: disable=redefined-builtin
 			item: str,
 			help: str = '',  # noqa: A002  # pylint: disable=redefined-builtin
-			group: Optional[AppIndicatorItem] = None
+			group: Optional[AppIndicatorItem] = None,
 			) -> AppIndicatorItem:
 		"""
 		Adds a radio item to the end of the menu.
@@ -467,7 +467,7 @@ class AppIndicatorMenu:  # noqa: D101
 			if item.id == id:
 				item.Check(check)
 
-	def Delete(self, *__args) -> bool:
+	def Delete(self, *__args) -> bool:  # noqa: PRM002
 		"""
 		Delete(id) -> bool
 		Delete(item) -> bool
@@ -477,7 +477,7 @@ class AppIndicatorMenu:  # noqa: D101
 
 		return False
 
-	def DestroyItem(self, *__args) -> bool:
+	def DestroyItem(self, *__args) -> bool:  # noqa: PRM002
 		"""
 		DestroyItem(id) -> bool
 		DestroyItem(item) -> bool
@@ -604,7 +604,7 @@ class AppIndicatorMenu:  # noqa: D101
 	def GetWindow(self) -> wx.Window:  # noqa: D102
 		pass
 
-	def Insert(self, pos, *__args) -> wx.MenuItem:
+	def Insert(self, pos, *__args) -> wx.MenuItem:  # noqa: PRM002
 		"""
 		Insert(pos, menuItem) -> MenuItem
 		Insert(pos, id, item=EmptyString, help_string=EmptyString, kind=ITEM_NORMAL) -> MenuItem
@@ -639,7 +639,7 @@ class AppIndicatorMenu:  # noqa: D101
 		:param help_string:
 		"""
 
-	def InsertSeparator(self, pos) -> wx.MenuItem:  # noqa: MAN001
+	def InsertSeparator(self, pos) -> wx.MenuItem:  # noqa: PRM002,MAN001
 		"""
 		Inserts a separator at the given position.
 		"""
@@ -647,21 +647,21 @@ class AppIndicatorMenu:  # noqa: D101
 	def IsAttached(self) -> bool:  # noqa: D102
 		return False
 
-	def IsChecked(self, id: int) -> bool:  # noqa: A002  # pylint: disable=redefined-builtin
+	def IsChecked(self, id: int) -> bool:  # noqa: PRM002,A002  # pylint: disable=redefined-builtin
 		"""
 		Determines whether a menu item is checked.
 		"""
 
 		return False
 
-	def IsEnabled(self, id: int) -> bool:  # noqa: A002  # pylint: disable=redefined-builtin
+	def IsEnabled(self, id: int) -> bool:  # noqa: PRM002,A002  # pylint: disable=redefined-builtin
 		"""
 		Determines whether a menu item is enabled.
 		"""
 
 		return False
 
-	def Prepend(self, *__args) -> wx.MenuItem:
+	def Prepend(self, *__args) -> wx.MenuItem:  # noqa: PRM002
 		"""
 		Prepend(menuItem) -> MenuItem
 		Prepend(id, item=EmptyString, help_string=EmptyString, kind=ITEM_NORMAL) -> MenuItem
@@ -699,7 +699,7 @@ class AppIndicatorMenu:  # noqa: D101
 		Inserts a separator at position 0.
 		"""
 
-	def Remove(self, *__args) -> wx.MenuItem:
+	def Remove(self, *__args) -> wx.MenuItem:  # noqa: PRM002
 		"""
 		Remove(id) -> MenuItem
 		Remove(item) -> MenuItem

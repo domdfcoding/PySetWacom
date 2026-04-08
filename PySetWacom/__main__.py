@@ -28,7 +28,7 @@ import pathlib
 import signal
 
 # 3rd party
-from pid import PidFile, PidFileAlreadyLockedError  # type: ignore
+from pid import PidFile, PidFileAlreadyLockedError  # type: ignore[import-untyped]
 from platformdirs import user_data_dir
 
 __all__ = ["main"]

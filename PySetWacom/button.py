@@ -22,10 +22,10 @@
 #  MA 02110-1301, USA.
 #
 # stdlib
-from typing import Dict, Iterator, List, Optional
+from typing import Any, Dict, Iterator, List, Optional
 
 # 3rd party
-from sh import xsetwacom  # type: ignore
+from sh import xsetwacom  # type: ignore[import-untyped]
 
 __all__ = ["Button", "get_mappings"]
 
@@ -66,14 +66,18 @@ class Button:
 
 		return cls(**data_dict)
 
-	def __dict__(self):
+	def to_dict(self) -> Dict[str, Any]:
+		"""
+		Returns a dictionary representation of the :class:`~.Button`.
+		"""
+
 		return {
 				"id": self.id,
 				"mapping": self.mapping,
 				}
 
 	def __iter__(self) -> Iterator:
-		yield from self.__dict__().items()
+		yield from self.to_dict().items()
 
 	def __repr__(self) -> str:
 		return f"Button({self.id} --> {self.mapping})"
@@ -96,7 +100,7 @@ def get_mappings(device_name: str) -> List[Button]:
 	for prop in all_properties:
 		if prop.startswith(f'xsetwacom set "{device_name}" "Button"'):
 			button = Button.from_string(
-					prop.replace(f'xsetwacom set "{device_name}" "Button"', '').rstrip('\n').strip()  # noqa: Q000
+					prop.replace(f'xsetwacom set "{device_name}" "Button"', '').rstrip('\n').strip(),  # noqa: Q000
 					)
 			buttons.append(button)
 

@@ -32,9 +32,9 @@ import webbrowser
 from typing import List, Optional
 
 # 3rd party
-import wx  # type: ignore  # nodep
-from domdf_wxpython_tools.validators import ValidatorBase  # type: ignore
-from pubsub import pub  # type: ignore
+import wx  # type: ignore[import-untyped,import-not-found,unused-ignore]  # nodep
+from domdf_wxpython_tools.validators import ValidatorBase  # type: ignore[import-untyped]
+from pubsub import pub
 
 # this package
 from PySetWacom.device import Device, detect_devices
@@ -66,7 +66,7 @@ class ManageDevicesDialog(wx.Dialog):  # noqa: D101
 			pos=wx.DefaultPosition,
 			size=wx.DefaultSize,
 			style=wx.DEFAULT_DIALOG_STYLE,
-			name=wx.DialogNameStr
+			name=wx.DialogNameStr,
 			):
 
 		args = (parent, id)
@@ -389,7 +389,10 @@ class GUI(wx.Frame):  # noqa: D101
 			return
 
 		with wx.MultiChoiceDialog(
-				self, "Select Profiles to delete", "Delete Profile", choices=self.profiles
+				self,
+				"Select Profiles to delete",
+				"Delete Profile",
+				choices=self.profiles,
 				) as dlg:
 			if dlg.ShowModal() == wx.ID_OK:
 				selected_profiles = [self.profiles[i] for i in dlg.GetSelections()]
@@ -568,7 +571,7 @@ class EditMappingDialog(wx.Dialog):  # noqa: D101
 			pos=wx.DefaultPosition,
 			size=wx.DefaultSize,
 			style=wx.DEFAULT_DIALOG_STYLE,
-			name=wx.DialogNameStr
+			name=wx.DialogNameStr,
 			):
 
 		args = (parent, id)
@@ -898,7 +901,7 @@ class app(wx.App):  # noqa: D101
 # end of class app
 
 
-class NewProfileValidator(ValidatorBase):
+class NewProfileValidator(ValidatorBase):  # noqa: PRM002  # TODO
 	"""
 	This validator is used to ensure that the user has entered something into the text object editor dialog's text field.
 	"""
@@ -920,7 +923,7 @@ class NewProfileValidator(ValidatorBase):
 
 		return self.__class__(self.existing_profiles)
 
-	def Validate(self, win) -> bool:
+	def Validate(self, win) -> bool:  # noqa: PRM002
 		"""
 		Validate the contents of the given text control.
 		"""
@@ -933,7 +936,7 @@ class NewProfileValidator(ValidatorBase):
 			wx.MessageBox(
 					"A Profile with that name already exists!\nPlease choose a unique name.",
 					"Error",
-					style=wx.ICON_ERROR
+					style=wx.ICON_ERROR,
 					)
 			return self.set_warning()
 		else:

@@ -26,7 +26,7 @@
 import sys
 
 # 3rd party
-from pubsub import pub  # type: ignore
+from pubsub import pub
 
 # this package
 from PySetWacom.AppIndicator import AppIndicator, AppIndicator3, AppIndicatorItem, AppIndicatorMenu, Gtk, Notify

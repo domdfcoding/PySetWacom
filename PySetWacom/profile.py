@@ -26,7 +26,7 @@
 import json
 import os
 import pathlib
-from typing import Iterator, List
+from typing import Any, Dict, Iterator, List
 
 # 3rd party
 from platformdirs import user_data_dir
@@ -63,14 +63,18 @@ class Profile:
 			device.add_multiple_buttons(get_mappings(device.name))
 		return cls(name, devices)
 
-	def __dict__(self):
+	def to_dict(self) -> Dict[str, Any]:
+		"""
+		Returns a dictionary representation of the :class:`~.Profile` and its devices.
+		"""
+
 		return {
 				"name": self._name,
-				"devices": [dict(device) for device in self.devices],
+				"devices": [device.to_dict() for device in self.devices],
 				}
 
 	def __iter__(self) -> Iterator:
-		yield from self.__dict__().items()
+		yield from self.to_dict().items()
 
 	def save(self) -> None:
 		"""
@@ -80,7 +84,7 @@ class Profile:
 		filename = profiles_dir / f"{self._name}.profile"
 
 		with filename.open('w') as fp:
-			json.dump(dict(self), fp, indent=4)
+			json.dump(self.to_dict(), fp, indent=4)
 
 	@classmethod
 	def load(cls, name: str) -> "Profile":
