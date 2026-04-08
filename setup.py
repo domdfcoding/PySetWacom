@@ -30,4 +30,4 @@ setup(
 		py_modules=[],
 		)
 
-shutil.rmtree("PySetWacom.egg-info", ignore_errors=True)
+shutil.rmtree("pysetwacom.egg-info", ignore_errors=True)

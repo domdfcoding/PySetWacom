@@ -51,22 +51,22 @@ PySetWacom
 		:alt: CodeFactor Grade
 
 	.. |pypi-version| pypi-shield::
-		:project: PySetWacom
+		:project: pysetwacom
 		:version:
 		:alt: PyPI - Package Version
 
 	.. |supported-versions| pypi-shield::
-		:project: PySetWacom
+		:project: pysetwacom
 		:py-versions:
 		:alt: PyPI - Supported Python Versions
 
 	.. |supported-implementations| pypi-shield::
-		:project: PySetWacom
+		:project: pysetwacom
 		:implementations:
 		:alt: PyPI - Supported Implementations
 
 	.. |wheel| pypi-shield::
-		:project: PySetWacom
+		:project: pysetwacom
 		:wheel:
 		:alt: PyPI - Wheel
 
@@ -90,7 +90,7 @@ PySetWacom
 		:alt: Maintenance
 
 	.. |pypi-downloads| pypi-shield::
-		:project: PySetWacom
+		:project: pysetwacom
 		:downloads: month
 		:alt: PyPI - Downloads
 
@@ -121,6 +121,7 @@ Depending on your tablet model you may need to install DIGImend_. See https://di
 
 .. installation:: PySetWacom
 	:pypi:
+	:pypi-name: pysetwacom
 	:github:
 
 .. end installation

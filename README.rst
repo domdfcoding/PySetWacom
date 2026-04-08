@@ -49,20 +49,20 @@ PySetWacom
 	:target: https://www.codefactor.io/repository/github/domdfcoding/PySetWacom
 	:alt: CodeFactor Grade
 
-.. |pypi-version| image:: https://img.shields.io/pypi/v/PySetWacom
-	:target: https://pypi.org/project/PySetWacom/
+.. |pypi-version| image:: https://img.shields.io/pypi/v/pysetwacom
+	:target: https://pypi.org/project/pysetwacom/
 	:alt: PyPI - Package Version
 
-.. |supported-versions| image:: https://img.shields.io/pypi/pyversions/PySetWacom?logo=python&logoColor=white
-	:target: https://pypi.org/project/PySetWacom/
+.. |supported-versions| image:: https://img.shields.io/pypi/pyversions/pysetwacom?logo=python&logoColor=white
+	:target: https://pypi.org/project/pysetwacom/
 	:alt: PyPI - Supported Python Versions
 
-.. |supported-implementations| image:: https://img.shields.io/pypi/implementation/PySetWacom
-	:target: https://pypi.org/project/PySetWacom/
+.. |supported-implementations| image:: https://img.shields.io/pypi/implementation/pysetwacom
+	:target: https://pypi.org/project/pysetwacom/
 	:alt: PyPI - Supported Implementations
 
-.. |wheel| image:: https://img.shields.io/pypi/wheel/PySetWacom
-	:target: https://pypi.org/project/PySetWacom/
+.. |wheel| image:: https://img.shields.io/pypi/wheel/pysetwacom
+	:target: https://pypi.org/project/pysetwacom/
 	:alt: PyPI - Wheel
 
 .. |license| image:: https://img.shields.io/github/license/domdfcoding/PySetWacom
@@ -83,8 +83,8 @@ PySetWacom
 .. |maintained| image:: https://img.shields.io/maintenance/yes/2025
 	:alt: Maintenance
 
-.. |pypi-downloads| image:: https://img.shields.io/pypi/dm/PySetWacom
-	:target: https://pypi.org/project/PySetWacom/
+.. |pypi-downloads| image:: https://img.shields.io/pypi/dm/pysetwacom
+	:target: https://pypistats.org/packages/pysetwacom
 	:alt: PyPI - Downloads
 
 .. end shields
@@ -118,7 +118,7 @@ To install with ``pip``:
 
 .. code-block:: bash
 
-	$ python -m pip install PySetWacom
+	$ python -m pip install pysetwacom
 
 .. end installation
 
