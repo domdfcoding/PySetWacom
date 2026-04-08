@@ -11,5 +11,5 @@ Icon=input-tablet
 Terminal=false
 Type=Application
 Categories=Utility;Application;
-"""
+""",
 				)
