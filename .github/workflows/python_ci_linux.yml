@@ -23,7 +23,7 @@ jobs:
     runs-on: "ubuntu-22.04"
     continue-on-error: ${{ matrix.config.experimental }}
     env:
-      USING_COVERAGE: '3.6,3.7,3.8'
+      USING_COVERAGE: '3.7,3.8'
 
     strategy:
       fail-fast: False
