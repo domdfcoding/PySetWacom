@@ -376,7 +376,6 @@ class AppIndicatorMenu:  # noqa: D101
 			By default, the handler for the wxEVT_MENU_HIGHLIGHT event displays this string in the status line.
 		:param kind: May be ITEM_SEPARATOR , ITEM_NORMAL , ITEM_CHECK or ITEM_RADIO .
 		:param radiogroup:
-
 		"""
 
 		_item = AppIndicatorItem(self, id, item, help_string, kind, radiogroup=radiogroup)
